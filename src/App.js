@@ -1,8 +1,11 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom';
 
 const App = () => {
     return(
-        <h2>Hola Mundo</h2>
+        <div>
+            <h4>Este es el header</h4>
+        </div>
     );
 };
 
