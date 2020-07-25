@@ -8,7 +8,7 @@ const App = () => {
     }, [])
 
     const fetchRequest = () => {
-        const response = fetch('http://localhost:3000/test')
+        const response = fetch('http://tesis-manager.herokuapp.com/test')
         .then(res => res.json())
         .then(result => console.log(result))
         .catch(err => console.log(err.message))
