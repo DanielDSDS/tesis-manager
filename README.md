@@ -7,8 +7,14 @@ Manejador del proceso de tramite de tesis
 - Vistas de la app (🚧)
 
 # Como empezar
-- Clona el repositorio `git clone https://github.com/nedBigby/tesis-manager`.
-- Instala las dependencias `npm install`.
+- Eliminar `package-lock.json`
+- Clona el repositorio `git clone https://github.com/nedBigby/tesis-manager`
+- Instala las dependencias `npm install`
+
+## Si no funciona
+- Eliminar `package-lock.json`
+- Instalar yarn `npm install -g yarn`
+- Instalar las dependencias con yarn desde la linea de comandos de admin `yarn install`
 
 # Para correr el proyecto
 - `npm run dev-start` correra el proyecto en http://localhost:1234 con parcel
