@@ -7,7 +7,7 @@ Manejador del proceso de tramite de tesis
 - Vistas de la app (🚧)
 
 # Como empezar
-- Clona el repositorio `git clone https://github.com/nedBigby/tesis-manager/edit/master/README.md`.
+- Clona el repositorio `git clone https://github.com/nedBigby/tesis-manager`.
 - Instala las dependencias `npm install`.
 
 # Para correr el proyecto
