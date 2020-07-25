@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel public/index.html",
+    "dev": "parcel public/index.html",
+    "start": "node server.js",
     "build": "parcel build public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "npm run build"

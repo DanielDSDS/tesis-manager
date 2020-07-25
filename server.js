@@ -26,6 +26,15 @@ if(!dev){
     app.use(morgan('dev'))
 }
 
+app.get('/test', async(req,res) => {
+    try{
+        console.log('El servidor esta corriendo');
+        res.json('Servidor backend corriendo');
+    }catch(err){
+        console.log(err.message);
+    }
+});
+
 //aqui se tienen que importar los endpoints o se pueden escribir aca directamente
 
 const server = createServer(app);
