@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev-start": "concurrently \"npm run dev\" \"npm run start\"",
     "dev": "parcel public/index.html",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "build": "parcel build public/index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "npm run build"
@@ -16,10 +17,12 @@
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "compression": "^1.7.4",
+    "concurrently": "^5.2.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "material-table": "^1.66.0",
     "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
     "parcel": "^1.12.4",
     "pg": "^8.3.0",
     "react": "^16.13.1",
