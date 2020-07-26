@@ -16,7 +16,7 @@ const App = () => {
 
     return(
         <div>
-            <h4>Carlos tiene hemorroides 😎</h4>
+            <h4>Carlos tiene hemorroides 😎😎</h4>
         </div>
     );
 };
