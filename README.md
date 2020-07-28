@@ -11,7 +11,7 @@ Manejador del proceso de tramite de tesis
 - Instala las dependencias `npm install`
 
 ## Si no funciona
-- Instalar yarn `npm install -g yarn`
+- Instalar yarn `npm install yarn`
 - Instalar las dependencias con yarn desde la linea de comandos de admin `yarn install`
 
 # Para correr el proyecto
