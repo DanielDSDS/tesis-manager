@@ -1,5 +1,6 @@
 import React, {useEffect, useState}from 'react';
 import {BrowserRouter as Router, Switch, Link, Route} from 'react-router-dom';
+import Especialidades from './components/Especialidades/Especialidades';
 
 const App = () => {
     
@@ -15,9 +16,14 @@ const App = () => {
     }
 
     return(
-        <div>
-            <h4>Carlos tiene hemorroides 😎😎</h4>
-        </div>
+        <Router>
+            <header className="nav-container">
+                <h3>Aqui ira el header de navegacion</h3>
+            </header>
+            <Switch>
+                <Route path="/especialidades" component={Especialidades}></Route>
+            </Switch>
+        </Router>
     );
 };
 

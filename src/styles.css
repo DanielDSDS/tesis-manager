@@ -1,0 +1,15 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: 'Roboto';
+}
+
+html{
+    font-size: 16px;
+}
+
+.form-container,
+.nav-container{
+    text-align: center;
+    margin-bottom: 2rem;
+}
