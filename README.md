@@ -10,6 +10,11 @@ Manejador del proceso de tramite de tesis
 - Clona el repositorio `git clone https://github.com/nedBigby/tesis-manager`
 - Instala las dependencias `npm install`
 
+# Crear y pushear a nueva branch
+- Clona el repositorio `git checkout -b <mi_branch>`
+- Haz add y commit
+- Push a tu branch `git push -u origin <mi_branch>`
+
 ## Si no funciona
 - Instalar yarn `npm install yarn`
 - Instalar las dependencias con yarn desde la linea de comandos de admin `yarn install`
