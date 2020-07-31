@@ -5,6 +5,16 @@ const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 
+//imports de los endpoints
+const especialidades = require('./routes/especialidades.js');
+const profesores = require('./routes/profesores.js');
+const comite = require('./routes/comites.js');
+const consejos = require('./routes/consejos.js');
+const instituciones = require('./routes/instituciones.js');
+const propuestas = require('./routes/propuestas.js');
+const tesistas = require('./routes/tesistas.js');
+const trabajos_grado = require('./routes/trabajos_grado.js');
+
 //guardar credenciales de la bd
 const pool = require('./db')
 process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
@@ -26,12 +36,18 @@ if(!dev){
     app.use(morgan('dev'))
 }
 
-const test_route  = require('./routes/test.js');
-app.use(test_route);
-
-//aqui se tienen que importar los endpoints o se pueden escribir aca directamente
+//Uso de los endpoints
+app.use(profesores);
+app.use(especialidades);
+app.use(comite);
+app.use(consejos);
+app.use(instituciones);
+app.use(propuestas);
+app.use(trabajos_grado);
+app.use(tesistas);
 
 const server = createServer(app);
+
 server.listen(PORT, err => {
     if(err) throw err
     console.log('Servidor iniciado en localhost:',PORT);

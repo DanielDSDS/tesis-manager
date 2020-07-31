@@ -4,17 +4,6 @@ import Especialidades from './components/Especialidades/Especialidades';
 
 const App = () => {
     
-    useEffect(() => {
-        fetchRequest();
-    }, [])
-
-    const fetchRequest = () => {
-        const response = fetch('http://localhost:3000/test')
-        .then(res => res.json())
-        .then(result => console.log(result))
-        .catch(err => console.log(err.message))
-    }
-
     return(
         <Router>
             <header className="nav-container">
