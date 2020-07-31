@@ -4,12 +4,17 @@
     font-family: 'Roboto';
 }
 
+
 html{
     font-size: 16px;
 }
 
-.form-container,
-.nav-container{
+.form-container{
     text-align: center;
     margin-bottom: 2rem;
+}
+
+.app-wrapper{
+    display: flex;
+    flex-direction: row;
 }

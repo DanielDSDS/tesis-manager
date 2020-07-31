@@ -5,10 +5,10 @@ const pool = require('../db');
 router.get('/tesistas', async(req,res) => {
     try{
         const tesistas = await pool.query("SELECT * FROM Tesistas;");
-        res.json(tesistas);
+        res.body = tesistas;
     }catch(err){
-        res.json(err.message);
-        console.log(err.message);
+        res.body = err.message;
+        console.log(res.body);
     }
 })
 

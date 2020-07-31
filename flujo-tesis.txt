@@ -1,0 +1,64 @@
+
+Pasos para usar la app
+
+SE DEBE CREAR UNA TABLA PROPUESTAS_X_ESPECIALIDAD
+PARA LUEGO ASOCIAR PROPUESTAS CON PROFESOR revisor
+
+1. Crear un nuevo Tesista
+    - Se añade un nuevo tesista con sus datos basicos desde la 
+    pantalla de tesistas
+
+2. Crear una nueva Propuesta
+    - Se crea una nueva propuesta desde la pantalla de 
+    propuestas con el titulo, la fecha y se selecciona un tesista 
+    nuevo o ya registrado.
+    - Se inicializa la fec_entrega de la propuesta con la fecha 
+    actual.
+    - Se inicializa la fec_comite con la fec del proximo comite 
+    y se asocia a su id
+    - fec_aprobacion = NULL
+    - observaciones = NULL 
+    - estatus_aprobacion = NE
+    - veredicto_profesor = NULL
+    - fec_veredicto = NULL
+    - p_interno = NULL 
+
+
+    *Despues de crear la propuesta se espera a la decision del comite
+
+3.Aprobar una propuesta a partir de la decision del comite
+    *Una vez revisada la propuesta por el comite se deben ingresar
+    los datos de la revision
+
+    - Se va a la pantalla de comites y por cada comite
+    habra una lista de propuestas que se presentaron en cada uno
+    - En esa misma lista aparece una lista de los profesores
+    que se le puede asignar a cada propuesta y se seleccion.
+    - Se escriben ademas las observaciones del comite.
+
+    *Despues de que se ingresa la decision del comite
+    sobre la propuesta, se espera la decision del profesor revisor
+
+4.Añadir veredicto del profesor revisor
+    *Una vez aprobada la propuesta por el comite se puede
+    ir a la pantalla de propuestas e ingresar el veredicto del profesor
+    y la fec_veredicto
+
+    *Para que el profesor la apruebe debe estar aprobada por el comite
+
+    *El profesor revisor debe ser de la misma especialidad de la propuesta
+
+    *Luego de que el profesor haya aprobado la propuesta esta se convierte
+    tesis
+
+5.Crear nueva tesis a partir de una propuesta
+    *Para ser una tesis debe estar la propuesta aprobada
+    por el profesor revisor
+
+    *Se selecciona de una lista una propuesta existente
+    que ya haya sido aprobada.
+
+    *Se insertan todos los datos basicos de la tesis
+    y escoger los 6 jurados.
+
+6.

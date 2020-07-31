@@ -5,10 +5,11 @@ const router = express.Router();
 router.get('/comites', async(req,res) => {
     try {
         const comites = await pool.query('SELECT * FROM Comites;');
-        res.json(comites);
+        res.body = comites;
+        console.log(res.body);
     } catch (err) {
-        res.json(err);
-        console.log(err.message);
+        res.body = err.message;
+        console.log(res.body);
     }
 })
 
