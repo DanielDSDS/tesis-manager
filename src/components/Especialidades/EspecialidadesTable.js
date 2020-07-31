@@ -17,7 +17,7 @@ const EspecialidadesTable = ( ) => {
     */
     
     const fetchEspecialidades = () => {
-        fetch('/especialidades')
+        fetch('http://localhost:3000/especialidades')
         .then(res => res.json())
         .then(result => setEspecialidades(result))
         .catch(err => console.log(err.message))
