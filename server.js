@@ -1,23 +1,25 @@
-const {createServer} = require('http');
-const express = require('express');
-const compression = require('compression');
-const morgan = require('morgan');
-const path = require('path');
-const cors = require('cors');
+const {createServer} = require('http')
+const express = require('express')
+const compression = require('compression')
+const morgan = require('morgan')
+const path = require('path')
+const cors = require('cors')
 
 //imports de los endpoints
-const especialidades = require('./routes/especialidades.js');
-const profesores = require('./routes/profesores.js');
-const comite = require('./routes/comites.js');
-const consejos = require('./routes/consejos.js');
-const instituciones = require('./routes/instituciones.js');
-const propuestas = require('./routes/propuestas.js');
-const tesistas = require('./routes/tesistas.js');
-const trabajos_grado = require('./routes/trabajos_grado.js');
+const especialidades = require('./routes/especialidades.js')
+const profesores = require('./routes/profesores.js')
+const comites = require('./routes/comites.js')
+const consejos = require('./routes/consejos.js')
+const instituciones = require('./routes/instituciones.js')
+const propuestas = require('./routes/propuestas.js')
+const tesistas = require('./routes/tesistas.js')
+const trabajos_grado = require('./routes/trabajos_grado.js')
+const tutores_emp = require('./routes/tutores_emp')
+const defensas = require('./routes/defensas.js')
 
 //guardar credenciales de la bd
 const pool = require('./db')
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
 
 //puerto donde va a correr el back (si esta en produccion correra en port y si no correra en localhost5000)
 const normalizePort = port => parseInt(port,10)
@@ -37,18 +39,20 @@ if(!dev){
 }
 
 //Uso de los endpoints
-app.use(profesores);
-app.use(especialidades);
-app.use(comite);
-app.use(consejos);
-app.use(instituciones);
-app.use(propuestas);
-app.use(trabajos_grado);
-app.use(tesistas);
+app.use(profesores)
+app.use(especialidades)
+app.use(comites)
+app.use(consejos)
+app.use(instituciones)
+app.use(propuestas)
+app.use(trabajos_grado)
+app.use(tesistas)
+app.use(tutores_emp)
+app.use(defensas)
 
-const server = createServer(app);
+const server = createServer(app)
 
 server.listen(PORT, err => {
     if(err) throw err
-    console.log('Servidor iniciado en localhost:',PORT);
+    console.log('Servidor iniciado en localhost:',PORT)
 })
