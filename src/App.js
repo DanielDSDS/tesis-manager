@@ -30,7 +30,7 @@ const App = () => {
                     <Route path="/instituciones" component={Instituciones} />
                 </Switch>
             </div>
-            <Form />
+            <Form/>
         </Router>
     );
 };
