@@ -16,6 +16,7 @@ const tesistas = require('./routes/tesistas.js')
 const trabajos_grado = require('./routes/trabajos_grado.js')
 const tutores_emp = require('./routes/tutores_emp')
 const defensas = require('./routes/defensas.js')
+const empresas = require('./routes/empresas.js') //Lo puso Roberto
 
 //guardar credenciales de la bd
 const pool = require('./db')
@@ -49,6 +50,7 @@ app.use(trabajos_grado)
 app.use(tesistas)
 app.use(tutores_emp)
 app.use(defensas)
+app.use(empresas) //Lo puso Roberto
 
 const server = createServer(app)
 

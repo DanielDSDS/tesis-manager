@@ -13,4 +13,69 @@ router.get('/comites', async(req,res) => {
     }
 })
 
+//Registrar un comite
+router.post ('/comites', async (req,res) => {
+    try {
+        const { asignacion,realizacion } = req.body;
+        const newComite = await pool.query(
+            "INSERT INTO comites ( fec_asignacion, fec_realizacion ) VALUES( $1, $2 ) RETURNING * ",
+            [asignacion,realizacion]
+        );
+
+        res.json(newComite.rows[0]);
+        
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+    }
+})
+
+//Get Un comite
+
+router.get ('/comites/:id', async (req,res) => {
+    try {
+        const {id} = req.params;
+        const comites = await pool.query ("SELECT * FROM comites WHERE id_comite = $1", [id]);
+
+        res.json (comites.rows[0]);
+
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+    }
+});
+
+
+//Actualizar un comite
+
+router.put('comites/:id', async (req,res) =>{
+    try {
+        const {id} = req.params;
+        const { asignacion, realizacion } = req.body;
+        const updateComite = await pool.query ("UPDATE comites SET fec_asignacion = $1 , fec_realizacion  = $2 ) WHERE id_comite = $3",
+        [asignacion, realizacion,id]);
+        
+        res.json ("Comite Actualizado");
+
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+    }
+});
+
+//Borar un comite
+
+router.delete ('especialidad/:id', async (req,res) =>{
+    try {
+        const {id} = req.params;
+        const deleteComite = await pool.query ("DELETE FROM comites WHERE id_comite = $1",[id]);
+        
+        res.json("Comite Eliminado")
+        
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+    }
+})
+
 module.exports = router;
