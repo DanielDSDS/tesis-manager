@@ -1,16 +1,28 @@
-const {createServer} = require('http');
-const express = require('express');
-const compression = require('compression');
-const morgan = require('morgan');
-const path = require('path');
-const cors = require('cors');
+const { createServer } = require('http')
+const express = require('express')
+const compression = require('compression')
+const morgan = require('morgan')
+const path = require('path')
+const cors = require('cors')
+
+//imports de los endpoints
+const especialidades = require('./routes/especialidades.js')
+const profesores = require('./routes/profesores.js')
+const comites = require('./routes/comites.js')
+const consejos = require('./routes/consejos.js')
+const instituciones = require('./routes/instituciones.js')
+const propuestas = require('./routes/propuestas.js')
+const tesistas = require('./routes/tesistas.js')
+const trabajos_grado = require('./routes/trabajos_grado.js')
+const tutores_emp = require('./routes/tutores_emp')
+const defensas = require('./routes/defensas.js')
 
 //guardar credenciales de la bd
 const pool = require('./db')
-process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0
 
 //puerto donde va a correr el back (si esta en produccion correra en port y si no correra en localhost5000)
-const normalizePort = port => parseInt(port,10)
+const normalizePort = port => parseInt(port, 10)
 const PORT = normalizePort(process.env.PORT || 3000)
 const app = express()
 const dev = app.get('env') !== 'production'
@@ -18,27 +30,29 @@ const dev = app.get('env') !== 'production'
 app.use(cors())
 app.use(express.json())
 
-if(!dev){
+if (!dev) {
     app.use(compression())
     app.use(morgan('common'))
-    app.use(express.static(path.resolve(__dirname,'dist')))
-}else{
+    app.use(express.static(path.resolve(__dirname, 'dist')))
+} else {
     app.use(morgan('dev'))
 }
 
-app.get('/test', async(req,res) => {
-    try{
-        console.log('El servidor esta corriendo');
-        res.json('Servidor backend corriendo');
-    }catch(err){
-        console.log(err.message);
-    }
-});
+//Uso de los endpoints 
+app.use(profesores)
+app.use(especialidades)
+app.use(comites)
+app.use(consejos)
+app.use(instituciones)
+app.use(propuestas)
+app.use(trabajos_grado)
+app.use(tesistas)
+app.use(tutores_emp)
+app.use(defensas)
 
-//aqui se tienen que importar los endpoints o se pueden escribir aca directamente
+const server = createServer(app)
 
-const server = createServer(app);
 server.listen(PORT, err => {
-    if(err) throw err
-    console.log('Servidor iniciado en localhost:',PORT);
+    if (err) throw err
+    console.log('Servidor iniciado en localhost:', PORT)
 })
