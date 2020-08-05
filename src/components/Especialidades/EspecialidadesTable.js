@@ -7,7 +7,7 @@ const EspecialidadesTable = ( ) => {
             {title: 'Codigo de Especialidad', field: 'cod_esp'},
             {title: 'Nombre de Especialidad', field: 'nomb_esp'},
         ],
-    })
+    });
     const [especialidades,setEspecialidades] = useState([]);
 
     /*
@@ -29,17 +29,6 @@ const EspecialidadesTable = ( ) => {
             columns={state.columns}
             data={especialidades}
             editable={{
-                onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                    resolve();
-                    setState((prevState) => {
-                        const data = [...prevState.data];
-                        data.push(newData);
-                        return { ...prevState, data };
-                    });
-                    }, 600);
-                }),
                 onRowUpdate: (newData, oldData) =>
                 new Promise((resolve) => {
                     setTimeout(() => {

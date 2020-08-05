@@ -7,12 +7,14 @@ import FormControl from '@material-ui/core/FormControl'
 
 const Especialidades = () => {
 
+        
 
     return(
         <div className="especialidades-container">   
             <div className="form-container"> 
                 <h3>Aqui ira la forma para introducir especialidades</h3>
             </div>
+            
             <div className="table-container">
                 <EspecialidadesTable/>
             </div>

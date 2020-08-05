@@ -3,8 +3,6 @@ const router = express.Router()
 const pool = require('../db');
 const { red } = require('@material-ui/core/colors');
 
-
-//Get totos los tesistas
 router.get('/tesistas', async (req, res) => {
     try {
         const tesistas = await pool.query("SELECT * FROM Tesistas;");
@@ -86,9 +84,5 @@ router.delete('tesistas/:id', async (req, res) => {
         console.log(res.body);
     }
 })
-
-
-
-
 
 module.exports = router
