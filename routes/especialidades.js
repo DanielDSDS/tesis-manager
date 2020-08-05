@@ -1,83 +1,87 @@
 const express = require('express')
 const pool = require('../db')
-const router = express.Router() 
+const router = express.Router()
 
-router.get('/especialidades', async(req,res) => {
-    try{
+//works
+router.get('/especialidades', async (req, res) => {
+    try {
         const especialidades = await pool.query("SELECT * FROM Especialidades;");
-        res.json(especialidades);
         res.body = especialidades;
         console.log(res.body);
-    }catch(err){
+        res.json(especialidades);
+    } catch (err) {
         res.body = err.message;
         console.log(res.body);
     }
 })
 
 //Registrar una especialidad
-router.post ('/especialidades', async (req,res) => {
+//works
+router.post('/especialidades', async (req, res) => {
     try {
-        const { nombre } = req.body;
+        const { nombre_esp } = req.body;
         const newEspecialidad = await pool.query(
-            "INSERT INTO especialidades ( nombre_esp ) VALUES( $1 ) RETURNING * ",
-            [nombre]
+            "INSERT INTO especialidades VALUES (DEFAULT, $1 ) RETURNING * ",
+            [nombre_esp]
         );
-
-        res.json(newEspecialidad.rows[0]);
-        
+        res.json(`La especialidad ${nombre_esp} ha sido creada exitosamente`);
     } catch (err) {
         res.body = err.message;
+        res.json(`La especialidad ${nombre_esp} no ha podido ser creada`);
         console.log(res.body);
     }
 })
 
 //Get Una especialidad
-
-router.get ('/especialidades/:id', async (req,res) => {
+//works
+router.get('/especialidades/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const especialidades = await pool.query ("SELECT * FROM especialidades WHERE cod_esp = $1", [id]);
+        const especialidades = await pool.query("SELECT * FROM especialidades WHERE cod_esp = $1", [id]);
 
-        res.json (especialidades.rows[0]);
-
+        if (especialidades.rows[0]) {
+            res.json(especialidades.rows[0]);
+        } else {
+            res.json(`No existe ninguna especialidad de codigo ${id}`)
+        }
     } catch (err) {
         res.body = err.message;
+        res.json(`No existe ninguna especialidad de codigo ${id}`)
         console.log(res.body);
     }
 });
 
 
 //Actualizar una especialidad
-
-router.put('especialidades/:id', async (req,res) =>{
+//works
+router.put('/especialidades/:id', async (req, res) => {
+    const { nombre_esp } = req.body;
     try {
-        const {id} = req.params;
-        const { nombre } = req.body;
-        const updateEspecialidad = await pool.query ("UPDATE especialidades SET nombre_esp = $1 ) WHERE cod_esp = $2",
-        [nombre,id]);
-        
-        res.json ("Especialidad Actualizada");
+        const { id } = req.params;
+        const updateEspecialidad = await pool.query("UPDATE especialidades SET nombre_esp=$1 WHERE cod_esp=$2;",
+            [nombre_esp, id]);
+
+        res.json(`La especialidad ${id} ha sido actualizada exitosamente`);
 
     } catch (err) {
         res.body = err.message;
+        res.json(`La especialidad ${id} no ha podido ser modificada`);
         console.log(res.body);
     }
 });
 
 //Borar una especialidad
-
-router.delete ('especialidad/:id', async (req,res) =>{
+//works
+router.delete('/especialidades/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const deleteEspecialidad = await pool.query ("DELETE FROM especialidades WHERE cod_esp = $1",[id]);
-        
-        res.json("Especialidad Eliminada")
-        
+        const deleteEspecialidad = await pool.query("DELETE FROM especialidades WHERE cod_esp = $1;", [id]);
+        res.json(`La epsecialidad de codigo ${id} ha sido eliminada exitosamente`);
     } catch (err) {
         res.body = err.message;
+        res.json(`La epsecialidad de codigo ${id} no ha podido ser eliminada`);
         console.log(res.body);
     }
-})
-
+});
 
 module.exports = router;

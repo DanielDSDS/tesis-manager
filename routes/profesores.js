@@ -3,80 +3,116 @@ const pool = require('../db');
 const router = express.Router();
 
 //Get todos los profesores
-router.get('/profesores', async(req,res) => {
-    try{
+//works
+router.get('/profesores', async (req, res) => {
+    try {
         const profesores = await pool.query("SELECT * FROM Profesores;");
+        res.json(profesores);
         res.body = profesores;
-    }catch(err){
+    } catch (err) {
         res.body = err.message
         console.log(res.body);
     }
-})
+});
+
+router.get('/profesores/internos', async (req, res) => {
+    try {
+        const internos = await pool.query("SELECT * FROM internos;");
+        res.json(internos);
+        res.body = internos;
+    } catch (err) {
+        res.body = err.message
+        console.log(res.body);
+    }
+});
 
 //Registrar un profesor
-router.post ('/profesores', async (req,res) => {
+//works
+router.post('/profesores', async (req, res) => {
+    const { nombre_p } = req.body;
     try {
-        const { cedula,nombre,direccion,correo,telefono } = req.body;
+        const { cedula_p, direccion_p, correo_p, telefono_p, tipo } = req.body;
         const newProfesor = await pool.query(
             "INSERT INTO profesores ( cedula_p, nombre_p, direccion_p, correo_p, telefono_p ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
-            [cedula,nombre,direccion,correo,telefono]
+            [cedula_p, nombre_p, direccion_p, correo_p, telefono_p]
         );
 
-        res.json(newProfesor.rows[0]);
-        
+        if (tipo === "I") {
+            const newInterno = await pool.query(
+                "INSERT INTO internos ( cedula_p) VALUES( $1) RETURNING * ",
+                [cedula_p]
+            );
+        } else {
+            const { cod_institucion } = req.body
+            const newForaneo = await pool.query(
+                "INSERT INTO internos ( cedula_p,cod_institucion) VALUES( $1,$2) RETURNING * ",
+                [cedula_p, cod_institucion]
+            );
+        }
+
+        res.json(`El profesor ${nombre_p} ha sido añadido exitosamente`);
+
     } catch (err) {
         res.body = err.message;
+        res.json(`El profesor ${nombre_p} no ha podido ser añadido`);
         console.log(res.body);
     }
 })
 
 //Get Un profesor
-//La parte de params hay que verla mejor por que se supone que tiene que ser la cedula
-
-router.get ('/profesores/:id', async (req,res) => {
+//works
+router.get('/profesores/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const profesores = await pool.query ("SELECT * FROM profesores WHERE cedula_p = $1", [id]);
+        const profesores = await pool.query("SELECT * FROM profesores WHERE cedula_p = $1", [id]);
 
-        res.json (profesores.rows[0]);
+        if (profesores.rows[0]) {
+            res.json(profesores.rows[0]);
+        } else {
+            res.json(`El profesor ${id} no esta registrado`)
+        }
 
     } catch (err) {
         res.body = err.message;
+        res.json(`Hubo un error al intentar obtener al profesor ${id}`)
         console.log(res.body);
     }
 });
 
 
 //Actualizar un profesor
-//La parte de params hay que verla mejor por que se supone que tiene que ser la cedula
-
-router.put('profesores/:id', async (req,res) =>{
+//works
+router.put('/profesores/:id', async (req, res) => {
+    const { nombre_p } = req.body;
     try {
-        const {id} = req.params;
-        const { nombre,direccion,correo,telefono } = req.body;
-        const updateProfesor = await pool.query ("UPDATE profesores SET nombre_p = $1, direccion_p = $2, correo_p = $3, telefono_p = $4 ) WHERE cedula_p = $5",
-        [nombre,direccion,correo,telefono,id]);
-        
-        res.json ("Profesor Actualizado");
+        const { id } = req.params;
+        const { direccion_p, correo_p, telefono_p } = req.body;
+        const updateProfesor = await pool.query("UPDATE profesores SET nombre_p=$1, direccion_p=$2, correo_p=$3, telefono_p=$4  WHERE cedula_p = $5;",
+            [nombre_p, direccion_p, correo_p, telefono_p, id]);
+
+        res.json(`El profesor ${nombre_p} ha sido actualizado exitosamente`);
 
     } catch (err) {
         res.body = err.message;
+        res.json(`El profesor ${nombre_p} no ha podido ser actualizado`);
         console.log(res.body);
     }
 });
 
 //Borar un Profesor
 //La parte de params hay que verla mejor por que se supone que tiene que ser la cedula
-
-router.delete ('profesores/:id', async (req,res) =>{
+//works
+router.delete('/profesores/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const deleteProfesor = await pool.query ("DELETE FROM profesores WHERE cedula_p = $1",[id]);
-        
-        res.json("Profesor Eliminado")
-        
+        const { id } = req.params;
+        const deleteProfesor = await pool.query("DELETE FROM profesores WHERE cedula_p = $1", [id]);
+
+        res.json(`El profesor ${id} ha sido eliminado exitosamente`);
+
     } catch (err) {
         res.body = err.message;
+        res.json(`El profesor ${id} no ha podido ser eliminado`);
         console.log(res.body);
     }
 })

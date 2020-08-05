@@ -2,10 +2,13 @@ const express = require('express');
 const pool = require('../db');
 const router = express.Router();
 
-router.get('/consejos', async(req,res) => {
+
+//works
+router.get('/consejos', async (req, res) => {
     try {
         const consejos = await pool.query("SELECT * FROM Consejos;");
         res.body = consejos;
+        res.json(consejos);
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
@@ -13,7 +16,8 @@ router.get('/consejos', async(req,res) => {
 })
 
 //Registrar un consejo
-router.post ('/consejos', async (req,res) => {
+//works
+router.post('/consejos', async (req, res) => {
     try {
         const { fecha } = req.body;
         const newConsejo = await pool.query(
@@ -21,8 +25,8 @@ router.post ('/consejos', async (req,res) => {
             [fecha]
         );
 
-        res.json(newConsejo.rows[0]);
-        
+        res.json(`Consejo creado exitosamente`);
+
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
@@ -30,14 +34,17 @@ router.post ('/consejos', async (req,res) => {
 })
 
 //Get Un consejo
-
-router.get ('/consejos/:id', async (req,res) => {
+//works
+router.get('/consejos/:id', async (req, res) => {
     try {
-        const {id} = req.params;
-        const consejos = await pool.query ("SELECT * FROM consejos WHERE num_consejo = $1", [id]);
+        const { id } = req.params;
+        const consejos = await pool.query("SELECT * FROM consejos WHERE num_consejo = $1", [id]);
 
-        res.json (consejos.rows[0]);
-
+        if (consejos.rows[0]) {
+            res.json(consejos.rows[0]);
+        } else {
+            res.json(`No existe ningun consejo de codigo ${id}`)
+        }
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
@@ -46,33 +53,34 @@ router.get ('/consejos/:id', async (req,res) => {
 
 
 //Actualizar un consejo
-
-router.put('consejos/:id', async (req,res) =>{
+//works
+router.put('/consejos/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
         const { fecha } = req.body;
-        const updateConsejo = await pool.query ("UPDATE consejos SET fec_consejo = $1 ) WHERE num_consejo = $2",
-        [fecha,id]);
-        
-        res.json ("Consejo Actualizado");
+        const updateConsejo = await pool.query("UPDATE consejos SET fec_consejo=$1 WHERE num_consejo=$2",
+            [fecha, id]);
+
+        res.json(`Consejo ${id} ha actualizado exitosamente`);
 
     } catch (err) {
         res.body = err.message;
+        res.send(`El consejo ${id} no ha podido ser actualizado`);
         console.log(res.body);
     }
 });
 
 //Borar un consejo
-
-router.delete ('consejos/:id', async (req,res) =>{
+//works
+router.delete('/consejos/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const deleteConsejo = await pool.query ("DELETE FROM consejos WHERE num_consejo = $1",[id]);
-        
-        res.json("Consejo Eliminado")
-        
+        const deleteConsejo = await pool.query("DELETE FROM consejos WHERE num_consejo=$1", [id]);
+        res.json(`El consejo ${id} ha sido eliminado exitosamente`)
+
     } catch (err) {
         res.body = err.message;
+        res.json(`El consejo ${id} no ha podido ser eliminado`)
         console.log(res.body);
     }
 })
