@@ -1,20 +1,22 @@
+import { useState } from 'react'
+
 const useForm = (fields, proxy) => {
-    const [state, setState] = useState(fields);
+    const [values, setValues] = useState(fields);
 
     const handleChange = ({ target }) => {
-        setState({
-            ...state,
+        setValues({
+            ...values,
             [target.name]: target.value
         })
-        console.log(state);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = e => {
         e.preventDefault();
+        console.log('%c state:', 'color:blue;', values)
         fetch(`http://localhost:3000/${proxy}`, {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(state)
+            body: JSON.stringify(values)
         })
             .then(res => res.json())
             .then(result => console.log(result))
@@ -22,8 +24,8 @@ const useForm = (fields, proxy) => {
     }
 
     return ({
-        state,
-        hanldeSubmit,
+        values,
+        handleSubmit,
         handleChange
     })
 }

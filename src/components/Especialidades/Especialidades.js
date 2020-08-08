@@ -1,15 +1,16 @@
 import React from 'react'
 import EspecialidadesTable from './EspecialidadesTable'
+import EspecialidadesForm from './EspecialidadesForm'
 
 const Especialidades = () => {
 
-    return(
-        <div className="content-container">   
-            <div className="form-container"> 
-                <h3>Aqui ira la forma para introducir especialidades</h3>
+    return (
+        <div className="content-container">
+            <div className="form-container">
+                <EspecialidadesForm />
             </div>
             <div className="table-container">
-                <EspecialidadesTable/>
+                <EspecialidadesTable />
             </div>
         </div>
     )
