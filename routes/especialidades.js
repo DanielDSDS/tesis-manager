@@ -11,6 +11,7 @@ router.get('/especialidades', async (req, res) => {
         res.json(especialidades);
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -27,7 +28,7 @@ router.post('/especialidades', async (req, res) => {
         res.json(`La especialidad ${nombre_esp} ha sido creada exitosamente`);
     } catch (err) {
         res.body = err.message;
-        res.json(`La especialidad ${nombre_esp} no ha podido ser creada`);
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -46,7 +47,7 @@ router.get('/especialidades/:id', async (req, res) => {
         }
     } catch (err) {
         res.body = err.message;
-        res.json(`No existe ninguna especialidad de codigo ${id}`)
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -65,7 +66,7 @@ router.put('/especialidades/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La especialidad ${id} no ha podido ser modificada`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -79,7 +80,7 @@ router.delete('/especialidades/:id', async (req, res) => {
         res.json(`La epsecialidad de codigo ${id} ha sido eliminada exitosamente`);
     } catch (err) {
         res.body = err.message;
-        res.json(`La epsecialidad de codigo ${id} no ha podido ser eliminada`);
+        res.json(err.message);
         console.log(res.body);
     }
 });

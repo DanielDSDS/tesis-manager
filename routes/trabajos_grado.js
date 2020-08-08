@@ -2,59 +2,81 @@ const express = require('express');
 const pool = require('../db');
 const router = express.Router();
 
-router.get('/trabajos_grado', async(req,res) => {
+
+//works
+router.get('/trabajos_grado', async (req, res) => {
     try {
         const trabajos_grado = await pool.query("SELECT * FROM Trabajos_grado;");
         res.body = trabajos_grado;
+        res.json(trabajos_grado);
     } catch (err) {
         res.body = err.message;
-        console.log(res.body);
+        res.json(err.message);
     }
 })
 
 //Registrar un TG
-router.post ('/trabajos_grado', async (req,res) => {
+//por testear
+router.post('/trabajos_grado', async (req, res) => {
+    const { num_consejo, cedula_t, modalidad, fec_aprobacion, titulo } = req.body;
     try {
-        const { consejo,cedula,modalidad,fecha,titulo } = req.body;
         const newTG = await pool.query(
-            "INSERT INTO trabajos_grado ( num_consejo, cedula_t, modalidad, fec_aprobacion, titulo ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
-            [consejo,cedula,modalidad,fecha,titulo]
-        );
-
-        res.json(newTG.rows[0]);
-        
+            "INSERT INTO Trabajos_grado ( num_consejo, cedula_t, modalidad, fec_aprobacion, titulo ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
+            [num_consejo, cedula_t, modalidad, fec_aprobacion, titulo]
+        ).then(() => {
+            if (newTG.rows[0]) {
+                if (modalidad = "Experimental") {
+                    //Insertar en Experimental
+                } else {
+                    //Insertar en El otro tipo que se me olvido el nombre
+                }
+            } else {
+                res.json(`El Trabajo de Grado de C.I V-${cedula_t}no pudo ser creado`);
+            }
+        })
+            .catch((err) => {
+                res.json(`El Trabajo de Grado de C.I V-${cedula_t}no pudo ser creado`);
+            })
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })
 
 //Get Un TG
-
-router.get ('/trabajos_grado/:id', async (req,res) => {
+//testear
+router.get('/trabajos_grado/:id', async (req, res) => {
+    const { id } = req.params
     try {
-        const {id} = req.params;
-        const TG = await pool.query ("SELECT * FROM trabajos_grado WHERE id_tg = $1", [id]);
-
-        res.json (TG.rows[0]);
-
+        const TG = await pool.query("SELECT * FROM Trabajos_grado WHERE cedula_t = $1;", [id])
+        if (TG.rows[0]) {
+            res.json(TG.rows[0]);
+        } else {
+            res.json(`El trabajos_grado ${id} no esta registrado`)
+        }
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
 
 
 //Actualizar un TG  
-
-router.put('trabajos_grado/:id', async (req,res) =>{
+//testear
+router.put('/trabajos_grado/:id', async (req, res) => {
     try {
-        const {id} = req.params;
-        const { consejo,cedula,modalidad,fecha,titulo } = req.body;
-        const updateTG = await pool.query ("UPDATE trabajos_grado SET num_consejo = $1 , cedula_t  = $2, modalidad  = $3, fec_aprobacion  = $4, titulo  = $5 ) WHERE id_comite = $6",
-        [consejo,cedula,modalidad,fecha,titulo,id]);
-        
-        res.json ("TG Actualizado");
+        const { id } = req.params;
+        const { num_consejo, id_comite, modalida, fec_aprobacion, titulo } = req.body;
+        const updateTG = await pool.query("UPDATE trabajos_grado SET num_consejo = $1 , id_comite  = $2, modalidad  = $3, fec_aprobacion  = $4, titulo  = $5  WHERE cedula_t = $6;",
+            [num_consejo, id_comite, modalida, fec_aprobacion, titulo, id])
+            .then(() => {
+                res.json(`El TG de C.I V-${id} ha sido actualizado exitosamente`);
+            })
+            .catch((err) => {
+                res.json(err.message)
+            })
 
     } catch (err) {
         res.body = err.message;
@@ -63,16 +85,20 @@ router.put('trabajos_grado/:id', async (req,res) =>{
 });
 
 //Borar un TG
-
-router.delete ('trabajos_grado/:id', async (req,res) =>{
+//recibira el id del trabajo de grado pero se puede cambiar por la cedula
+router.delete('/trabajos_grado/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const {id} = req.params;
-        const deleteTG = await pool.query ("DELETE FROM trabajos_grado WHERE id_tg = $1",[id]);
-        
-        res.json("TG Eliminado")
-        
+        const deleteTG = await pool.query("DELETE FROM trabajos_grado WHERE id_tg = $1", [id])
+            .then(() => {
+                res.json(`El tesista C.I V-${id} ha sido eliminado exitosamente`)
+            })
+            .catch((err) => {
+                res.json(`El tesista C.I V-${id} no ha podido ser eliminado`)
+            })
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })

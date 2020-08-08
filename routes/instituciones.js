@@ -11,6 +11,7 @@ router.get('/instituciones', async (req, res) => {
         res.json(instituciones);
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -29,7 +30,7 @@ router.post('/instituciones', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La institucion ${nombre_inst} no ha podido ser añadido`)
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -48,7 +49,7 @@ router.get('/instituciones/:id', async (req, res) => {
         }
     } catch (err) {
         res.body = err.message;
-        res.json(`La empresa de codigo ${id} no existe`)
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -68,6 +69,7 @@ router.put('/instituciones/:id', async (req, res) => {
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
+        res.json(err.message);
     }
 });
 
@@ -80,7 +82,7 @@ router.delete('/instituciones/:id', async (req, res) => {
         res.json(`La institucion ${id} ha sido eliminada`);
     } catch (err) {
         res.body = err.message;
-        res.json(`La institucion ${id} no ha podido ser eliminada`)
+        res.json(err.message);
         console.log(res.body);
     }
 });

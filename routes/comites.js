@@ -11,6 +11,7 @@ router.get('/comites', async (req, res) => {
         console.log(res.body);
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -29,6 +30,7 @@ router.post('/comites', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -48,6 +50,7 @@ router.get('/comites/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -65,7 +68,7 @@ router.put('/comites/:id', async (req, res) => {
         res.json(`El comite ${id} ha sido actualizado exitosamente`);
     } catch (err) {
         res.body = err.message;
-        res.json(`El comite ${id} no ha podido ser actualizado`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -81,7 +84,7 @@ router.delete('/comites/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`El comite ${id} no ha podido ser eliminado`);
+        res.json(err.message);
         console.log(res.body);
     }
 })

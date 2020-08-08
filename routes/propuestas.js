@@ -6,12 +6,13 @@ const router = express.Router();
 //works
 router.get('/propuestas', async (req, res) => {
     try {
-        const propuestas = await pool.query("SELECT * FROM propuestas;");
+        const propuestas = await pool.query("SELECT * FROM propuestas;")
         res.body = propuestas;
         res.json(propuestas);
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
+        res.json(err.message);
     }
 })
 
@@ -26,28 +27,34 @@ function getLocalDate() {
 
 //Registrar una propuesta
 //works
-router.post('/propuestas', async (req, res) => {
-    const { cedula_p, cedula_t,titulo_propuesta, id_comite } = req.body;
-    try {
-        const fec_entrega = getLocalDate();
-        console.log(today)
-        //fecha  = funcion para tomar la fecha
-        const newPropuesta = await pool.query(
-            "INSERT INTO propuestas ( cedula_p, titulo_propuesta, fec_entrega ) VALUES( $1, $2, $3 ) RETURNING *;",
-            [cedula_p, titulo, fec_entrega]
-        );
 
-        if(newPropuesta){
-            // const newPropuesta = await pool.query(
-            //     "INSERT INTO propuestas ( cedula_p, titulo_propuesta, fec_entrega ) VALUES( $1, $2, $3 ) RETURNING *;",
-            //     [cedula_p, titulo, fec_entrega]
-            // );
-        }
-        res.json(`La propuesta del tesista ${cedula_p} ha sido creada exitosamente`);
+//debe recibir desde front: cedula_t,titulo_propuesta,fecha_entrega
+
+//valores inicializados por defecto: id_prop:serial,cedula_p:NULL,id_comite:NULL,id_tg:NULL,estatus_aprobacion:PA,veredicto_prof:PER
+//valores inicializados por defecto 2: titulo:NULL,observaciones_comite:NULL,fec_comite:NULL,fec_veredicto:NULL,fec_aprobacion:NULL
+router.post('/propuestas', async (req, res) => {
+    const { cedula_t, titulo_propuesta, fec_entrega } = req.body;
+    try {
+        //const fec_entrega = getLocalDate();
+
+        const newPropuesta = await pool.query(
+            "INSERT INTO Propuestas (titulo_propuesta, fec_entrega ) VALUES( $1, $2 ) RETURNING *;",
+            [titulo_propuesta, fec_entrega]
+        )
+            .then(() => {
+                pool.query(
+                    "INSERT INTO Aplicaciones_propuestas ( cedula_t ) VALUES( $1) RETURNING *;",
+                    [cedula_t]
+                )
+                    .then(() => {
+                        res.json(`La propuesta del tesista C.I V-${cedula_t} ha sido creada exitosamente`);
+                    })
+                    .catch(err => res.json(`La propuesta del tesista C.I V-${cedula_t} no ha podido ser creada`))
+            })
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La propuesta del tesista ${cedula_p} no ha podido ser creada`);
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -57,47 +64,59 @@ router.post('/propuestas', async (req, res) => {
 router.get('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const propuestas = await pool.query("SELECT * FROM propuestas WHERE id_propueta = $1", [id]);
+        const propuestas = await pool.query(
+            "SELECT * FROM Propuestas p WHERE p.id_propuesta IN (SELECT id_propuesta FROM Aplicaciones_propuestas a WHERE cedula_t = $1)", [id]);
 
-        res.json(propuestas.rows[0]);
+        if (propuestas.rows[0]) {
+            res.json(propuestas.rows[0]);
+        } else {
+            res.json(`La propuesta del tesista C.I V-${id} no existe`);
+        }
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
 
-
 //Actualizar una propuesta
-
-router.put('propuestas/:id', async (req, res) => {
+//works
+router.put('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { comite, tg, estatus, veredicto, title, title_p, observaciones, f_comite, f_veredicto } = req.body;
-        //f_aprovacion = funcion para tomar la fecha
         const updatePropuesta = await pool.query
-            ("UPDATE propuestas SET id_comite = $1, id_tg = $2, estatus_aprovacion = $3, veredicto_profesor = $4, titulo = $5, titulo_propuesta = $6, observaciones_comite = $7, fec_comite = $7, fec_veredicto = $8, fec_aprovacion = $9 ) WHERE id_propuesta = $10",
-                [comite, tg, estatus, veredicto, title, title_p, observaciones, f_comite, f_veredicto, f_aprovacion, id]);
+            ("UPDATE Propuestas SET id_comite = $1, id_tg = $2, estatus_aprovacion = $3, veredicto_profesor = $4, titulo = $5, titulo_propuesta = $6, observaciones_comite = $7, fec_comite = $7, fec_veredicto = $8, fec_aprovacion = $9 WHERE id_propuesta = $10",
+                [comite, tg, estatus, veredicto, title, title_p, observaciones, f_comite, f_veredicto, f_aprovacion, id])
+            .then(() => {
+                res.json(`La propuesta ${id} ha sido actualizada exitosamente`);
+            })
+            .catch((err) => {
+                res.json(err.message)
+            })
 
-        res.json("Propuesta Actualizada");
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
 
 //Borar una propuesta
-
-router.delete('propuestas/:id', async (req, res) => {
+//works
+//Estar pendiente de restricciones de borrado con respecto a otras tablas
+router.delete('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const deletePropuesta = await pool.query("DELETE FROM propuestas WHERE id_propuesta = $1", [id]);
 
-        res.json("Propuesta Eliminada")
+        res.json(`La propuesta ${id} ha sido eliminada correctamente`);
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })

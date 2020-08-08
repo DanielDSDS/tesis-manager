@@ -11,6 +11,7 @@ router.get('/profesores', async (req, res) => {
         res.body = profesores;
     } catch (err) {
         res.body = err.message
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -23,38 +24,40 @@ router.get('/profesores/internos', async (req, res) => {
     } catch (err) {
         res.body = err.message
         console.log(res.body);
+        res.json(err.message);
     }
 });
 
 //Registrar un profesor
 //works
+//el campo "tipo" con el que el profesor es recibido viene del front por un boton radio
 router.post('/profesores', async (req, res) => {
     const { nombre_p } = req.body;
     try {
         const { cedula_p, direccion_p, correo_p, telefono_p, tipo } = req.body;
-        const newProfesor = await pool.query(
+        const newProfesor = pool.query(
             "INSERT INTO profesores ( cedula_p, nombre_p, direccion_p, correo_p, telefono_p ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
             [cedula_p, nombre_p, direccion_p, correo_p, telefono_p]
-        );
-
-        if (tipo === "I") {
-            const newInterno = await pool.query(
-                "INSERT INTO internos ( cedula_p) VALUES( $1) RETURNING * ",
-                [cedula_p]
-            );
-        } else {
-            const { cod_institucion } = req.body
-            const newForaneo = await pool.query(
-                "INSERT INTO internos ( cedula_p,cod_institucion) VALUES( $1,$2) RETURNING * ",
-                [cedula_p, cod_institucion]
-            );
-        }
+        ).then(() => {
+            if (tipo === "I") {
+                const newInterno = pool.query(
+                    "INSERT INTO internos ( cedula_p) VALUES( $1) RETURNING * ",
+                    [cedula_p]
+                );
+            } else {
+                const { cod_institucion } = req.body
+                const newForaneo = pool.query(
+                    "INSERT INTO internos ( cedula_p,cod_institucion) VALUES( $1,$2) RETURNING * ",
+                    [cedula_p, cod_institucion]
+                );
+            }
+        })
 
         res.json(`El profesor ${nombre_p} ha sido añadido exitosamente`);
 
     } catch (err) {
         res.body = err.message;
-        res.json(`El profesor ${nombre_p} no ha podido ser añadido`);
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -74,7 +77,7 @@ router.get('/profesores/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`Hubo un error al intentar obtener al profesor ${id}`)
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -94,7 +97,7 @@ router.put('/profesores/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`El profesor ${nombre_p} no ha podido ser actualizado`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -112,7 +115,7 @@ router.delete('/profesores/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`El profesor ${id} no ha podido ser eliminado`);
+        res.json(err.message);
         console.log(res.body);
     }
 })

@@ -1,0 +1,248 @@
+
+CREATE TABLE Escuela (
+codigo_escuela              CHAR(10) PRIMARY KEY,
+nombre_escuela              VARCHAR(30) NOT NULL, 
+domicilio_escuela           VARCHAR(500)  NOT NULL);
+
+CREATE TABLE Guia (
+codigo_guia                 CHAR(10) PRIMARY KEY, 
+nombre_guia                 VARCHAR(20) NOT NULL,
+apellido_guia               VARCHAR(20) NOT NULL );
+
+CREATE TABLE Reserva (
+codigo_escuela              CHAR(10) PRIMARY KEY,
+numero_reserva              CHAR (10) PRIMARY KEY,
+fecha_visita_reservada      DATETIME NOT NULL, 
+hora_visita_reservada       DATETIME NOT NULL);
+
+CREATE TABLE Tipo_visita ( 
+codigo_tipo_visita          CHAR(10) PRIMARY KEY,
+descripcion_visita          VARCHAR(30),
+arancel_por_alumno          MONEY);
+
+CREATE TABLE Telefono_escuela (
+telefono_escuela            INT,
+codigo_escuela              CHAR(10) CONSTRAINT codigo_escuela REFERENCES Escuela,
+CONSTRAINT CP               PRIMARY KEY (telefono_escuela, codigo_escuela));
+
+CREATE TABLE Reserva_por_grado ( 
+numero_reserva              CHAR(10) CONSTRAINT numero_reserva REFERENCES Reserva,
+codigo_tipo_visita          CHAR(10) CONSTRAINT tipo_visita REFERENCES Tipo_visita,
+numero_grado                INT,
+CONSTRAINT CP PRIMARY KEY ( numero_reserva, codigo_tipo_visita, numero_grado));
+
+CREATE TABLE Reserva_tipo_visita (
+numero_reserva                  CHAR(10) CONSTRAINT numero_reserva2 REFERENCES RESERVA, 
+codigo_tipo_visita              CHAR(10) CONSTRAINT codigo_tipo_visita REFERENCES Tipo_visita, 
+CANTIDAD_ALUMNOS_RESERVADOS     INT,
+cantidad_alumnos_reservados     INT, 
+codigo_guia                     CHAR(10), 
+CONSTRAINT cf_codigo_guia FOREIGN KEY (codigo_guia) REFERENCES Guia,
+CONSTRAINT CP PRIMARY KEY (numero_reserva, codigo_tipo_visita));
+
+CREATE TABLE Distrito_escolar (
+codigo_distrito CHAR(10)        PRIMARY KEY,
+descripcion_distrito            CHAR(50));
+
+
+Examen 1
+
+1) Listar las reservas, el dia,la cantidad total de alumnos por tipo de visita, el nombre de la escuela y el nombre
+del guia:
+
+joins
+
+SELECT res.numero_reserva,res.fecha_visita_reservada,es.nombre_escuela,guia.nombre_guia
+FROM Guia guia INNER JOIN ((Escuela esc INNER JOIN reserva res ON 
+    esc.codigo_escuela = res.codigo_escuela) INNER JOIN 
+    reserva_tipo_visita rev ON res.numero_reserva = rev.numero_reserva)
+    ON guia.codigo_guia = rev.codigo_guia;
+
+
+subconsultas
+
+SELECT res.numero_reserva,res.fecha_visita_reservada,es.nombre_escuela,guia.nombre_guia
+FROM Guia guia WHERE guia.codigo_guia IN (SELECT rtv.codigo_guia FROM reserva_tipo_visita
+    WHERE rtv.codigo_reserva IN (SELECT res.codigo_reserva FROM Reserva res 
+    WHERE res.codigo_escuela IN (SELECT es.codigo_escuela FROM Escuela)))
+
+
+2) Listar el nombre, apellido y código de aquellos guías que, en alguna visita
+de una reserva en particular, hayan atendido por lo menos al 40% de los alumnos
+totales guiados en todas sus visitas. 
+
+joins
+
+SELECT guia.codigo_guia, guia.apellido_guia, guia.nombre_guia
+FROM Guia guia
+WHERE guia.codigo_guia IN (
+    SELECT revt.codigo_guia 
+    FROM reserva_tipo_visita revt
+    WHERE revt.cantidad_alumnos_reales > (
+        SELECT SUM (cantidad_alumnos_reales)*0.40
+        FROM reserva_tipo_visita revt2
+        WHERE revt2.codigo_guia = revt.codigo_guia
+    )
+);
+
+
+
+
+3)	Listar el nombre y el código de aquellas escuelas que hayan asistido el día
+ en que se registró la mayor cantidad de alumnos reales (PUEDE USAR INNER JOIN). 
+
+joins
+
+SELECT esc.codigo_escuela, esc.nombre_escuela
+FROM Escuela esc
+WHERE esc.codigo_escuela IN (
+    SELECT res.codigo_escuela
+    FROM Reserva res
+    WHERE res.fecha_visita_reservada = (
+        SELECT TOP 1 res2.fecha_visita_reservada
+        FROM Reserva res2 INNER JOIN Reserva_tipo_visita rev ON 
+            res2.numero_reserva = rev.numero_reserva
+        GROUP BY res2.fecha_visita_reservada
+        ORDER BY SUM(rev.cantidad_alumnos_reales) DESC
+    )
+);
+
+
+
+4)	Listar los guías (codigo, nombre y apellido) que fueron asignados a más de 2
+ tipos de visita distintos y con una cantidad total real de alumnos que guiaron, mayor a 200. 
+
+joins
+
+SELECT guia.codigo_guia,guia.nombre_guia,guia.apellido_guia FROM Guia guia
+WHERE guia.codigo_guia IN (
+    SELECT rev.codigo_guia FROM reserva_tipo_visita rev
+    GROUP BY rev.codigo_guia
+    HAVING COUNT (DISTINCT(rev.codigo_tipo_visita)) > 2 
+    AND SUM(rev.cantidad_alumnos_reales) > 200
+);
+
+
+Examen 2
+
+1) Listar las reservas y los nombres de escuelas con valor total mayor a $1000
+
+SELECT esc.nombre_escuela, res.numero_reserva,
+    SUM(res.cantidad_alumnos_reales) as total_presentes
+    SUM(rev.cantidad_alumnos_reales) * arancel_por_alumno * 1.21) as cantidad_total
+    as valor_total
+FROM (Escuela esc INNER JOIN (Reserva_tipo_visita as ret INNER JOIN 
+    Reserva ON res.numero_reserva = reserva.numero_reserva) ON 
+    es.codigo_escuela = reserva.codigo_escuela ) INNER JOIN 
+    tipo_visita tv ON (tv.codigo_tipo_visita = 
+    res.codigo_tipo_visita)
+GROUP BY es.nombre_escuela, res.numero_reserva
+    HAVING SUM(res.cantidad_alumnos_reales * tv.arancel_por_alumno*1.21)>1000;
+
+
+2)	Listar el nombre y el código de aquellas escuelas que hayan asistido el día
+en que se registró la mayor cantidad de alumnos reales (PUEDE USAR INNER JOIN). 
+
+joins
+
+SELECT codigo_escuela, nombre_escuela
+FROM escuela
+WHERE codigo_escuela IN (
+    SELECT res.codigo_escuela
+    FROM reserva res
+    WHERE res.fecha_visita_reservada = (
+        SELECT TOP 1 res2.fecha_visita_reservada
+            FROM reserva res1
+            WHERE YEAR(res1.fecha_visita_reservada) BETWEENE 2001 AND 2002
+    )
+)
+
+1.	Listar las reservas, el día, la cantidad total de alumnos por tipo de visita
+, el nombre de la escuela y el nombre del guía. 
+
+SELECT ESC.Nombre_Escuela, GUI.Apellido_Guia, GUI.Nombre_Guia,
+        RES.Numero_Reserva, TV.Descripcion_Tipo_Visita,
+        Sum(REV.Cantidad_Alumnos_Reales) AS TOTAL_Cantidad_Alumnos_Reales
+ FROM tipo_visita TV INNER JOIN (escuela ESC INNER JOIN (guia GUI
+        INNER JOIN (reserva RES INNER JOIN Reserva_Tipo_Visita REV ON
+        RES.Numero_Reserva = REV.Numero_Reserva) ON GUI.Codigo_Guia = REV.Codigo_Guia) 
+        ON ESC.Codigo_Escuela = RES.Codigo_Escuela) ON TV.Codigo_Tipo_Visita = REV.Codigo_Tipo_Visita
+GROUP BY ESC.Nombre_Escuela, GUI.Apellido_Guia, GUI.Nombre_Guia,
+        RES.Numero_Reserva, TV.Descripcion_Tipo_Visita; 
+
+2.	Insertar en una nueva tabla llamada Guia_Performance los datos del Guía
+ y las sumas de las cantidades reservadas y reales del año 2003
+
+SELECT guia.codigo_guia,guia.apellido_guia,guia.nombre_guia,
+    SUM(rtv.cantidad_alumnos_reservados) AS cantidad_alumnos_reservados, 
+    SUM(rtv.cantidad_alumnos_reales) AS cantidad_alumnos_reales
+    INTO Guia_Performance
+FROM (guia INNER JOIN reserva_tipo_visita AS rtv ON guia.codigo_guia = rtv.codigo_guia)
+    INNER JOIN reserva ON rtv.numero_reserva = reserva.numero_reserva
+WHERE Year(fecha_visita_reservada) = 2003
+GROUP BY guia.codigo_guia, guia.apellido_guia, guia.nombre_guia;
+
+3. Listar las escuelas que poseen más de 1 reservas con más de 2 tipos de visitas para cada reserva.
+
+SELECT codigo_escuela,nombre_escuela FROM Escuela
+WHERE Escuela.codigo_escuela IN (
+    SELECT res.codigo_escuela FROM Reserva res
+    WHERE res.numero_reserva IN (
+        SELECT rtv.numero_reserva FROM Reserva_tipo_visita rtv
+        GROUP BY rtv.numero_reserva
+        HAVING COUNT (rtv.codigo_tipo_visita) > 2
+    )
+    GROUP BY res.codigo_escuela
+    HAVING COUNT(res.numero_reserva) > 1
+)
+
+4.Listar los nombres y códigos de escuelas con gasto total de todas las visitas mayor a
+$1700. 
+
+SELECT nombre_escuela FROM Escuela 
+WHERE codigo_escuela IN (
+    SELECT res.codigo_escuel FROM Reserva res 
+    INNER JOIN reserva_tipo_visita rtv ON res.numero_reserva = rtv.numero_reserva
+    INNER JOIN tipo_visita tv ON tv.codigo_tipo_visita = rtv.codigo_tipo_visita
+    GROUP BY res.codigo_escuela
+    HAVING (SUM((tv.arancel_por_alumno) * rev.cantidad_alumnos_reales) > 1700)
+);
+
+Examen 3.
+
+1.Listar los guías que tuvieron más de 3 escuelas diferentes y una cantidad total real de alumnos mayor a 200
+
+SELECT guia.codigo_guia, guia.nombre_guia, guia.apellido_guia
+FROM Guia guia
+WHERE guia.codigo_guia IN (
+    SELECT rtv.codigo_guia FROM Reserva_tipo_visita rtv 
+    INNER JOIN Reserva res ON rtv.numero_reserva = res.numero_reserva
+    GROUP BY (rtv.codigo_guia)
+    HAVING COUNT (DISTINCT (res.codigo_escuela)) > 3 AND SUM(rev.cantidad_alumnos_reales) > 100
+);
+
+2.Listar las escuelas que poseen más de 1 reservas con más de 2 tipos de visitas para cada reserva.
+
+SELECT es.codigo_escuela, nombre_escuela FROM escuela es
+WHERE es.codigo_escuela IN (
+    SELECT res.codigo_escuela FROM 
+    WHERE res.numero_reserva IN (
+        SELECT rtv.numero_reserva FROM Reserva_tipo_visita rev
+        GROUP BY rtv.numero_reserva
+        HAVING COUNT (rtv.codigo_tipo_visita) > 2
+    )
+    GROUP BY res.codigo_escuela
+    HAVING COUNT(res.numero_reserva) > 1
+);
+
+3.Listar los guías que hayan tenido en solo un tipo de visita de una reserva en particular
+ por lo menos el 45% del total de alumnos totales que esa persona atendió. 
+
+SELECT guia.codigo_guia, guia.apellido_guia,guia.nombre_guia FROM Guia guia
+WHERE guia.codigo_guia IN (
+    SELECT rtv.codigo_guia FROM Reserva_tipo_visita rtv
+    WHERE rtv.cantidad_alumnos_reales > (
+        SELECT SUM(cantidad_alumnos_reales)*0.45 FROM Reserva_tipo_visita revt2
+        WHERE rtv2.codigo_guia = rtv.codigo_guia
+    )
+);

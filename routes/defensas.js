@@ -12,6 +12,7 @@ router.get('/defensas', async (req, res) => {
         console.log(defensas);
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body)
     }
 })
@@ -30,7 +31,7 @@ router.post('/defensas', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La defensa para el ${fec_pres} no ha podido ser creada`);
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -51,6 +52,7 @@ router.get('/defensas/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -69,7 +71,7 @@ router.put('/defensas/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La defensa para C.I V-${id} no ha podido ser modificada`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -84,7 +86,7 @@ router.delete('/defensas/:id', async (req, res) => {
         res.json(`La defensa de C.I V-${id} ha sido eliminada exitosamente`);
     } catch (err) {
         res.body = err.message;
-        res.json(`La defensa de C.I V-${id} no ha podido ser eliminada`);
+        res.json(err.message);
         console.log(res.body);
     }
 })

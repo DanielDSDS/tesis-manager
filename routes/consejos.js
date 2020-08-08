@@ -12,6 +12,7 @@ router.get('/consejos', async (req, res) => {
     } catch (err) {
         res.body = err.message;
         console.log(res.body);
+        res.json(err.message);
     }
 })
 
@@ -29,6 +30,7 @@ router.post('/consejos', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -47,6 +49,7 @@ router.get('/consejos/:id', async (req, res) => {
         }
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -65,7 +68,7 @@ router.put('/consejos/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.send(`El consejo ${id} no ha podido ser actualizado`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -80,7 +83,7 @@ router.delete('/consejos/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`El consejo ${id} no ha podido ser eliminado`)
+        res.json(err.message);
         console.log(res.body);
     }
 })

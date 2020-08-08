@@ -12,6 +12,7 @@ router.get('/empresas', async (req, res) => {
     } catch (err) {
         res.body = err.message;
         console.log(err.message);
+        res.json(err.message);
     }
 })
 
@@ -29,7 +30,7 @@ router.post('/empresas', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La empresa ${nombre_emp} no ha podido ser creada`);
+        res.json(err.message);
         console.log(res.body);
     }
 })
@@ -49,6 +50,7 @@ router.get('/empresas/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -66,7 +68,7 @@ router.put('/empresas/:id', async (req, res) => {
         res.json(`La empresa ${nombre_emp} ha sido modificada exitosamente`);
     } catch (err) {
         res.body = err.message;
-        res.json(`La empresa ${nombre_emp} no ha podido ser modificada`);
+        res.json(err.message);
         console.log(res.body);
     }
 });
@@ -82,7 +84,7 @@ router.delete('/empresas/:id', async (req, res) => {
 
     } catch (err) {
         res.body = err.message;
-        res.json(`La empresa de codigo ${id} no ha podido ser eliminada`)
+        res.json(err.message);
         console.log(res.body);
     }
 })
