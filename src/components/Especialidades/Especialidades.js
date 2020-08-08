@@ -6,6 +6,7 @@ const Especialidades = () => {
 
     return (
         <div className="content-container">
+            <h1 className="content-title">Especialidades</h1>
             <div className="form-container">
                 <EspecialidadesForm />
             </div>

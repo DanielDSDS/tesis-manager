@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table'
 
 /*
-    De tener tiempo se puede hacer un custom hook 
+    (documentacion)
+    De tener tiempo se puede hacer un custom hook
 
 EspecialidadesTable.js
     const {handleUpdate, handleFetch, handleDelete} = useTable('/especialidades')
@@ -22,7 +23,11 @@ useTable.js
 */
 
 const EspecialidadesTable = () => {
+    //estado del componente
     const [especialidades, setEspecialidades] = useState([{}]);
+    //estado para los titulos de las columnas de la tabla 
+    //NOTA: EL CAMPO FIELD DEBE SER EL MISMO NOMBRE QUE TIENE EL ATRIBUTO EN LA BD, SINO SE ROMPE
+    //TODAS LAS VARIABLES DE LAS TABLAS DEBEN TENER EL MISMO NOMBRE QUE EN LA BD
     const [state, setState] = useState({
         columns: [
             { title: 'id', field: 'cod_esp' },
@@ -31,10 +36,12 @@ const EspecialidadesTable = () => {
         data: []
     })
 
+    //Cuando se renderiza el componente se llama la funcion que obtiene todas las especialidades
     useEffect(() => {
         fetchEspecialidades()
     }, [])
 
+    //obtener todas las especialidades
     const fetchEspecialidades = () => {
         fetch('http://localhost:3000/especialidades')
             .then(res => res.json())
@@ -42,6 +49,7 @@ const EspecialidadesTable = () => {
             .catch(err => console.log(err.message))
     }
 
+    //eliminar una especialidad
     const deleteEspecialidad = (cod_esp) => {
         console.log(cod_esp)
         fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
@@ -53,6 +61,7 @@ const EspecialidadesTable = () => {
             .catch(err => console.log(err.message))
     }
 
+    //actualizar una especialidad
     const updateEspecialidad = (especialidad) => {
         console.log(especialidad)
         const { cod_esp, nombre_esp } = especialidad;

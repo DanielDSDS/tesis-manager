@@ -1,8 +1,6 @@
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
-import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select';
 import React from 'react';
 import useForm from '../useForm/useForm';
 
@@ -16,13 +14,15 @@ const EspecialidadesForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl className="form-especialidad">
                     <TextField
-                        name="nombre_esp"
+                        class="text-field"
+                        size="small"
                         label="Nombre Especialidad"
+                        name="nombre_esp"
                         variant="outlined"
                         value={values.nombre_esp}
                         onChange={handleChange}
-                    ></TextField>
-                    <Button variant="contained" type="submit">Añadir Especialidad</Button>
+                        disableElevation />
+                    <Button class="button" variant="contained" type="submit">Añadir Especialidad</Button>
                 </FormControl>
             </form>
         </div>

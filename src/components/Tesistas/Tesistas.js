@@ -1,26 +1,17 @@
 import React from 'react';
-import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import FormControl from '@material-ui/core/FormControl'
+import TesistasForm from './TesistasForm';
+import TesistasTable from './TesistasTable';
 
 const Tesistas = () => {
     return (
-        <div>
-            <form>
-                <FormControl>
-                    <TextField id="nombre" label="Nombre de Tesista" variant="outlined"></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField id="cedula" label="Cedula" variant="outlined"></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField id="correo_ucab" label="Correo UCAB" variant="outlined"></TextField>
-                </FormControl>
-                <FormControl>
-                    <TextField id="correo_personal" label="Correo Personal" variant="outlined"></TextField>
-                </FormControl>
-                <Button variant="contained">Añadir tesista</Button>
-            </form>
+        <div className="content-container">
+            <h1 className="content-title">Tesistas</h1>
+            <div className="form-container">
+                <TesistasForm />
+            </div>
+            <div className="table-container">
+                <TesistasTable />
+            </div>
         </div>
     )
 }

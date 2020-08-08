@@ -17,6 +17,12 @@ html{
     width: 100%;
 }
 
+.content-title{
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 2rem;
+}
+
 .content-container{
     width: 100%;
     z-index: 0;
@@ -25,4 +31,9 @@ html{
 .app-wrapper{
     display: flex;
     flex-direction: row;
+}
+
+.button,
+.text-field{
+    margin: 2rem;
 }
