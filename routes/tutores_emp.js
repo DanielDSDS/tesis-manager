@@ -8,7 +8,7 @@ router.get('/tutores_emp', async (req, res) => {
     try {
         const tutores = await pool.query("SELECT * FROM Tutores_empresariales;")
         res.body = tutores;
-        res.json(tutores);
+        res.json(tutores.rows);
     } catch (err) {
         res.body = err.message;
         res.json(err.message);

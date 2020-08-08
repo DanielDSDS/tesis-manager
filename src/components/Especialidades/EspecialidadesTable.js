@@ -1,58 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table'
 
-const EspecialidadesTable = ( ) => {
-    const [state,setColumns] = useState({
-        columns:[
-            {title: 'Codigo de Especialidad', field: 'cod_esp'},
-            {title: 'Nombre de Especialidad', field: 'nomb_esp'},
-        ],
-    });
-    const [especialidades,setEspecialidades] = useState([]);
+/*
+    De tener tiempo se puede hacer un custom hook 
 
-    /*
-    useEffect(()=>{
-        fetchEspecialidades()
-    },[])
-    */
+EspecialidadesTable.js
+    const {handleUpdate, handleFetch, handleDelete} = useTable('/especialidades')
     
+    useEffect(() => {
+        handleFetch();
+    },[])   
+
+    ...
+
+useTable.js
+    const [state,setState] = useState([{}])
+    
+    -> handleUpdate recibe cod_esp
+    -> hadleDelete recibe datos para actualizacion 
+    -> handleUpdate no recibe parametros y retorna las tablas
+*/
+
+const EspecialidadesTable = () => {
+    const [especialidades, setEspecialidades] = useState([{}]);
+    const [state, setState] = useState({
+        columns: [
+            { title: 'id', field: 'cod_esp' },
+            { title: 'Nombre de Especialidad', field: 'nombre_esp' },
+        ],
+        data: []
+    })
+
+    useEffect(() => {
+        fetchEspecialidades()
+    }, [])
+
     const fetchEspecialidades = () => {
         fetch('http://localhost:3000/especialidades')
-        .then(res => res.json())
-        .then(result => setEspecialidades(result))
-        .catch(err => console.log(err.message))
+            .then(res => res.json())
+            .then(result => setEspecialidades(result))
+            .catch(err => console.log(err.message))
     }
 
-    return(
+    const deleteEspecialidad = (cod_esp) => {
+        console.log(cod_esp)
+        fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+            method: 'DELETE',
+            headers: { 'Content-type': 'application/json' }
+        })
+            .then(res => res.json())
+            .then(result => console.log(result))
+            .catch(err => console.log(err.message))
+    }
+
+    const updateEspecialidad = (especialidad) => {
+        console.log(especialidad)
+        const { cod_esp, nombre_esp } = especialidad;
+        const updateE = fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+            method: 'PUT',
+            headers: { 'Content-type': 'application/json' },
+            body: JSON.stringify({ cod_esp, nombre_esp })
+        })
+            .then(res => res.json())
+            .then(result => console.log(result))
+            .catch(err => console.log(err.message))
+        console.log(updateE)
+    }
+
+    return (
         <MaterialTable
-            title="Ejemplo de tabla"
+            title="Especialidades"
             columns={state.columns}
             data={especialidades}
             editable={{
                 onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                    resolve();
-                    if (oldData) {
-                        setState((prevState) => {
-                        const data = [...prevState.data];
-                        data[data.indexOf(oldData)] = newData;
-                        return { ...prevState, data };
-                        });
-                    }
-                    }, 600);
-                }),
+                    new Promise((resolve) => {
+                        setTimeout(() => {
+                            resolve();
+                            if (oldData) {
+                                setState((prevState) => {
+                                    const data = [...prevState.data];
+                                    data[data.indexOf(oldData)] = newData;
+                                    updateEspecialidad(newData);                //AQUI SE ACTUALIZA EL CAMPO
+                                    console.log(newData);
+                                    return { ...prevState, data };
+                                });
+                            }
+                        }, 600);
+                    }),
                 onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                    resolve();
-                    setState((prevState) => {
-                        const data = [...prevState.data];
-                        data.splice(data.indexOf(oldData), 1);
-                        return { ...prevState, data };
-                    });
-                    }, 600);
-                }),
+                    new Promise((resolve) => {
+                        deleteEspecialidad(oldData.cod_esp);                    //AQUI SE DELETEA LA ESPECIALIDAD
+                        console.log(oldData.cod_esp);
+                        setTimeout(() => {
+                            resolve();
+                            setState((prevState) => {
+                                const data = [...prevState.data];
+                                data.splice(data.indexOf(oldData), 1);
+                                return { ...prevState, data };
+                            });
+                        }, 600);
+                    }),
             }}
         />
     )

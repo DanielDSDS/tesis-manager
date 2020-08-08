@@ -7,7 +7,7 @@ router.get('/comites', async (req, res) => {
     try {
         const comites = await pool.query('SELECT * FROM Comites;');
         res.body = comites;
-        res.json(comites);
+        res.json(comites.rows);
         console.log(res.body);
     } catch (err) {
         res.body = err.message;

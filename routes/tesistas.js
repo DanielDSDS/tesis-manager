@@ -7,7 +7,7 @@ const { red } = require('@material-ui/core/colors');
 router.get('/tesistas', async (req, res) => {
     try {
         const tesistas = await pool.query("SELECT * FROM Tesistas;");
-        res.json(tesistas)
+        res.json(tesistas.rows)
         res.body = tesistas;
     } catch (err) {
         res.body = err.message;

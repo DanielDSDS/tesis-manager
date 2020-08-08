@@ -4,7 +4,6 @@
     font-family: 'Roboto';
 }
 
-
 html{
     font-size: 16px;
 }
@@ -12,6 +11,15 @@ html{
 .form-container{
     text-align: center;
     margin-bottom: 2rem;
+}
+
+.table-container{
+    width: 100%;
+}
+
+.content-container{
+    width: 100%;
+    z-index: 0;
 }
 
 .app-wrapper{

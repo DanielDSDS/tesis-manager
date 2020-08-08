@@ -8,7 +8,7 @@ router.get('/especialidades', async (req, res) => {
         const especialidades = await pool.query("SELECT * FROM Especialidades;");
         res.body = especialidades;
         console.log(res.body);
-        res.json(especialidades);
+        res.json(especialidades.rows);
     } catch (err) {
         res.body = err.message;
         res.json(err.message);

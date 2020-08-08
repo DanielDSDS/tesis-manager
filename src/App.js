@@ -15,8 +15,9 @@ import Sidebar from './components/Sidebar/Sidebar';
 const App = () => {
 
     return (
-        <Router >
+        <Router>
             <div className="app-wrapper">
+                <Sidebar />
                 <Switch>
                     <Route path="/especialidades" component={Especialidades} />
                     <Route path="/tesistas" component={Tesistas} />
@@ -30,7 +31,6 @@ const App = () => {
                     <Route path="/instituciones" component={Instituciones} />
                 </Switch>
             </div>
-            <Form/>
         </Router>
     );
 };
