@@ -18,14 +18,14 @@ router.get('/tutores_emp', async (req, res) => {
 
 //Registrar un Tutor Empresarial
 router.post('/tutores_emp', async (req, res) => {
+    const { cod_emp, nombre_tutor } = req.body;
     try {
-        const { cod_emp, nombre_tutor } = req.body;
         const newTE = await pool.query(
             "INSERT INTO tutores_empresariales ( cod_emp, nombre_tutor ) VALUES( $1, $2 ) RETURNING * ",
             [cod_emp, nombre_tutor]
         )
             .then((res) => {
-                console.log(res);
+                res.json(`El tutor ${nombre_tutor} fue añadido exitosamente`)
             })
             .catch((err) => {
                 res.json(err.message);
@@ -57,15 +57,18 @@ router.get('/tutores_emp/:id', async (req, res) => {
 
 //Actualizar un Tutor Empresarial  
 
-router.put('tutores_emp/:id', async (req, res) => {
+router.put('/tutores_emp/:id', async (req, res) => {
+    const { cod_emp, nombre_tutor } = req.body;
     try {
         const { id } = req.params;
-        const { codigo, nombre } = req.body;
-        const updateTE = await pool.query("UPDATE tutores_empresariales SET cod_emp = $1 , nombre_tutor  = $2 ) WHERE cod_tutor = $3",
-            [codigo, nombre, id]);
-
-        res.json("Tutor Actualizado");
-
+        const updateTE = await pool.query("UPDATE tutores_empresariales SET cod_emp = $1 , nombre_tutor  = $2  WHERE cod_tutor = $3",
+            [cod_emp, nombre_tutor, id])
+            .then(() => {
+                res.json(`El tutor ${nombre_tutor} fue editado exitosamente`)
+            })
+            .catch((err) => {
+                res.json(err.message);
+            })
     } catch (err) {
         res.body = err.message;
         res.json(err.message);
@@ -74,16 +77,20 @@ router.put('tutores_emp/:id', async (req, res) => {
 
 //Borar un TG
 
-router.delete('tutores_emp/:id', async (req, res) => {
+router.delete('/tutores_emp/:id', async (req, res) => {
+    const { id } = req.params;
     try {
-        const { id } = req.params;
-        const deleteTE = await pool.query("DELETE FROM tutores_empresariales WHERE cod_tutor = $1", [id]);
-
-        res.json("Tutor Eliminado")
-
+        const deleteTE = await pool.query("DELETE FROM tutores_empresariales WHERE cod_tutor = $1", [id])
+            .then((res) => {
+                res.json(`El tutor ${id} fue eliminado exitosamente`)
+            })
+            .catch((err) => {
+                res.json(err.message);
+            })
     } catch (err) {
         res.body = err.message;
         res.json(err.message);
     }
 })
+
 module.exports = router
