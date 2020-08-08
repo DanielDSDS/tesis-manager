@@ -19,18 +19,17 @@ router.get('/tesistas', async (req, res) => {
 //Registrar un tesista
 //works
 router.post('/tesistas', async (req, res) => {
-    const { cedula } = req.body;
     try {
-        const { cedula, nombre, correo_U, correo_P, tlf } = req.body;
+        const { cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t } = req.body;
         const newTesista = await pool.query(
             "INSERT INTO tesistas ( cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
-            [cedula, nombre, correo_U, correo_P, tlf]
+            [cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t]
         )
             .then(() => {
-                res.json(`El tesista C.I V-${cedula} fue creado exitosamente`);
+                res.json(`El tesista C.I V-${cedula_t} fue creado exitosamente`);
             })
             .catch((err) => {
-                res.json(`El tesista C.I V-${cedula} no pudo ser creado`);
+                res.json(`El tesista C.I V-${cedula_t} no pudo ser creado`);
             })
 
     } catch (err) {

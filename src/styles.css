@@ -15,6 +15,7 @@ html{
 
 .table-container{
     width: 100%;
+    font-size: .8rem;
 }
 
 .content-title{
@@ -33,7 +34,6 @@ html{
     flex-direction: row;
 }
 
-.button,
 .text-field{
     margin: 2rem;
 }

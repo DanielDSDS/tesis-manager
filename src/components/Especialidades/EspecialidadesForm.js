@@ -21,8 +21,8 @@ const EspecialidadesForm = () => {
                         variant="outlined"
                         value={values.nombre_esp}
                         onChange={handleChange}
-                        disableElevation />
-                    <Button class="button" variant="contained" type="submit">Añadir Especialidad</Button>
+                    />
+                    <Button type="submit" variant="contained" size="small" disableElevation>Añadir Especialidad</Button>
                 </FormControl>
             </form>
         </div>

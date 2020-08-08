@@ -1,4 +1,4 @@
-import React from 'react';
+import React  from 'react';
 import TesistasForm from './TesistasForm';
 import TesistasTable from './TesistasTable';
 
