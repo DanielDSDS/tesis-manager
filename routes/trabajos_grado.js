@@ -21,21 +21,22 @@ router.post('/trabajos_grado', async (req, res) => {
     const { num_consejo, cedula_t, modalidad, fec_aprobacion, titulo } = req.body;
     try {
         const newTG = await pool.query(
-            "INSERT INTO Trabajos_grado ( num_consejo, cedula_t, modalidad, fec_aprobacion, titulo ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
+            "INSERT INTO trabajos_grado ( num_consejo, cedula_t, modalidad, fec_aprobacion, titulo ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
             [num_consejo, cedula_t, modalidad, fec_aprobacion, titulo]
         ).then(() => {
             if (newTG.rows[0]) {
                 if (modalidad = "Experimental") {
-                    //Insertar en Experimental
+                    "INSERT INTO experimentales (  id_tg, cedula_t ) VALUES ( $1, $2) RETURNING * ",
+                    [ "SELECT id_tg FROM trabajos_grado WHERE trabajos_grado.cedula_t = cedula_t", cedula_t]
                 } else {
-                    //Insertar en El otro tipo que se me olvido el nombre
+                    //"INSERT INTO instrumentales (  id_tg, cod_emp ) VALUES ( $1, $2) RETURNING * ", []
                 }
             } else {
                 res.json(`El Trabajo de Grado de C.I V-${cedula_t}no pudo ser creado`);
             }
         })
             .catch((err) => {
-                res.json(`El Trabajo de Grado de C.I V-${cedula_t}no pudo ser creado`);
+                res.json(`El Trabajo de Grado de C.I V-${cedula_t} no pudo ser creado`);
             })
     } catch (err) {
         res.body = err.message;
