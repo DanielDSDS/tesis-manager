@@ -7,9 +7,7 @@ const Instituciones = () => {
             <div className="form-container">
                 <InstitucionesForm />
             </div>
-            <div className="table-container">
-                <InstitucionesTable />
-            </div>
+
         </div>
     )
 }
