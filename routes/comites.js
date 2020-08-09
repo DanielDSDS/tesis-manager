@@ -26,7 +26,7 @@ router.post('/comites', async (req, res) => {
             [fec_asignacion, fec_realizacion]
         );
 
-        res.json(`Consejo creado exitosamente`);
+        res.json(`Comite creado exitosamente`);
 
     } catch (err) {
         res.body = err.message;
