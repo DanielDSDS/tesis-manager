@@ -1,4 +1,6 @@
 import React from 'react';
+import InstitucionesForm from './InstitucionesForm'
+import InstitucionesTable from './InstitucionesTable'
 
 const Instituciones = () => {
     return (
@@ -7,7 +9,9 @@ const Instituciones = () => {
             <div className="form-container">
                 <InstitucionesForm />
             </div>
-
+            <div className="table-container">
+                <InstitucionesTable />
+            </div>
         </div>
     )
 }
