@@ -9,7 +9,7 @@ const TutoresEmpTable = () => {
             { title: 'Codigo tutor', field: 'cod_tutor', editable: 'never' },
             { title: 'Codigo empresa', field: 'cod_emp' },
             { title: 'Nombre tutor', field: 'nombre_tutor' },
-         ],
+        ],
         data: []
     })
 
@@ -20,7 +20,7 @@ const TutoresEmpTable = () => {
 
     //obtener todos los tutores emp
     const fetchTutoresemp = () => {
-        fetch('http://localhost:3000/tutoresemp')
+        fetch('http://localhost:3000/tutore_semp')
             .then(res => res.json())
             .then(result => setTutoresemp(result))
             .catch(err => console.log(err.message))
@@ -29,7 +29,7 @@ const TutoresEmpTable = () => {
     //eliminar un tutor
     const deleteTutoresemp = (cod_tutor) => {
         console.log(cod_tutor)
-        fetch(`http://localhost:3000/tutoresemp/${cod_tutor}`, {
+        fetch(`http://localhost:3000/tutores_emp/${cod_tutor}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -42,7 +42,7 @@ const TutoresEmpTable = () => {
     const updateTutoresemp = (tutoremp) => {
         console.log(tutoremp)
         const { cod_tutor, cod_emp, nombre_tutor } = tutoremp;
-        const updateTe = fetch(`http://localhost:3000/tutoresemp/${cod_tutor}`, {
+        const updateTe = fetch(`http://localhost:3000/tutores_emp/${cod_tutor}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cod_tutor, cod_emp, nombre_tutor })

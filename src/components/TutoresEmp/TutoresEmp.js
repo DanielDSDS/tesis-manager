@@ -1,21 +1,21 @@
-import React from 'react';
-import EspecialidadesTable from './TutoresEmpTable'
-import EspecialidadesForm from './TutoresEmpForm'
+import React from 'react'
+import TutoresEmpTable from './TutoresEmpTable'
+import TutoresEmpForm from './TutoresEmpForm'
 
-const TutoresEmpresariales = () => {
+const TutoresEmp = () => {
 
-return (   
+    return (
 
-    <div className="content-container">
-         <h1 className="content-title">Tutores Empresariales</h1>
-         <div className="form-container">
-             <TutoresEmpForm />
+        <div className="content-container">
+            <h1 className="content-title">Tutores Empresariales</h1>
+            <div className="form-container">
+                <TutoresEmpForm />
+            </div>
+            <div className="table-container">
+                <TutoresEmpTable />
+            </div>
         </div>
-         <div className="table-container">
-             <TutoresEmpTable />
-        </div>
-    </div>
-)
+    )
 }
 
-export default TutoresEmpresariales
+export default TutoresEmp
