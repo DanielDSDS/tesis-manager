@@ -54,12 +54,12 @@ const TesistasForm = () => {
                         value={values.correo_particular_t}
                         onChange={handleChange} />
                     <TextField
-                        className="text-field" efono
+                        className="text-field"
                         size="small"
                         label="Telefono"
                         name="telefono_contacto_t"
                         variant="outlined"
-                        value={values.telefono_contacto_t} sista
+                        value={values.telefono_contacto_t}
                         onChange={handleChange} />
                     <Button type="submit" variant="contained" size="small" disableElevation>Añadir Tesista</Button>
                 </FormControl>
