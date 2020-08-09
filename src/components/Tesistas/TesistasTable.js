@@ -1,58 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
 
-/*
-    (documentacion)
-    De tener tiempo se puede hacer un custom hook
-
-EspecialidadesTable.js
-    const {handleUpdate, handleFetch, handleDelete} = useTable('/especialidades')
-    
-    useEffect(() => {
-        handleFetch();
-    },[])   
-
-    ...
-
-useTable.js
-    const [state,setState] = useState([{}])
-    
-    -> handleUpdate recibe cod_esp
-    -> hadleDelete recibe datos para actualizacion 
-    -> handleUpdate no recibe parametros y retorna las tablas
-*/
-
-const EspecialidadesTable = () => {
-    //estado del componente
-    const [especialidades, setEspecialidades] = useState([{}]);
-    //estado para los titulos de las columnas de la tabla 
-    //NOTA: EL CAMPO FIELD DEBE SER EL MISMO NOMBRE QUE TIENE EL ATRIBUTO EN LA BD, SINO SE ROMPE
-    //TODAS LAS VARIABLES DE LAS TABLAS DEBEN TENER EL MISMO NOMBRE QUE EN LA BD
+//cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t
+const TesistasTable = () => {
+    const [tesistas, setTesista] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'id', field: 'cod_esp' },
-            { title: 'Nombre de Especialidad', field: 'nombre_esp' },
+            { title: 'Cedula', field: 'cedula_t', editable:'never' },
+            { title: 'Nombre', field: 'nombre_t' },
+            { title: 'email UCAB', field: 'correo_ucab_t' },
+            { title: 'email', field: 'correo_particular_t' },
+            { title: 'Telefono', field: 'telefono_contacto_t' },
         ],
         data: []
     })
 
     //Cuando se renderiza el componente se llama la funcion que obtiene todas las especialidades
     useEffect(() => {
-        fetchEspecialidades()
+        fetchTesistas()
     }, [])
 
     //obtener todas las especialidades
-    const fetchEspecialidades = () => {
-        fetch('http://localhost:3000/especialidades')
+    const fetchTesistas = () => {
+        fetch('http://localhost:3000/tesistas')
             .then(res => res.json())
-            .then(result => setEspecialidades(result))
+            .then(result => setTesista(result))
             .catch(err => console.log(err.message))
     }
 
     //eliminar una especialidad
-    const deleteEspecialidad = (cod_esp) => {
-        console.log(cod_esp)
-        fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+    const deleteTesistas = (cedula_t) => {
+        console.log(cedula_t)
+        fetch(`http://localhost:3000/tesistas/${cedula_t}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -62,25 +41,26 @@ const EspecialidadesTable = () => {
     }
 
     //actualizar una especialidad
-    const updateEspecialidad = (especialidad) => {
-        console.log(especialidad)
-        const { cod_esp, nombre_esp } = especialidad;
-        const updateE = fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+    const updateTesistas = (tesista) => {
+        console.log(tesista)
+        const { cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t } = tesista;
+        const updateT = fetch(`http://localhost:3000/tesistas/${cedula_t}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ cod_esp, nombre_esp })
+            body: JSON.stringify({ cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t })
         })
             .then(res => res.json())
             .then(result => console.log(result))
             .catch(err => console.log(err.message))
-        console.log(updateE)
+        console.log(updateT)
     }
+
 
     return (
         <MaterialTable
-            title="Especialidades"
+            title="Tesistas"
             columns={state.columns}
-            data={especialidades}
+            data={tesistas}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
@@ -90,7 +70,7 @@ const EspecialidadesTable = () => {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data[data.indexOf(oldData)] = newData;
-                                    updateEspecialidad(newData);                //AQUI SE ACTUALIZA EL CAMPO
+                                    updateTesistas(newData);                //AQUI SE ACTUALIZA EL CAMPO
                                     console.log(newData);
                                     return { ...prevState, data };
                                 });
@@ -99,8 +79,8 @@ const EspecialidadesTable = () => {
                     }),
                 onRowDelete: (oldData) =>
                     new Promise((resolve) => {
-                        deleteEspecialidad(oldData.cod_esp);                    //AQUI SE DELETEA LA ESPECIALIDAD
-                        console.log(oldData.cod_esp);
+                        deleteTesistas(oldData.cedula_t);                    //AQUI SE DELETEA LA ESPECIALIDAD
+                        console.log(oldData.cedula_t);
                         setTimeout(() => {
                             resolve();
                             setState((prevState) => {
@@ -115,4 +95,4 @@ const EspecialidadesTable = () => {
     )
 }
 
-export default EspecialidadesTable
+export default TesistasTable

@@ -1,58 +1,35 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
 
-/*
-    (documentacion)
-    De tener tiempo se puede hacer un custom hook
-
-EspecialidadesTable.js
-    const {handleUpdate, handleFetch, handleDelete} = useTable('/especialidades')
-    
-    useEffect(() => {
-        handleFetch();
-    },[])   
-
-    ...
-
-useTable.js
-    const [state,setState] = useState([{}])
-    
-    -> handleUpdate recibe cod_esp
-    -> hadleDelete recibe datos para actualizacion 
-    -> handleUpdate no recibe parametros y retorna las tablas
-*/
-
-const EspecialidadesTable = () => {
-    //estado del componente
-    const [especialidades, setEspecialidades] = useState([{}]);
-    //estado para los titulos de las columnas de la tabla 
-    //NOTA: EL CAMPO FIELD DEBE SER EL MISMO NOMBRE QUE TIENE EL ATRIBUTO EN LA BD, SINO SE ROMPE
-    //TODAS LAS VARIABLES DE LAS TABLAS DEBEN TENER EL MISMO NOMBRE QUE EN LA BD
+// cod_tutor, cod_emp, nombre_tutor
+const TutoresEmpTable = () => {
+    const [tutoresemp, setTutoresemp] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'id', field: 'cod_esp' },
-            { title: 'Nombre de Especialidad', field: 'nombre_esp' },
-        ],
+            { title: 'Codigo tutor', field: 'cod_tutor', editable: 'never' },
+            { title: 'Codigo empresa', field: 'cod_emp' },
+            { title: 'Nombre tutor', field: 'nombre_tutor' },
+         ],
         data: []
     })
 
     //Cuando se renderiza el componente se llama la funcion que obtiene todas las especialidades
     useEffect(() => {
-        fetchEspecialidades()
+        fetchTutoresemp()
     }, [])
 
-    //obtener todas las especialidades
-    const fetchEspecialidades = () => {
-        fetch('http://localhost:3000/especialidades')
+    //obtener todos los tutores emp
+    const fetchTutoresemp = () => {
+        fetch('http://localhost:3000/tutoresemp')
             .then(res => res.json())
-            .then(result => setEspecialidades(result))
+            .then(result => setTutoresemp(result))
             .catch(err => console.log(err.message))
     }
 
-    //eliminar una especialidad
-    const deleteEspecialidad = (cod_esp) => {
-        console.log(cod_esp)
-        fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+    //eliminar un tutor
+    const deleteTutoresemp = (cod_tutor) => {
+        console.log(cod_tutor)
+        fetch(`http://localhost:3000/tutoresemp/${cod_tutor}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -61,26 +38,27 @@ const EspecialidadesTable = () => {
             .catch(err => console.log(err.message))
     }
 
-    //actualizar una especialidad
-    const updateEspecialidad = (especialidad) => {
-        console.log(especialidad)
-        const { cod_esp, nombre_esp } = especialidad;
-        const updateE = fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+    //actualizar un tutor
+    const updateTutoresemp = (tutoremp) => {
+        console.log(tutoremp)
+        const { cod_tutor, cod_emp, nombre_tutor } = tutoremp;
+        const updateTe = fetch(`http://localhost:3000/tutoresemp/${cod_tutor}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ cod_esp, nombre_esp })
+            body: JSON.stringify({ cod_tutor, cod_emp, nombre_tutor })
         })
             .then(res => res.json())
             .then(result => console.log(result))
             .catch(err => console.log(err.message))
-        console.log(updateE)
+        console.log(updateTe)
     }
+
 
     return (
         <MaterialTable
-            title="Especialidades"
+            title="Tutores empresariales"
             columns={state.columns}
-            data={especialidades}
+            data={tutoresemp}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
@@ -90,7 +68,7 @@ const EspecialidadesTable = () => {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data[data.indexOf(oldData)] = newData;
-                                    updateEspecialidad(newData);                //AQUI SE ACTUALIZA EL CAMPO
+                                    updateTutoresemp(newData);                //AQUI SE ACTUALIZA EL CAMPO
                                     console.log(newData);
                                     return { ...prevState, data };
                                 });
@@ -99,8 +77,8 @@ const EspecialidadesTable = () => {
                     }),
                 onRowDelete: (oldData) =>
                     new Promise((resolve) => {
-                        deleteEspecialidad(oldData.cod_esp);                    //AQUI SE DELETEA LA ESPECIALIDAD
-                        console.log(oldData.cod_esp);
+                        deleteTutoresemp(oldData.cod_tutor);                    //AQUI SE DELETEA el tutor 
+                        console.log(oldData.cod_tutor);
                         setTimeout(() => {
                             resolve();
                             setState((prevState) => {
@@ -115,4 +93,4 @@ const EspecialidadesTable = () => {
     )
 }
 
-export default EspecialidadesTable
+export default TutoresEmpTable

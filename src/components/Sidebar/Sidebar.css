@@ -4,12 +4,10 @@
 }
 
 .sidebar-wrapper{
-    position: fixed;
+    z-index: 1;
     height: 100vh;
     width: 16rem;
     background-color: #ffffff;
-    border-radius: 0 1rem 1rem 0;
-    box-shadow: 5px 8px 35px 1px #a0a0a044;
 }
 
 .sidebar-content{

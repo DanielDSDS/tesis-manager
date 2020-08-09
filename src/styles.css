@@ -4,7 +4,6 @@
     font-family: 'Roboto';
 }
 
-
 html{
     font-size: 16px;
 }
@@ -14,7 +13,27 @@ html{
     margin-bottom: 2rem;
 }
 
+.table-container{
+    width: 100%;
+    font-size: .8rem;
+}
+
+.content-title{
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 2rem;
+}
+
+.content-container{
+    width: 100%;
+    z-index: 0;
+}
+
 .app-wrapper{
     display: flex;
     flex-direction: row;
+}
+
+.text-field{
+    margin: 2rem;
 }
