@@ -1,6 +1,6 @@
 import React from 'react'
-import TutoresEmpTable from './TutoresEmpTable'
 import TutoresEmpForm from './TutoresEmpForm'
+import TutoresEmpTable from './TuroresEmpTable'
 
 const TutoresEmp = () => {
 
