@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select';
 import useForm from '../useForm/useForm';
 
 //cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t

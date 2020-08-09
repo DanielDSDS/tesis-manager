@@ -1,9 +1,13 @@
 import React from 'react';
 
 const Instituciones = () => {
-    return(
-        <div>
-            Hola desde inst
+    return (
+        <div className="content-container">
+            <h1 className="content-title">Instituciones</h1>
+            <div className="form-container">
+                <InstitucionesForm />
+            </div>
+
         </div>
     )
 }
