@@ -1,6 +1,8 @@
-import React from 'react';
-import EspecialidadesTable from './TutoresEmpTable'
-import EspecialidadesForm from './TutoresEmpForm'
+import React from 'react'
+import TutoresEmpForm from './TutoresEmpForm'
+import TutoresEmpTable from './TutoresEmpTable'
+
+
 
 const TutoresEmpresariales = () => {
 
