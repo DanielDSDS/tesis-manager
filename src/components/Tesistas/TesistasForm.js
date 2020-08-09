@@ -18,7 +18,7 @@ const TesistasForm = () => {
     return (
         <div className="form-container">
             <form onSubmit={handleSubmit}>
-                <FormControl className="form-especialidad">
+                <FormControl className="form-profesor">
                     <div className="form-tesista-1">
                         <TextField
                             className="text-field"

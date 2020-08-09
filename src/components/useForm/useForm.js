@@ -8,6 +8,7 @@ const useForm = (fields, proxy) => {
             ...values,
             [target.name]: target.value
         })
+        console.log(values);
     }
 
     const handleSubmit = e => {
