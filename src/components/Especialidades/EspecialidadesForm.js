@@ -14,9 +14,9 @@ const EspecialidadesForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl className="form-especialidad">
                     <TextField
-                        class="text-field"
+                        className="text-field"
                         size="small"
-                        label="Nombre Especialidad"
+                        label="Nombre Esp"
                         name="nombre_esp"
                         variant="outlined"
                         value={values.nombre_esp}
