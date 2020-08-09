@@ -6,7 +6,7 @@ const ProfesoresTable = () => {
     const [profesores, setProfesores] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Cedula', field: 'cedula_p' },
+            { title: 'Cedula', field: 'cedula_p', editable: 'never' },
             { title: 'Nombre', field: 'nombre_p' },
             { title: 'Direccion', field: 'direccion_p' },
             { title: 'Correo', field: 'correo_p' },

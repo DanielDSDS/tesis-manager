@@ -1,0 +1,30 @@
+
+-> Añadir Especialidad a la forma de profesores
+-> Añadir seleccion de Institucion cuando el profesor es foraneo
+-> Filtrar profesores por Especialidad
+-> Al crear un profesor añadir un select para incluirle su Especialidad
+-> Pantalla de detalle de comite
+-> Pantalla de detalle de consejo
+-> Pantalla de detalle de Tesista 
+    =>Se muestran los datos completos de un Tesista
+    =>Se listan las propuestas realizadas por un tesista
+    =>Se listan los TG realizados por un tesista
+    =>Se listan las defensas realizadas por un tesista
+-> Pantalla de detalle de profesor
+    =>Se muestran los datos completos del profesor
+    =>Se listan los trabajos de grado que el profesor tutoriza
+    =>Se listan los trabajos de grado que el profesor revisa
+    =>Se listan los jurados donde el profesor participo ??????????????
+    =>Se listan los comites/consejos donde el profesor participo ?????????????
+-> Pantalla de detalle de Propuesta
+    =>Se muestran todos los detalles de una propuesta seleccionada
+    =>Se le puede asignar un comite
+    =>Se puede asignar una respuesta del comite
+    =>Se agregan las observaciones del comite
+    =>Se muestran todos los detalles de una propuesta seleccionada
+-> Pantalla de detalle de Trabajo de Grado
+    =>Se puede asignar el tutor
+    =>Se le puede asignar la decision del tutor
+    =>Se le puede asignar un consejo
+    =>Se le puede asignar un veredicto de un consejo
+-> GENERAR ANEXOS O CRITERIOS PARA LOS PROFESORES? ( no se como )

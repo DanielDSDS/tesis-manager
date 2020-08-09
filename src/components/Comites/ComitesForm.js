@@ -9,7 +9,6 @@ const ComitesForm = () => {
     const proxy = 'comites'
     const { handleChange, handleSubmit, values } = useForm({
         id_comite: '',
-        fec_asignacion: '',
         fec_realizacion: '',
     }, proxy)
 
@@ -18,14 +17,6 @@ const ComitesForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl className="form-profesor">
                     <div className="form-tesista-1">
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Fecha Asignacion"
-                            name="fec_asignacion"
-                            variant="outlined"
-                            value={values.fec_asignacion}
-                            onChange={handleChange} />
                         <TextField
                             className="text-field"
                             size="small"

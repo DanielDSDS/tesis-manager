@@ -16,11 +16,21 @@ router.get('/comites', async (req, res) => {
     }
 });
 
+function getLocalDate() {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+    return today;
+}
+
 //Registrar un comite
 //works
 router.post('/comites', async (req, res) => {
     try {
-        const { fec_asignacion, fec_realizacion } = req.body;
+        const fec_asignacion = getLocalDate();
+        const { fec_realizacion } = req.body;
         const newComite = await pool.query(
             "INSERT INTO comites ( fec_asignacion, fec_realizacion ) VALUES( $1, $2 ) ",
             [fec_asignacion, fec_realizacion]
