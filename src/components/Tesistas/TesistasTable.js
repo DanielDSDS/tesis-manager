@@ -6,7 +6,7 @@ const TesistasTable = () => {
     const [tesistas, setTesista] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Cedula', field: 'cedula_t' },
+            { title: 'Cedula', field: 'cedula_t', editable:'never' },
             { title: 'Nombre', field: 'nombre_t' },
             { title: 'email UCAB', field: 'correo_ucab_t' },
             { title: 'email', field: 'correo_particular_t' },
