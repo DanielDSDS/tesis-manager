@@ -3,21 +3,22 @@ import TutoresEmpForm from './TutoresEmpForm'
 import TutoresEmpTable from './TutoresEmpTable'
 
 
+import TutoresEmpTable from './TuroresEmpTable'
 
-const TutoresEmpresariales = () => {
+const TutoresEmp = () => {
 
-return (   
+    return (
 
-    <div className="content-container">
-         <h1 className="content-title">Tutores Empresariales</h1>
-         <div className="form-container">
-             <TutoresEmpForm />
+        <div className="content-container">
+            <h1 className="content-title">Tutores Empresariales</h1>
+            <div className="form-container">
+                <TutoresEmpForm />
+            </div>
+            <div className="table-container">
+                <TutoresEmpTable />
+            </div>
         </div>
-         <div className="table-container">
-             <TutoresEmpTable />
-        </div>
-    </div>
-)
+    )
 }
 
-export default TutoresEmpresariales
+export default TutoresEmp

@@ -4,7 +4,7 @@ import FormControl from '@material-ui/core/FormControl'
 import React from 'react';
 import useForm from '../useForm/useForm';
 
-// cod_tutor, cod_emp, nombre_emp
+// cod_tutor, cod_emp, nombre_tutor
 
 const TutoresEmpForm = () => {
     //se define el nombre del endpoint que se va a utilizar para la llamada al POST

@@ -34,23 +34,24 @@ router.get('/profesores/internos', async (req, res) => {
 router.post('/profesores', async (req, res) => {
     const { nombre_p } = req.body;
     try {
-        const { cedula_p, direccion_p, correo_p, telefono_p, tipo } = req.body;
+        const { cod_esp, cod_inst, cedula_p, direccion_p, correo_p, telefono_p, tipo } = req.body;
         const newProfesor = pool.query(
             "INSERT INTO profesores ( cedula_p, nombre_p, direccion_p, correo_p, telefono_p ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
             [cedula_p, nombre_p, direccion_p, correo_p, telefono_p]
         ).then(() => {
             if (tipo === "I") {
                 const newInterno = pool.query(
-                    "INSERT INTO internos ( cedula_p) VALUES( $1) RETURNING * ",
+                    "INSERT INTO internos ( cedula_p) VALUES( $1) RETURNING * ;",
                     [cedula_p]
                 );
             } else {
-                const { cod_institucion } = req.body
                 const newForaneo = pool.query(
-                    "INSERT INTO internos ( cedula_p,cod_institucion) VALUES( $1,$2) RETURNING * ",
-                    [cedula_p, cod_institucion]
+                    "INSERT INTO Foraneos ( cedula_p,cod_institucion) VALUES( $1,$2) RETURNING * ;",
+                    [cedula_p, cod_inst]
                 );
             }
+            const newEspecializado = pool.query("INSERT INTO Especializados VALUES ($1,$2);",
+                [cod_esp, cedula_p])
         })
 
         res.json(`El profesor ${nombre_p} ha sido añadido exitosamente`);

@@ -1,4 +1,6 @@
 
+-> Añadir Especialidad a la forma de profesores
+-> Añadir seleccion de Institucion cuando el profesor es foraneo
 -> Filtrar profesores por Especialidad
 -> Al crear un profesor añadir un select para incluirle su Especialidad
 -> Pantalla de detalle de comite

@@ -9,7 +9,7 @@ const TutoresEmpTable = () => {
             { title: 'Codigo tutor', field: 'cod_tutor', editable: 'never' },
             { title: 'Codigo empresa', field: 'cod_emp' },
             { title: 'Nombre tutor', field: 'nombre_tutor' },
-         ],
+        ],
         data: []
     })
 
