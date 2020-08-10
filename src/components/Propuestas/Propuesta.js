@@ -22,8 +22,9 @@ const Propuesta = ({ location }) => {
         fec_veredicto: '',
     }, 'null')
 
-    const hasComite, hasRevisor, hasVeredicto = false;
-    const fecha = fec_entrega.substr(0, 10);
+    const hasComite = false
+    const hasRevisor = false
+    const hasVeredicto = false
     console.log(fecha)
 
     useEffect(() => {
@@ -46,7 +47,7 @@ const Propuesta = ({ location }) => {
             .catch(err => console.log(err.message))
     }
 
-    const fetchComites = () => {
+    const fetchComites = async () => {
         const _coms = await fetch('http://localhost:3000/comites')
             .then(res => res.json())
             .then(result => setComites(result))
