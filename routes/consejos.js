@@ -20,10 +20,10 @@ router.get('/consejos', async (req, res) => {
 //works
 router.post('/consejos', async (req, res) => {
     try {
-        const { fecha } = req.body;
+        const { fec_consejo } = req.body;
         const newConsejo = await pool.query(
             "INSERT INTO consejos ( fec_consejo ) VALUES( $1 ) RETURNING * ",
-            [fecha]
+            [fec_consejo]
         );
 
         res.json(`Consejo creado exitosamente`);
