@@ -1,9 +1,17 @@
-import React from 'react';
+import React from 'react'
+import PropuestasForm from './PropuestasForm'
+import PropuestasTable from './PropuestasTable'
 
 const Propuestas = () => {
-    return(
-        <div>
-            Hola desde propuestas
+    return (
+        <div className="content-container">
+            <h1 className="content-title">Propuestas</h1>
+            <div className="form-container">
+                <PropuestasForm />
+            </div>
+            <div className="table-container">
+                <PropuestasTable />
+            </div>
         </div>
     )
 }
