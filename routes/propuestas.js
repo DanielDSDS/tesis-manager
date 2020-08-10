@@ -19,7 +19,7 @@ router.get('/propuestas', async (req, res) => {
 router.get('/propuestasT', async (req, res) => {
     try {
         const propuestas = await pool
-        .query("SELECT titulo_propuesta,fec_entrega,nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE p.id_propuesta = ap.id_propuesta AND t.cedula_t = ap.cedula_t;")
+            .query("SELECT p.id_propuesta,titulo_propuesta,fec_entrega,t.nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE p.id_propuesta = ap.id_propuesta AND t.cedula_t = ap.cedula_t;")
         res.body = propuestas;
         res.json(propuestas.rows);
     } catch (err) {
@@ -117,10 +117,10 @@ router.get('/propuestas/:id', async (req, res) => {
 router.put('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto,fec_aprovacion } = req.body;
+        const { id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion } = req.body;
         const updatePropuesta = await pool.query
             ("UPDATE Propuestas SET id_comite = $1, id_tg = $2, estatus_aprovacion = $3, veredicto_profesor = $4, titulo = $5, titulo_propuesta = $6, observaciones_comite = $7, fec_comite = $7, fec_veredicto = $8, fec_aprovacion = $9 WHERE id_propuesta = $10",
-                [id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto,fec_aprovacion])
+                [id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion])
             .then(() => {
                 res.json(`La propuesta ${id} ha sido actualizada exitosamente`);
             })

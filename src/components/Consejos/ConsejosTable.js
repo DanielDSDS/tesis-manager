@@ -6,7 +6,7 @@ const ConsejosTable = () => {
     const [consejos,setConsejos] = useState([{}]);
     const [state,setState] = useState({
         columns: [
-            { title: 'Numero de Consejo', field: 'num_consejo' },
+            { title: 'Numero de Consejo', field: 'num_consejo', editable:'never' },
             { title: 'Fecha de Realizacion', field: 'fec_consejo' },
         ],
         data: []

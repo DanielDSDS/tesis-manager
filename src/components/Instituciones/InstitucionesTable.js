@@ -6,7 +6,7 @@ const InstitucionesTable = () => {
     const [instituciones,setInstituciones] = useState([{}]);
     const [state,setState] = useState({
         columns: [
-            { title: 'ID', field: 'cod_inst' },
+            { title: 'ID', field: 'cod_inst',editable:'never' },
             { title: 'Nombre de la Institucion', field: 'nombre_inst' },
         ],
         data: []

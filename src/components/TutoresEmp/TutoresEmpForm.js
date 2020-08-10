@@ -20,18 +20,9 @@ const TutoresEmpForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl className="form-tutor_emp">
                     <TextField
-                        className="text-field"
-                        size="small"
-                        label="codigo_tutor"
-                        name="cod_tutor"
-                        variant="outlined"
-                        value={values.cod_tutor}
-                        onChange={handleChange}
-                    />
-                    <TextField
                             className="text-field"
                             size="small"
-                            label="codigo_emp"
+                            label="Codigo de Empresa"
                             name="cod_emp"
                             variant="outlined"
                             value={values.cod_emp}
@@ -40,7 +31,7 @@ const TutoresEmpForm = () => {
                     <TextField
                             className="text-field"
                             size="small"
-                            label="Nombre_tutor"
+                            label="Nombre de Tutores"
                             name="nombre_tutor"
                             variant="outlined"
                             value={values.nombre_tutor}
