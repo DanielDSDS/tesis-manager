@@ -6,7 +6,7 @@ const ComitesTable = () => {
     const [comites, setComite] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'ID', field: 'id_comite' },
+            { title: 'ID', field: 'id_comite', editable: 'never' },
             { title: 'Fecha Asignacion', field: 'fec_asignacion' },
             { title: 'Fecha Realizacion', field: 'fec_realizacion' },
         ],

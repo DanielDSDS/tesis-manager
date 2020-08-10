@@ -30,7 +30,7 @@ const EspecialidadesTable = () => {
     //TODAS LAS VARIABLES DE LAS TABLAS DEBEN TENER EL MISMO NOMBRE QUE EN LA BD
     const [state, setState] = useState({
         columns: [
-            { title: 'id', field: 'cod_esp' },
+            { title: 'id', field: 'cod_esp', editable:'never' },
             { title: 'Nombre de Especialidad', field: 'nombre_esp' },
         ],
         data: []

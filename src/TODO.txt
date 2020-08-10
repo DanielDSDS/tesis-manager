@@ -1,8 +1,10 @@
 
--> Añadir Especialidad a la forma de profesores
--> Añadir seleccion de Institucion cuando el profesor es foraneo
--> Filtrar profesores por Especialidad
--> Al crear un profesor añadir un select para incluirle su Especialidad
+-> Añadir Especialidad a la forma de profesores [*]
+-> Añadir seleccion de Institucion cuando el profesor es foraneo [*]
+-> Añadir select para la vista de tutores_emp para escoger una empresa
+-> Aladir select para Tesista en defensas 
+-> Filtrar profesores por Especialidad 
+-> Al crear un profesor añadir un select para incluirle su Especialidad [*] 
 -> Pantalla de detalle de comite
 -> Pantalla de detalle de consejo
 -> Pantalla de detalle de Tesista 
@@ -16,13 +18,15 @@
     =>Se listan los trabajos de grado que el profesor revisa
     =>Se listan los jurados donde el profesor participo ??????????????
     =>Se listan los comites/consejos donde el profesor participo ?????????????
--> Pantalla de detalle de Propuesta
+
+-> Pantalla de detalle de Propuesta [Daniel]
     =>Se muestran todos los detalles de una propuesta seleccionada
     =>Se le puede asignar un comite
     =>Se puede asignar una respuesta del comite
     =>Se agregan las observaciones del comite
     =>Se muestran todos los detalles de una propuesta seleccionada
--> Pantalla de detalle de Trabajo de Grado
+
+-> Pantalla de detalle de Trabajo de Grado [Daniel]
     =>Se puede asignar el tutor
     =>Se le puede asignar la decision del tutor
     =>Se le puede asignar un consejo

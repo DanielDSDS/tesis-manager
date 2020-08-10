@@ -20,7 +20,7 @@ const TutoresEmpTable = () => {
 
     //obtener todos los tutores emp
     const fetchTutoresemp = () => {
-        fetch('http://localhost:3000/tutore_semp')
+        fetch('http://localhost:3000/tutores_emp')
             .then(res => res.json())
             .then(result => setTutoresemp(result))
             .catch(err => console.log(err.message))

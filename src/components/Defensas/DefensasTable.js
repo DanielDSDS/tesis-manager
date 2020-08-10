@@ -6,7 +6,7 @@ const DefensasTable = () => {
     const [defensas, setDefensa] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Cedula', field: 'cedula_t' },
+            { title: 'Cedula', field: 'cedula_t', editable:'never' },
             { title: 'Fecha Presentacion', field: 'fec_pres' },
             { title: 'Hora Presentacion', field: 'hora_pres' },
         ],

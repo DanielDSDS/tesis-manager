@@ -7,6 +7,7 @@ import TutoresEmp from './components/TutoresEmp/TutoresEmp';
 import Consejos from './components/Consejos/Consejos';
 import Comites from './components/Comites/Comites';
 import Propuestas from './components/Propuestas/Propuestas';
+import Propuesta from './components/Propuestas/Propuesta';
 import Profesores from './components/Profesores/Profesores';
 import Defensas from './components/Defensas/Defensas';
 import Instituciones from './components/Instituciones/Instituciones';
@@ -29,6 +30,7 @@ const App = () => {
                     <Route path="/profesores" component={Profesores} />
                     <Route path="/defensas" component={Defensas} />
                     <Route path="/instituciones" component={Instituciones} />
+                    <Route path="/propuestas/:id_propuesta" component={Propuesta} />
                 </Switch>
             </div>
         </Router>

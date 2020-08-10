@@ -1,21 +1,30 @@
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import MaterialTable from 'material-table'
 
 // titulo_propuesta, cedula_t, fec_entrega
 const PropuestasTable = () => {
+    const history = useHistory()
     const [propuestas, setPropuestas] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Titulo', field: 'titulo_propuesta', editable: 'never' },
+            { title: 'Titulo', field: 'titulo_propuesta' },
+            { title: 'ID', field: 'id_propuesta', editable: 'never' },
             { title: 'Fecha de Entrega', field: 'fec_entrega' },
-            { title: 'Tesista', field: 'cedula_t' },
+            { title: 'Tesista', field: 'nombre_t' },
         ],
-        data: []
+        data: [],
     })
 
     useEffect(() => {
         fetchPropuestas()
     }, [])
+
+    const handleRowClick = (e, rowData) => {
+        console.log(e.target)
+        const { id_propuesta } = rowData;
+        //history.push(`/propuesta/${id_propuesta}`)
+    }
 
     //obtener todas las propuestas
     const fetchPropuestas = () => {
@@ -56,12 +65,12 @@ const PropuestasTable = () => {
         console.log(updateP)
     }
 
-
     return (
         <MaterialTable
             title="Propuestas"
             columns={state.columns}
             data={propuestas}
+            onRowClick={handleRowClick}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
