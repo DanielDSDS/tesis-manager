@@ -1,34 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
+import React from 'react';
 
-// titulo_propuesta, cedula_t, fec_entrega
-const PropuestasTable = () => {
-    const [propuestas, setPropuestas] = useState([{}])
-    const [state, setState] = useState({
+const ConsejosTable = () => {
+    const [consejos,setConsejos] = useState([{}]);
+    const [state,setState] = useState({
         columns: [
-            { title: 'Titulo', field: 'titulo_propuesta', editable: 'never' },
-            { title: 'Fecha de Entrega', field: 'fec_entrega' },
-            { title: 'Tesista', field: 'cedula_t' },
+            { title: 'Numero de Consejo', field: 'num_consejo' },
+            { title: 'Fecha de Realizacion', field: 'fec_consejo' },
         ],
         data: []
     })
 
     useEffect(() => {
-        fetchPropuestas()
+        fetchConsejos()
     }, [])
 
-    //obtener todas las propuestas
-    const fetchPropuestas = () => {
-        fetch('http://localhost:3000/propuestasT')
+    const fetchConsejos = () => {
+        fetch('http://localhost:3000/consejos')
             .then(res => res.json())
-            .then(result => setPropuestas(result))
+            .then(result => setConsejos(result))
             .catch(err => console.log(err.message))
     }
-
-    //eliminar una propuesta
-    const deletePropuesta = (id_propuesta) => {
-        console.log(id_propuesta)
-        fetch(`http://localhost:3000/propuestas/${id_propuesta}`, {
+    
+    const deleteConsejos = (num_consejos) => {
+        console.log(num_consejos)
+        fetch(`http://localhost:3000/consejos/${num_consejos}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -37,31 +34,26 @@ const PropuestasTable = () => {
             .catch(err => console.log(err.message))
     }
 
-    //actualizar una especialidad
-    const updatePropuesta = (propuesta) => {
-        console.log(propuesta)
-        const { id_comite, id_tg, estatus_aprobacion, titulo_propuesta,
-            observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion } = propuesta;
-        const updateP = fetch(`http://localhost:3000/propuestas/${id_propuesta}`, {
+    const updateConsejos = (consejos) => {
+        console.log(consejos)
+        const { num_consejo, fec_consejo } = consejos;
+        const updateE = fetch(`http://localhost:3000/consejos/${num_consejo}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({
-                id_comite, id_tg, estatus_aprobacion, titulo_propuesta,
-                observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion
-            })
+            body: JSON.stringify({ num_consejo, fec_consejo })
         })
             .then(res => res.json())
             .then(result => console.log(result))
             .catch(err => console.log(err.message))
-        console.log(updateP)
+        console.log(updateE)
     }
 
-
-    return (
-        <MaterialTable
-            title="Propuestas"
+    return(
+        <div>
+            <MaterialTable
+            title="Consejos"
             columns={state.columns}
-            data={propuestas}
+            data={consejos}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
@@ -71,7 +63,7 @@ const PropuestasTable = () => {
                                 setState((prevState) => {
                                     const data = [...prevState.data];
                                     data[data.indexOf(oldData)] = newData;
-                                    updatePropuesta(newData);                //AQUI SE ACTUALIZA EL CAMPO
+                                    updateConsejos(newData);                //AQUI SE ACTUALIZA EL CAMPO
                                     console.log(newData);
                                     return { ...prevState, data };
                                 });
@@ -80,8 +72,8 @@ const PropuestasTable = () => {
                     }),
                 onRowDelete: (oldData) =>
                     new Promise((resolve) => {
-                        deletePropuesta(oldData.id_propuesta);                    //AQUI SE DELETEA LA ESPECIALIDAD
-                        console.log(oldData.id_propuesta);
+                        deleteConsejos(oldData.num_consejo);                    //AQUI SE DELETEA LA ESPECIALIDAD
+                        console.log(oldData.num_consejo);
                         setTimeout(() => {
                             resolve();
                             setState((prevState) => {
@@ -93,7 +85,8 @@ const PropuestasTable = () => {
                     }),
             }}
         />
+        </div>
     )
 }
 
-export default PropuestasTable
+export default ConsejosTable
