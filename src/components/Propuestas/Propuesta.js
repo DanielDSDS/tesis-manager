@@ -8,10 +8,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import useForm from '../useForm/useForm';
 
 const Propuesta = ({ location }) => {
+    console.log(location)
     const [comites, setComites] = useState([{}])
     const [profesores, setProfesores] = useState([{}])
     const [propuesta, setPropuesta] = useState([{}])
-    const { fec_entrega, id_propuesta, nombre_t, titulo_propuesta } = location.state
+    const { fec_entrega, id_propuesta, nombre_t, titulo_propuesta } = location.state.rowData
 
     const { handleChange, values } = useForm({
         id_comite: '',
@@ -25,7 +26,6 @@ const Propuesta = ({ location }) => {
     const hasComite = false
     const hasRevisor = false
     const hasVeredicto = false
-    console.log(fecha)
 
     useEffect(() => {
         fetchPropuesta()
@@ -33,22 +33,22 @@ const Propuesta = ({ location }) => {
         fetchComites()
     }, [])
 
-    const fetchPropuesta = async () => {
-        const _prop = await fetch(`http://localhost:3000/propuestas/${id_propuesta}`)
+    const fetchPropuesta = () => {
+        const _prop = fetch(`http://localhost:3000/propuestas/${id_propuesta}`)
             .then(res => res.json())
             .then(result => setPropuesta(result))
             .catch(err => console.log(err.message))
     }
 
-    const fetchProfesores = async () => {
-        const _prof = await fetch('http://localhost:3000/profesores')
+    const fetchProfesores = () => {
+        const _prof = fetch('http://localhost:3000/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
-    const fetchComites = async () => {
-        const _coms = await fetch('http://localhost:3000/comites')
+    const fetchComites = () => {
+        const _coms = fetch('http://localhost:3000/comites')
             .then(res => res.json())
             .then(result => setComites(result))
             .catch(err => console.log(err.message))
@@ -57,10 +57,10 @@ const Propuesta = ({ location }) => {
     return (
         <div className="content-container">
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
-            <h4 className="content-subtitle">{titulo_propuesta}</h4>
+            <h4 className="content-subtitle">{titulo_propuesta} - {nombre_t}</h4>
             <div className="propuesta-container">
-                <FormControl className="propuesta">
-                    {hasComite
+                <div className="propuesta-select">
+                    {hasComite == true
                         ? <h3>La propuesta tiene un comite asignado</h3>
                         : <FormControl className="comites-select-container">
                             <InputLabel id="comites-label">Asignar Comite</InputLabel>
@@ -93,9 +93,9 @@ const Propuesta = ({ location }) => {
                             </div>
                         </FormControl>
                     }
-                </FormControl>
+                </div>
                 <FormControl className="propuesta">
-                    {hasRevisor
+                    {hasRevisor == true
                         ? <h3>La propuesta tiene un comite asignado</h3>
                         : <FormControl className="revisor-select-container">
                             <InputLabel id="revisor-label">Asignar Revisor</InputLabel>
@@ -121,18 +121,16 @@ const Propuesta = ({ location }) => {
                             : <FormControl className="veredicto-select-container">
                                 <InputLabel id="veredicto-label">Veredicto del Revisor</InputLabel>
                                 <Select
-                                    labelId="revisor-label"
-                                    id="revisores"
-                                    value={values.cedula_p}
-                                    name="cedula_p"
+                                    labelId="veredicto-label"
+                                    id="veredictos"
+                                    value={values.veredicto_prof}
+                                    name="veredicto_prof"
                                     onChange={handleChange}
                                     onBlur={handleChange}
                                 >
-                                    {profesores.map((profesor, i) => (
-                                        <MenuItem value={profesor.cedula_p} key={i}>
-                                            {profesor.nombre_p}
-                                        </MenuItem>
-                                    ))}
+                                    <MenuItem value="PAR" key={1}></MenuItem>
+                                    <MenuItem value="PRR" key={2}></MenuItem>
+                                    <MenuItem value="NA" key={3}></MenuItem>
                                 </Select>
                             </FormControl>
                     }
