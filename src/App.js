@@ -30,7 +30,7 @@ const App = () => {
                     <Route path="/profesores" component={Profesores} />
                     <Route path="/defensas" component={Defensas} />
                     <Route path="/instituciones" component={Instituciones} />
-                    <Route path="/propuestas/:id_propuesta" component={Propuesta} />
+                    <Route path="/propuesta" component={Propuesta} />
                 </Switch>
             </div>
         </Router>

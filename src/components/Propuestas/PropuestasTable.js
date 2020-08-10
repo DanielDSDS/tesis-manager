@@ -21,9 +21,12 @@ const PropuestasTable = () => {
     }, [])
 
     const handleRowClick = (e, rowData) => {
-        console.log(e.target)
         const { id_propuesta } = rowData;
-        //history.push(`/propuesta/${id_propuesta}`)
+        history.push({
+            pathname: '/propuesta',
+            search: `?query=${id_propuesta}`,
+            state: { rowData }
+        })
     }
 
     //obtener todas las propuestas

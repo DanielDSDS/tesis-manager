@@ -1,8 +1,8 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 
-const Propuesta = () => {
-
-    return(
+const Propuesta = ({ location }) => {
+    console.log(location.state)
+    return (
         <div>
             Hola desde una propuesta especifica
         </div>
