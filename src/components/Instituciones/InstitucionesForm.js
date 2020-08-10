@@ -20,8 +20,8 @@ const InstitucionesForm = () => {
                         name="nombre_inst"
                         variant="outlined"
                         value={values.nombre_inst}
-                        onChange={handleChange}/>
-                    <Button className="button" variant="contained" type="submit">Añadir Institucion</Button>
+                        onChange={handleChange} />
+                    <Button className="button" variant="contained" type="submit" disableElevation>Añadir Institucion</Button>
                 </FormControl>
             </form>
         </div>
