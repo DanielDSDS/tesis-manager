@@ -5,7 +5,7 @@ import ConsejosTable from './ConsejosTable'
 const Consejos = () => {
     return (
         <div className="content-container">
-            <h1 className="content-title">Instituciones</h1>
+            <h1 className="content-title">Consejos</h1>
             <div className="form-container">
                 <ConsejosForm />
             </div>

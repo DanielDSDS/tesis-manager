@@ -19,7 +19,7 @@ const ConsejosTable = () => {
     const fetchConsejos = () => {
         fetch('http://localhost:3000/consejos')
             .then(res => res.json())
-            .then(result => setInstituciones(result))
+            .then(result => setConsejos(result))
             .catch(err => console.log(err.message))
     }
     
