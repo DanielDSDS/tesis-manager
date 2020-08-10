@@ -38,3 +38,14 @@ html{
 .text-field{
     margin: 2rem;
 }
+
+.propuesta-veredicto,
+.propuesta-select{
+    margin: 2rem;
+}
+
+.revisor-select-container,
+.veredicto-container{
+    margin: 2rem;
+    width: 4rem;
+}
