@@ -40,10 +40,10 @@ const TesistasForm = () => {
                         <TextField
                             className="text-field"
                             size="small"
-                            label="Correo UCAB"
-                            name="correo_ucab_t"
+                            label="Telefono"
+                            name="telefono_contacto_t"
+                            value={values.telefono_contacto_t}
                             variant="outlined"
-                            value={values.correo_ucab_t}
                             onChange={handleChange} />
                     </div>
                     <TextField
@@ -57,10 +57,10 @@ const TesistasForm = () => {
                     <TextField
                         className="text-field"
                         size="small"
-                        label="Telefono"
-                        name="telefono_contacto_t"
                         variant="outlined"
-                        value={values.telefono_contacto_t}
+                        label="Correo UCAB"
+                        name="correo_ucab_t"
+                        value={values.correo_ucab_t}
                         onChange={handleChange} />
                     <Button type="submit" variant="contained" size="small" disableElevation>Añadir Tesista</Button>
                 </FormControl>

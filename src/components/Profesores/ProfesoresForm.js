@@ -14,7 +14,7 @@ import useForm from '../useForm/useForm'
 const ProfesoresForm = () => {
     const [especialidades, setEspecialidades] = useState([{}])
     const [instituciones, setInstituciones] = useState([{}])
-    const isToggled = false
+    const [toggle, setToggle] = useState(false)
     const proxy = 'profesores'
     const { handleChange, handleSubmit, values } = useForm({
         cedula_p: '',
@@ -27,7 +27,7 @@ const ProfesoresForm = () => {
         cod_inst: '',
     }, proxy)
 
-    const toggleSelect = () => (isToggled = !isToggled)
+    const toggleSelect = ({ target }) => setToggle(target.value == "F" ? true : false)
 
     const fetchEspecialidades = () => {
         fetch('http://localhost:3000/especialidades')
@@ -95,7 +95,7 @@ const ProfesoresForm = () => {
                         value={values.telefono_p}
                         onChange={handleChange} />
                     <RadioGroup aria-label="tipo" name="tipo" value={values.tipo} onChange={handleChange}>
-                        <FormControlLabel value="I" control={<Radio />} label="Interno" />
+                        <FormControlLabel onClick={toggleSelect} value="I" control={<Radio />} label="Interno" />
                         <FormControlLabel onClick={toggleSelect} value="F" control={<Radio />} label="Foraneo" />
                     </RadioGroup>
                     <FormControl>
@@ -115,15 +115,13 @@ const ProfesoresForm = () => {
                             ))}
                         </Select>
                     </FormControl>
-
-
-                    {isToggled ?
-                        <div className="instituciones">
+                    {toggle ?
+                        <FormControl className="instituciones">
                             <InputLabel id="instituciones-label">Instituciones</InputLabel>
                             <Select
                                 labelId="instituciones-label"
                                 id="instituciones"
-                                value=""
+                                value={values.cod_inst}
                                 name="cod_inst"
                                 onChange={handleChange}
                                 onBlur={handleChange}
@@ -134,7 +132,7 @@ const ProfesoresForm = () => {
                                     </MenuItem>
                                 ))}
                             </Select>
-                        </div>
+                        </FormControl>
                         : <div></div>
                     }
                     <Button type="submit" variant="contained" size="small" disableElevation>Añadir Profesor</Button>
