@@ -31,7 +31,7 @@ const PropuestasTable = () => {
 
     //obtener todas las propuestas
     const fetchPropuestas = () => {
-        fetch('http://localhost:3000/propuestasT')
+        fetch('http://tesis-manager.herokuapp.com/propuestasT')
             .then(res => res.json())
             .then(result => setPropuestas(result))
             .catch(err => console.log(err.message))
@@ -40,7 +40,7 @@ const PropuestasTable = () => {
     //eliminar una propuesta
     const deletePropuesta = (id_propuesta) => {
         console.log(id_propuesta)
-        fetch(`http://localhost:3000/propuestas/${id_propuesta}`, {
+        fetch(`http://tesis-manager.herokuapp.com/propuestas/${id_propuesta}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -54,7 +54,7 @@ const PropuestasTable = () => {
         console.log(propuesta)
         const { id_comite, id_tg, estatus_aprobacion, titulo_propuesta,
             observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion } = propuesta;
-        const updateP = fetch(`http://localhost:3000/propuestas/${id_propuesta}`, {
+        const updateP = fetch(`http://tesis-manager.herokuapp.com/propuestas/${id_propuesta}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({

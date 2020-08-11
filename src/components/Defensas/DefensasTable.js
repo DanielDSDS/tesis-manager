@@ -20,7 +20,7 @@ const DefensasTable = () => {
 
     //obtener todas las especialidades
     const fetchDefensas = () => {
-        fetch('http://localhost:3000/defensas')
+        fetch('http://tesis-manager.herokuapp.com/defensas')
             .then(res => res.json())
             .then(result => setDefensa(result))
             .catch(err => console.log(err.message))
@@ -29,7 +29,7 @@ const DefensasTable = () => {
     //eliminar una especialidad
     const deleteDefensas = (cedula_t) => {
         console.log(cedula_t)
-        fetch(`http://localhost:3000/defensas/${cedula_t}`, {
+        fetch(`http://tesis-manager.herokuapp.com/defensas/${cedula_t}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -42,7 +42,7 @@ const DefensasTable = () => {
     const updateDefensas = (defensa) => {
         console.log(defensa)
         const { fec_pres, cedula_t, hora_pres } = defensa;
-        const updateD = fetch(`http://localhost:3000/defensas/${cedula_t}`, {
+        const updateD = fetch(`http://tesis-manager.herokuapp.com/defensas/${cedula_t}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ fec_pres, cedula_t, hora_pres })

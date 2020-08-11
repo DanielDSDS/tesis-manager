@@ -36,7 +36,7 @@ const Propuesta = ({ location }) => {
     const handleUpdate = () => {
         const { id_comite, cedula_p, observaciones_comite, estatus_aprobacion, veredicto_prof, fec_veredicto } = values
         const { id_propuesta, veredicto_profesor, titulo_propuesta, fec_comite, fec_entrega, fec_aprobacion } = propuesta
-        fetch(`http://localhost:3000/propuesta/${id_propuesta}`, {
+        fetch(`http://tesis-manager.herokuapp.com/propuesta/${id_propuesta}`, {
             method: 'UPDATE',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ id_comite, cedula_p, observaciones_comite, estatus_aprobacion, veredicto_prof, fec_veredicto, id_propuesta, veredicto_profesor, titulo_propuesta, fec_comite, fec_entrega, fec_aprobacion })
@@ -44,21 +44,21 @@ const Propuesta = ({ location }) => {
     }
 
     const fetchPropuesta = () => {
-        const _prop = fetch(`http://localhost:3000/propuestas/${id_propuesta}`)
+        const _prop = fetch(`http://tesis-manager.herokuapp.com/propuestas/${id_propuesta}`)
             .then(res => res.json())
             .then(result => setPropuesta(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchProfesores = () => {
-        const _prof = fetch('http://localhost:3000/profesores')
+        const _prof = fetch('http://tesis-manager.herokuapp.com/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchComites = () => {
-        const _coms = fetch('http://localhost:3000/comites')
+        const _coms = fetch('http://tesis-manager.herokuapp.com/comites')
             .then(res => res.json())
             .then(result => setComites(result))
             .catch(err => console.log(err.message))

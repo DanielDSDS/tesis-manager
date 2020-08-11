@@ -22,7 +22,7 @@ const ProfesoresTable = () => {
 
     //obtener todas las especialidades
     const fetchProfesores = () => {
-        fetch('http://localhost:3000/profesores')
+        fetch('http://tesis-manager.herokuapp.com/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
@@ -31,7 +31,7 @@ const ProfesoresTable = () => {
     //eliminar una especialidad
     const deleteProfesores = (cedula_p) => {
         console.log(cedula_p)
-        fetch(`http://localhost:3000/profesores/${cedula_p}`, {
+        fetch(`http://tesis-manager.herokuapp.com/profesores/${cedula_p}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -44,7 +44,7 @@ const ProfesoresTable = () => {
     const updateProfesores = (profesor) => {
         console.log(profesor)
         const { cedula_p, nombre_p, direccion_p, correo_p, telefono_p } = profesor;
-        const updateP = fetch(`http://localhost:3000/profesores/${cedula_p}`, {
+        const updateP = fetch(`http://tesis-manager.herokuapp.com/profesores/${cedula_p}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cedula_p, nombre_p, direccion_p, correo_p, telefono_p })

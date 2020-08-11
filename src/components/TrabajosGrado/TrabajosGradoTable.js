@@ -23,7 +23,7 @@ const TrabajosGradoTable = () => {
 
     //obtener todos los tutores emp
     const fetchTrabajosgrado = () => {
-        fetch('http://localhost:3000/trabajos_grado')
+        fetch('http://tesis-manager.herokuapp.com/trabajos_grado')
             .then(res => res.json())
             .then(result => setTrabajosGrado(result))
             .catch(err => console.log(err.message))
@@ -32,7 +32,7 @@ const TrabajosGradoTable = () => {
     //eliminar un tutor
     const deleteTrabajosgrado = (id_tg) => {
         console.log(id_tg)
-        fetch(`http://localhost:3000/trabajos_grado/${id_tg}`, {
+        fetch(`http://tesis-manager.herokuapp.com/trabajos_grado/${id_tg}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -45,7 +45,7 @@ const TrabajosGradoTable = () => {
     const updateTrabajogrado = (trabajosgrado) => {
         console.log(trabajosgrado)
         const { id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo} = trabajosgrado;
-        const updateTg = fetch(`http://localhost:3000/trabajos_grado/${id_tg}`, {
+        const updateTg = fetch(`http://tesis-manager.herokuapp.com/trabajos_grado/${id_tg}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo })

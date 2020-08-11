@@ -55,15 +55,14 @@ router.post('/propuestas', async (req, res) => {
             [titulo_propuesta, fec_entrega]
         )
             .then(() => {
-                pool.query(
-                    "INSERT INTO Aplicaciones_propuestas ( cedula_t ) VALUES( $1) RETURNING *;",
-                    [cedula_t]
-                )
-                    .then(() => {
-                        res.json(`La propuesta del tesista C.I V-${cedula_t} ha sido creada exitosamente`);
-                    })
-                    .catch(err => res.json(`La propuesta del tesista C.I V-${cedula_t} no ha podido ser creada`))
+                if (newPropuesta.rows[0]) {
+                    pool.query("INSERT INTO Aplicaciones_propuestas ( cedula_t ) VALUES( $1) RETURNING *;", [cedula_t])
+                        .then(res => res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`))
+                } else {
+                    res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`)
+                }
             })
+            .catch(err => res.json(`La propuesta del tesista C.I V-${cedula_t} no ha podido ser creada`))
 
     } catch (err) {
         res.body = err.message;
@@ -79,7 +78,6 @@ router.get('/propuestas/:id', async (req, res) => {
         const { id } = req.params;
         const propuestas = await pool.query(
             "SELECT * FROM Propuestas p WHERE p.id_propuesta IN (SELECT id_propuesta FROM Aplicaciones_propuestas a WHERE cedula_t = $1)", [id]);
-
         if (propuestas.rows[0]) {
             res.json(propuestas.rows[0]);
         } else {

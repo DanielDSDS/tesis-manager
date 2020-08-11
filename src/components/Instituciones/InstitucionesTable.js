@@ -17,7 +17,7 @@ const InstitucionesTable = () => {
     }, [])
 
     const fetchInstituciones = () => {
-        fetch('http://localhost:3000/instituciones')
+        fetch('http://tesis-manager.herokuapp.com/instituciones')
             .then(res => res.json())
             .then(result => setInstituciones(result))
             .catch(err => console.log(err.message))
@@ -25,7 +25,7 @@ const InstitucionesTable = () => {
     
     const deleteInstituciones = (cod_inst) => {
         console.log(cod_inst)
-        fetch(`http://localhost:3000/instituciones/${cod_inst}`, {
+        fetch(`http://tesis-manager.herokuapp.com/instituciones/${cod_inst}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -37,7 +37,7 @@ const InstitucionesTable = () => {
     const updateInstituciones = (instituciones) => {
         console.log(instituciones)
         const { cod_inst, nombre_inst } = instituciones;
-        const updateE = fetch(`http://localhost:3000/instituciones/${cod_inst}`, {
+        const updateE = fetch(`http://tesis-manager.herokuapp.com/instituciones/${cod_inst}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cod_inst, nombre_inst })
