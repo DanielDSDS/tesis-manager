@@ -17,7 +17,7 @@ const ConsejosTable = () => {
     }, [])
 
     const fetchConsejos = () => {
-        fetch('http://tesis-manager.herokuapp.com/consejos')
+        fetch('http://localhost:3000/consejos')
             .then(res => res.json())
             .then(result => setConsejos(result))
             .catch(err => console.log(err.message))
@@ -25,7 +25,7 @@ const ConsejosTable = () => {
     
     const deleteConsejos = (num_consejos) => {
         console.log(num_consejos)
-        fetch(`http://tesis-manager.herokuapp.com/consejos/${num_consejos}`, {
+        fetch(`http://localhost:3000/consejos/${num_consejos}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -37,7 +37,7 @@ const ConsejosTable = () => {
     const updateConsejos = (consejos) => {
         console.log(consejos)
         const { num_consejo, fec_consejo } = consejos;
-        const updateE = fetch(`http://tesis-manager.herokuapp.com/consejos/${num_consejo}`, {
+        const updateE = fetch(`http://localhost:3000/consejos/${num_consejo}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ num_consejo, fec_consejo })

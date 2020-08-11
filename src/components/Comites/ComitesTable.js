@@ -20,7 +20,7 @@ const ComitesTable = () => {
 
     //obtener todas las especialidades
     const fetchComites = () => {
-        fetch('http://tesis-manager.herokuapp.com/comites')
+        fetch('http://localhost:3000/comites')
             .then(res => res.json())
             .then(result => setComite(result))
             .catch(err => console.log(err.message))
@@ -29,7 +29,7 @@ const ComitesTable = () => {
     //eliminar una especialidad
     const deleteComite = (id_comite) => {
         console.log(id_comite)
-        fetch(`http://tesis-manager.herokuapp.com/comites/${id_comite}`, {
+        fetch(`http://localhost:3000/comites/${id_comite}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -41,7 +41,7 @@ const ComitesTable = () => {
     const updateComites = (comite) => {
         console.log(comite)
         const { id_comite, fec_asignacion, fec_realizacion } = comite;
-        const updateC = fetch(`http://tesis-manager.herokuapp.com/comites/${id_comite}`, {
+        const updateC = fetch(`http://localhost:3000/comites/${id_comite}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ id_comite, fec_asignacion, fec_realizacion })

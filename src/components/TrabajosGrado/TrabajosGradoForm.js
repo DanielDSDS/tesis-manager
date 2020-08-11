@@ -1,12 +1,14 @@
 import Button from '@material-ui/core/Button'
-import TextField from '@material-ui/core/TextField'
-import FormControl from '@material-ui/core/FormControl'
 import React, { useState, useEffect } from 'react';
 import useForm from '../useForm/useForm';
-
+import TextField from '@material-ui/core/TextField'
+import FormControl from '@material-ui/core/FormControl'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
 
 
 // id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo
@@ -14,24 +16,44 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 const TrabajosGradoForm = () => {
     //se define el nombre del endpoint que se va a utilizar para la llamada al POST
     const [propuestas, setPropuestas] = useState([{}])
+    const [profesores, setProfesores] = useState([{}])
+    const [empresas, setEmpresas] = useState([{}])
+    const [toggle, setToggle] = useState(true)
     const proxy = 'trabajos_grado'
     const { handleChange, handleSubmit, values } = useForm({
-        'id_tg': '',
-        'id_propuesta': '',
-        'cedula_t': '',
-        'modalidad': '',
-        'fec_aprobacion': '',
-        'titulo': '',
+        id_tg: '',
+        id_propuesta: '',
+        cedula_p: '',
+        cod_emp: '',
+        modalidad: '',
+        titulo: '',
     }, proxy)
+
 
     useEffect(() => {
         fetchPropuestas()
     }, [])
 
+    const toggleModalidad = ({ target }) => setToggle(target.value == "E" ? true : false)
+
     const fetchPropuestas = () => {
         fetch(`http://localhost:3000/propuestas`)
             .then(res => res.json())
             .then(result => setPropuestas(result))
+            .catch(err => console.log(err.message))
+    }
+
+    const fetchProfesores = () => {
+        fetch(`http://localhost:3000/profesores`)
+            .then(res => res.json())
+            .then(result => setProfesores(result))
+            .catch(err => console.log(err.message))
+    }
+
+    const fetchEmpresas = () => {
+        fetch(`http://localhost:3000/empresas`)
+            .then(res => res.json())
+            .then(result => setEmpresas(result))
             .catch(err => console.log(err.message))
     }
 
@@ -57,15 +79,6 @@ const TrabajosGradoForm = () => {
                                 ))}
                             </Select>
                         </FormControl>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Fecha de Aprobacion"
-                            name="fec_aprobacion"
-                            variant="outlined"
-                            value={values.fec_aprobacion}
-                            onChange={handleChange}
-                        />
                     </div>
                     <div className="tg-form-2">
                         <TextField
@@ -78,9 +91,45 @@ const TrabajosGradoForm = () => {
                             onChange={handleChange}
                         />
                         <RadioGroup aria-label="modalidad" name="modalidad" value={values.modalidad} onChange={handleChange}>
-                            <FormControlLabel value="E" control={<Radio />} label="Experimental" />
-                            <FormControlLabel value="I" control={<Radio />} label="Instrumental" />
+                            <FormControlLabel onClick={toggleModalidad} value="E" control={<Radio />} label="Experimental" />
+                            <FormControlLabel onClick={toggleModalidad} value="I" control={<Radio />} label="Instrumental" />
                         </RadioGroup>
+                        {toggle == true
+                            ? <FormControl>
+                                <InputLabel id="profesores-label">Profesores</InputLabel>
+                                <Select
+                                    labelId="profesores-label"
+                                    id="profesores"
+                                    value={values.cedula_p}
+                                    name="cedula_p"
+                                    onChange={handleChange}
+                                    onBlur={handleChange}
+                                >
+                                    {profesores.map((profesor, i) => (
+                                        <MenuItem value={profesor.cedula_p} key={i}>
+                                            {profesor.nombre_p}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                            : <FormControl>
+                                <InputLabel id="empresas-label">Empresas</InputLabel>
+                                <Select
+                                    labelId="empresas-label"
+                                    id="empresas"
+                                    value={values.cod_emp}
+                                    name="cod_emp"
+                                    onChange={handleChange}
+                                    onBlur={handleChange}
+                                >
+                                    {empresas.map((empresa, i) => (
+                                        <MenuItem value={empresa.cod_emp} key={i}>
+                                            {empresa.nombre_emp}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        }
                     </div>
                     <Button type="submit" variant="contained" size="small" disableElevation>Añadir Tabajo de Grado</Button>
                 </FormControl>

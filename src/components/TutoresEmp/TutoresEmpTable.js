@@ -20,7 +20,7 @@ const TutoresEmpTable = () => {
 
     //obtener todos los tutores emp
     const fetchTutoresemp = () => {
-        fetch('http://tesis-manager.herokuapp.com/tutores_emp')
+        fetch('http://localhost:3000/tutores_emp')
             .then(res => res.json())
             .then(result => setTutoresemp(result))
             .catch(err => console.log(err.message))
@@ -29,7 +29,7 @@ const TutoresEmpTable = () => {
     //eliminar un tutor
     const deleteTutoresemp = (cod_tutor) => {
         console.log(cod_tutor)
-        fetch(`http://tesis-manager.herokuapp.com/tutores_emp/${cod_tutor}`, {
+        fetch(`http://localhost:3000/tutores_emp/${cod_tutor}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -42,7 +42,7 @@ const TutoresEmpTable = () => {
     const updateTutoresemp = (tutoremp) => {
         console.log(tutoremp)
         const { cod_tutor, cod_emp, nombre_tutor } = tutoremp;
-        const updateTe = fetch(`http://tesis-manager.herokuapp.com/tutores_emp/${cod_tutor}`, {
+        const updateTe = fetch(`http://localhost:3000/tutores_emp/${cod_tutor}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cod_tutor, cod_emp, nombre_tutor })

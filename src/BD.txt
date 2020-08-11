@@ -160,7 +160,7 @@ CREATE TABLE public.trabajos_grado
     num_consejo integer,
     cedula_t dom_cedula NOT NULL,
     modalidad dom_modalidad,
-    fec_aprobacion date NOT NULL,
+    fec_aprobacion date,
     titulo dom_nombre NOT NULL,
     CONSTRAINT trabajos_grado_pkey PRIMARY KEY (id_tg),
     CONSTRAINT trabajos_grado_cedula_t_key UNIQUE (cedula_t)
@@ -235,7 +235,7 @@ CREATE TABLE public.participantes_x_consejo
 
 CREATE TABLE public.propuestas
 (
-    id_propuesta SERIAL NOT NULL,
+    id_propuesta SERIAL,
     cedula_p dom_cedula,
     id_comite integer,
     estatus_aprobacion dom_aprobacion NOT NULL,

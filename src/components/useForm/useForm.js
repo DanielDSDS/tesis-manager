@@ -14,7 +14,7 @@ const useForm = (fields, proxy) => {
     const handleSubmit = e => {
         e.preventDefault();
         console.log('%c state:', 'color:blue;', values)
-        fetch(`http://tesis-manager.herokuapp.com/${proxy}`, {
+        fetch(`http://localhost:3000/${proxy}`, {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify(values)

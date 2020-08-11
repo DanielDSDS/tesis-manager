@@ -18,7 +18,7 @@ const PropuestasForm = () => {
     }, proxy)
 
     const fetchTesistas = () => {
-        fetch('http://tesis-manager.herokuapp.com/tesistas')
+        fetch('http://localhost:3000/tesistas')
             .then(res => res.json())
             .then(result => setTesistas(result))
             .catch(err => console.log(err.message))
