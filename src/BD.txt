@@ -155,8 +155,9 @@ CREATE TABLE public.tesistas
 
 CREATE TABLE public.trabajos_grado
 (
-    id_tg integer NOT NULL,
-    num_consejo integer NOT NULL,
+    id_tg SERIAL NOT NULL,
+    id_propuesta INT NOT NULL,
+    num_consejo integer,
     cedula_t dom_cedula NOT NULL,
     modalidad dom_modalidad,
     fec_aprobacion date NOT NULL,
@@ -237,7 +238,6 @@ CREATE TABLE public.propuestas
     id_propuesta SERIAL NOT NULL,
     cedula_p dom_cedula,
     id_comite integer,
-    id_tg integer,
     estatus_aprobacion dom_aprobacion NOT NULL,
     veredicto_profesor dom_veredicto NOT NULL,
     titulo character varying(128),
@@ -248,17 +248,8 @@ CREATE TABLE public.propuestas
     fec_entrega date,
     fec_aprobacion date,
     CONSTRAINT propuestas_pkey PRIMARY KEY (id_propuesta),
-    CONSTRAINT propuestas_id_propuesta_key UNIQUE (id_propuesta)
-,
-    CONSTRAINT propuestas_id_tg_key UNIQUE (id_tg)
-,
+    CONSTRAINT propuestas_id_propuesta_key UNIQUE (id_propuesta),
     CONSTRAINT propuestas_titulo_key UNIQUE (titulo)
-,
-    CONSTRAINT propuestas_id_tg_fkey FOREIGN KEY (id_tg)
-        REFERENCES public.trabajos_grado (id_tg) MATCH SIMPLE
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-        NOT VALID
 );
 
 
@@ -281,7 +272,7 @@ CREATE TABLE public.defensas
 
 CREATE TABLE public.experimentales
 (
-    id_tg SERIAL NOT NULL,
+    id_tg INT NOT NULL,
     cedula_p dom_cedula,
     CONSTRAINT experimentales_pkey PRIMARY KEY (id_tg),
     CONSTRAINT experimentales_cedula_p_fkey FOREIGN KEY (cedula_p)
