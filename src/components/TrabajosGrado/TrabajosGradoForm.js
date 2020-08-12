@@ -32,9 +32,10 @@ const TrabajosGradoForm = () => {
 
     useEffect(() => {
         fetchPropuestas()
+        fetchProfesores()
     }, [])
 
-    const toggleModalidad = ({ target }) => setToggle(target.value == "E" ? true : false)
+    const toggleModalidad = ({ target }) => setToggle(target.value == "Experimental" ? true : false)
 
     const fetchPropuestas = () => {
         fetch(`http://localhost:3000/propuestas`)
@@ -62,7 +63,7 @@ const TrabajosGradoForm = () => {
             <form onSubmit={handleSubmit}>
                 <FormControl className="form-trabajo_grado">
                     <div className="tg-form-1">
-                        <FormControl>
+                        <FormControl className="select">
                             <InputLabel id="propuestas-label">Propuesta Original</InputLabel>
                             <Select
                                 labelId="propuestas-label"
@@ -79,8 +80,6 @@ const TrabajosGradoForm = () => {
                                 ))}
                             </Select>
                         </FormControl>
-                    </div>
-                    <div className="tg-form-2">
                         <TextField
                             className="text-field"
                             size="small"
@@ -90,14 +89,19 @@ const TrabajosGradoForm = () => {
                             value={values.titulo}
                             onChange={handleChange}
                         />
-                        <RadioGroup aria-label="modalidad" name="modalidad" value={values.modalidad} onChange={handleChange}>
-                            <FormControlLabel onClick={toggleModalidad} value="E" control={<Radio />} label="Experimental" />
-                            <FormControlLabel onClick={toggleModalidad} value="I" control={<Radio />} label="Instrumental" />
-                        </RadioGroup>
+                    </div>
+                    <div className="tg-form-2">
+                        <FormControl>
+                            <RadioGroup aria-label="modalidad" name="modalidad" value={values.modalidad} onChange={handleChange}>
+                                <FormControlLabel onClick={toggleModalidad} value="Experimental" control={<Radio />} label="Experimental" checked />
+                                <FormControlLabel onClick={toggleModalidad} value="Instrumental" control={<Radio />} label="Instrumental" />
+                            </RadioGroup>
+                        </FormControl>
                         {toggle == true
                             ? <FormControl>
                                 <InputLabel id="profesores-label">Profesores</InputLabel>
                                 <Select
+                                    className="select"
                                     labelId="profesores-label"
                                     id="profesores"
                                     value={values.cedula_p}
@@ -115,6 +119,7 @@ const TrabajosGradoForm = () => {
                             : <FormControl>
                                 <InputLabel id="empresas-label">Empresas</InputLabel>
                                 <Select
+                                    className="select"
                                     labelId="empresas-label"
                                     id="empresas"
                                     value={values.cod_emp}

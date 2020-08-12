@@ -49,3 +49,12 @@ html{
     margin: 2rem;
     width: 4rem;
 }
+
+.select{
+    width: 10rem;
+}
+
+.tg-form-1,
+.tg-form-2{
+    margin: 1rem;;
+}

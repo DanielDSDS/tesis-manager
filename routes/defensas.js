@@ -6,7 +6,7 @@ const pool = require('../db')
 //works
 router.get('/defensas', async (req, res) => {
     try {
-        const defensas = await pool.query("SELECT * FROM Defensas;")
+        const defensas = await pool.query("SELECT cedula_t, to_char(fec_pres,'DD-MM-YYYY'), hora_pres FROM Defensas;")
         res.body = defensas;
         res.json(defensas.rows);
         console.log(defensas);

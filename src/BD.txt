@@ -158,7 +158,7 @@ CREATE TABLE public.trabajos_grado
     id_tg SERIAL NOT NULL,
     id_propuesta INT NOT NULL,
     num_consejo integer,
-    cedula_t dom_cedula NOT NULL,
+    cedula_tut dom_cedula,
     modalidad dom_modalidad,
     fec_aprobacion date,
     titulo dom_nombre NOT NULL,

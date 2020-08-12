@@ -19,7 +19,7 @@ router.get('/propuestas', async (req, res) => {
 router.get('/propuestasT', async (req, res) => {
     try {
         const propuestas = await pool
-            .query("SELECT p.id_propuesta,titulo_propuesta,fec_entrega,t.nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE p.id_propuesta = ap.id_propuesta AND t.cedula_t = ap.cedula_t;")
+            .query("SELECT p.id_propuesta,titulo_propuesta,to_char(fec_entrega,'DD-MM-YYYY'),t.nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE ap.id_propuesta = p.id_propuesta;")
         res.body = propuestas;
         res.json(propuestas.rows);
     } catch (err) {
@@ -34,7 +34,7 @@ function getLocalDate() {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    today = mm + '/' + dd + '/' + yyyy;
+    today = mm + '-' + dd + '-' + yyyy;
     return today;
 }
 
@@ -55,16 +55,13 @@ router.post('/propuestas', async (req, res) => {
             [titulo_propuesta, fec_entrega]
         )
             .then(() => {
-                if (newPropuesta.rows[0]) {
-                    pool.query("INSERT INTO Aplicaciones_propuestas ( id_propuesta,cedula_t ) VALUES( $1,$2) RETURNING *;",
-                        [newPropuesta.rows[0].id_propuesta, cedula_t])
-                        .then(res => res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`))
-                } else {
-                    res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`)
-                }
+                pool.query("INSERT INTO Aplicaciones_propuestas ( id_propuesta,cedula_t ) VALUES( (SELECT MAX(id_propuesta) FROM propuestas),$1) RETURNING *;",
+                    [cedula_t])
+                    .then(res => res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`))
+
+                res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`)
             })
             .catch(err => res.json(newPropuesta.rows[0]))
-        res.json(newPropuesta.rows[0])
 
     } catch (err) {
         res.body = err.message;

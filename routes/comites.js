@@ -5,7 +5,7 @@ const router = express.Router();
 //wokrs
 router.get('/comites', async (req, res) => {
     try {
-        const comites = await pool.query('SELECT * FROM Comites;');
+        const comites = await pool.query("SELECT id_comite,to_char(fec_realizacion,'DD-MM-YYYY'),to_char(fec_asignacion,'DD-MM-YYYY') FROM Comites;");
         res.body = comites;
         res.json(comites.rows);
         console.log(res.body);

@@ -6,7 +6,7 @@ const router = express.Router();
 //works
 router.get('/trabajos_grado', async (req, res) => {
     try {
-        const trabajos_grado = await pool.query("SELECT * FROM Trabajos_grado;");
+        const trabajos_grado = await pool.query("SELECT id_tg,id_propuesta,modalidad,to_char(fec_aprobacion,'DD-MM-YYYY'),titulo FROM Trabajos_grado;");
         res.body = trabajos_grado;
         res.json(trabajos_grado.rows);
     } catch (err) {
@@ -18,30 +18,27 @@ router.get('/trabajos_grado', async (req, res) => {
 //Registrar un TG
 //por testear
 router.post('/trabajos_grado', async (req, res) => {
-    const { num_consejo, cedula_t, modalidad, fec_aprobacion, titulo, cod_emp } = req.body;
+    const { id_propuesta, modalidad, titulo } = req.body;
     try {
         const newTG = await pool.query(
-            "INSERT INTO trabajos_grado ( num_consejo, cedula_t, modalidad, fec_aprobacion, titulo ) VALUES( $1, $2, $3, $4, $5 ) RETURNING * ",
-            [num_consejo, cedula_t, modalidad, fec_aprobacion, titulo]
-        ).then(() => {
-            if (newTG.rows[0]) {
-                if (modalidad = "Experimental") {
-                    pool.query("INSERT INTO experimentales (  id_tg, cedula_t ) VALUES ( $1, $2) RETURNING * ",
-                        ["SELECT id_tg FROM trabajos_grado WHERE trabajos_grado.cedula_t = cedula_t", cedula_t])
+            "INSERT INTO trabajos_grado ( modalidad, titulo,id_propuesta ) VALUES($1, $2, $3) RETURNING *;",
+            [modalidad, titulo, id_propuesta]
+        )
+            .then(() => {
+                if (modalidad === "Experimental") {
+                    const { cedula_p } = req.body;
+                    pool.query("INSERT INTO Experimentales (  id_tg, cedula_p ) VALUES ( (SELECT id_tg FROM trabajos_grado WHERE trabajos_grado.id_propuesta = $1), $2) RETURNING * ",
+                        [id_propuesta, cedula_p])
                 } else {
-                    //"INSERT INTO instrumentales (  id_tg, cod_emp ) VALUES ( $1, $2) RETURNING * ", []
-                    pool.query("INSERT INTO Instrumentales (  id_tg, cod_emp ) VALUES ( $1, $2) RETURNING * ",
-                        ["SELECT id_tg FROM trabajos_grado WHERE trabajos_grado.cedula_t = cedula_t", cod_emp])
+                    const { cod_emp } = req.body;
+                    pool.query("INSERT INTO Instrumentales (  id_tg, cod_emp ) VALUES ( (SELECT id_tg FROM trabajos_grado WHERE trabajos_grado.id_propuesta = $1), $2) RETURNING * ",
+                        [id_propuesta, cod_emp])
                 }
-                res.json(`El Trabajo de Grado de C.I V-${cedula_t} fue creado exitosamente`);
-
-            } else {
-                res.json(`El Trabajo de Grado de C.I V-${cedula_t}no pudo ser creado`);
-            }
-        })
-            .catch((err) => {
-                res.json(`El Trabajo de Grado de C.I V-${cedula_t} no pudo ser creado`);
             })
+            .catch((err) => {
+                res.json(`El Trabajo de Grado de ${titulo} no pudo ser creado`);
+            })
+
     } catch (err) {
         res.body = err.message;
         res.json(err.message);

@@ -16,6 +16,19 @@ router.get('/tesistas', async (req, res) => {
     }
 })
 
+router.get('/tesistas-sintesis', async (req, res) => {
+    try {
+        const tesistas = await pool.query("SELECT * FROM Tesistas WHERE cedula_t NOT IN (SELECT cedula_t FROM Trabajos_grado);");
+        res.json(tesistas.rows)
+        res.body = tesistas;
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+        res.json(err.message);
+    }
+})
+
+
 //Registrar un tesista
 //works
 router.post('/tesistas', async (req, res) => {

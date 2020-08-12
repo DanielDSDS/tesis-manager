@@ -6,7 +6,7 @@ const router = express.Router();
 //works
 router.get('/consejos', async (req, res) => {
     try {
-        const consejos = await pool.query("SELECT * FROM Consejos;");
+        const consejos = await pool.query("SELECT num_consejo,to_char(fec_consejo,'DD-MM-YYYY') FROM Consejos;");
         res.body = consejos;
         res.json(consejos.rows);
     } catch (err) {
