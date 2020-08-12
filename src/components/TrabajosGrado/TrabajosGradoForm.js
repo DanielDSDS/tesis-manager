@@ -93,7 +93,7 @@ const TrabajosGradoForm = () => {
                     <div className="tg-form-2">
                         <FormControl>
                             <RadioGroup aria-label="modalidad" name="modalidad" value={values.modalidad} onChange={handleChange}>
-                                <FormControlLabel onClick={toggleModalidad} value="Experimental" control={<Radio />} label="Experimental" checked />
+                                <FormControlLabel onClick={toggleModalidad} value="Experimental" control={<Radio />} label="Experimental" />
                                 <FormControlLabel onClick={toggleModalidad} value="Instrumental" control={<Radio />} label="Instrumental" />
                             </RadioGroup>
                         </FormControl>

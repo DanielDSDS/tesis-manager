@@ -19,7 +19,7 @@ router.get('/propuestas', async (req, res) => {
 router.get('/propuestasT', async (req, res) => {
     try {
         const propuestas = await pool
-            .query("SELECT p.id_propuesta,titulo_propuesta,to_char(fec_entrega,'DD-MM-YYYY'),t.nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE ap.id_propuesta = p.id_propuesta;")
+            .query("SELECT p.id_propuesta,titulo_propuesta,to_char(p.fec_entrega,'DD-MM-YYYY'),t.nombre_t FROM Propuestas p,Tesistas t,Aplicaciones_propuestas ap WHERE p.id_propuesta = ap.id_propuesta AND ap.cedula_t = t.cedula_t;")
         res.body = propuestas;
         res.json(propuestas.rows);
     } catch (err) {

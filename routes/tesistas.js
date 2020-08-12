@@ -18,7 +18,7 @@ router.get('/tesistas', async (req, res) => {
 
 router.get('/tesistas-sintesis', async (req, res) => {
     try {
-        const tesistas = await pool.query("SELECT * FROM Tesistas WHERE cedula_t NOT IN (SELECT cedula_t FROM Trabajos_grado);");
+        const tesistas = await pool.query("SELECT * FROM Tesistas WHERE cedula_t NOT IN(SELECT cedula_t FROM Propuestas WHERE id_propuesta IN(SELECT id_propuesta FROM Trabajos_grado)); ");
         res.json(tesistas.rows)
         res.body = tesistas;
     } catch (err) {
