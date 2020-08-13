@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import FormControl from '@material-ui/core/FormControl'
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import useForm from '../useForm/useForm';
+import Select from '@material-ui/core/Select'
+import InputLabel from '@material-ui/core/InputLabel'
+import MenuItem from '@material-ui/core/MenuItem'
+import useForm from '../useForm/useForm'
 
 const Propuesta = ({ location }) => {
     console.log(location)
@@ -67,7 +67,8 @@ const Propuesta = ({ location }) => {
     return (
         <div className="content-container">
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
-            <h4 className="content-subtitle">{titulo_propuesta} - {nombre_t}</h4>
+            <h4 className="content-subtitle">{titulo_propuesta} por: {nombre_t}</h4>
+            <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
             <form onSubmit={handleUpdate}>
                 <div className="propuesta-container">
                     <div className="propuesta-select">

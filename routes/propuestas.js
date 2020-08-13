@@ -57,7 +57,6 @@ router.post('/propuestas', async (req, res) => {
             .then(() => {
                 pool.query("INSERT INTO Aplicaciones_propuestas ( id_propuesta,cedula_t ) VALUES( (SELECT MAX(id_propuesta) FROM propuestas),$1) RETURNING *;",
                     [cedula_t])
-                    .then(res => res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`))
 
                 res.json(`La propuesta del tesista C.I V-${cedula_t} fue creada exitosamente`)
             })
