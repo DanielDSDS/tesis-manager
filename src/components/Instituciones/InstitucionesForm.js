@@ -7,7 +7,7 @@ import useForm from '../useForm/useForm';
 const InstitucionesForm = () => {
     //se define el nombre del endpoint que se va a utilizar para la llamada al POST
     const proxy = 'instituciones'
-    const { handleChange, handleSubmit, values } = useForm({ 'codigo_inst': '', 'nombre_inst': '' }, proxy)
+    const { handleChange, handleSubmit, values } = useForm({ codigo_inst: '', nombre_inst: '' }, proxy)
 
     return (
         <div className="form-container">

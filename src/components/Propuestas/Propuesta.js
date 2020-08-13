@@ -51,14 +51,14 @@ const Propuesta = ({ location }) => {
     }
 
     const fetchProfesores = () => {
-        const _prof = fetch('http://tesis-manager.herokuapp.com/profesores')
+        const _prof = fetch('http://localhost:3000/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchComites = () => {
-        const _coms = fetch('http://tesis-manager.herokuapp.com/comites')
+        const _coms = fetch('http://localhost:3000/comites')
             .then(res => res.json())
             .then(result => setComites(result))
             .catch(err => console.log(err.message))
@@ -71,7 +71,7 @@ const Propuesta = ({ location }) => {
             <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
             <form onSubmit={handleUpdate}>
                 <div className="propuesta-container">
-                    <div className="propuesta-select">
+                    <div className="propuesta-form-1">
                         {hasComite == true
                             ? <h3>La propuesta tiene un comite asignado</h3>
                             : <FormControl className="comites-select-container">
@@ -106,33 +106,37 @@ const Propuesta = ({ location }) => {
                             </FormControl>
                         }
                     </div>
-                    <div className="propuesta-veredicto">
+                    <div className="propuesta-form-2">
                         {hasRevisor == true
                             ? <h3>La propuesta tiene un comite asignado</h3>
-                            : <FormControl className="revisor-select-container">
-                                <InputLabel id="revisor-label">Asignar Revisor</InputLabel>
-                                <Select
-                                    labelId="revisor-label"
-                                    id="revisores"
-                                    value={values.cedula_p}
-                                    name="cedula_p"
-                                    onChange={handleChange}
-                                    onBlur={handleChange}
-                                >
-                                    {profesores.map((profesor, i) => (
-                                        <MenuItem value={profesor.cedula_p} key={i}>
-                                            {profesor.nombre_p}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
+                            : <div>
+                                <FormControl className="revisor-select-container w-15">
+                                    <InputLabel id="revisor-label">Asignar Revisor</InputLabel>
+                                    <Select
+                                        className="w-15"
+                                        labelId="revisor-label"
+                                        id="revisores"
+                                        value={values.cedula_p}
+                                        name="cedula_p"
+                                        onChange={handleChange}
+                                        onBlur={handleChange}
+                                    >
+                                        {profesores.map((profesor, i) => (
+                                            <MenuItem value={profesor.cedula_p} key={i}>
+                                                {profesor.nombre_p}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </div>
                         }
                         {
                             hasVeredicto
                                 ? <h3>El veredicto del profesor es {veredicto_prof}</h3>
-                                : <FormControl className="veredicto-container">
+                                : <FormControl className="veredicto-container w-15">
                                     <InputLabel id="veredicto-label">Veredicto del Revisor</InputLabel>
                                     <Select
+                                        className="w-15"
                                         labelId="veredicto-label"
                                         id="veredictos"
                                         value={values.veredicto_prof}
