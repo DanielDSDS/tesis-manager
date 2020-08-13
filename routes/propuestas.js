@@ -75,30 +75,11 @@ router.get('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const propuestas = await pool.query(
-            "SELECT * FROM Propuestas p WHERE p.id_propuesta IN (SELECT id_propuesta FROM Aplicaciones_propuestas a WHERE cedula_t = $1)", [id]);
+            "SELECT * FROM Propuestas WHERE id_propuesta = $1", [id]);
         if (propuestas.rows[0]) {
-            res.json(propuestas.rows[0]);
+            res.json(`200`);
         } else {
-            res.json(`La propuesta del tesista C.I V-${id} no existe`);
-        }
-
-    } catch (err) {
-        res.body = err.message;
-        res.json(err.message);
-        console.log(res.body);
-    }
-});
-
-router.get('/propuestas/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const propuestas = await pool.query(
-            "SELECT * FROM Propuestas p WHERE p.id_propuesta IN (SELECT id_propuesta FROM Aplicaciones_propuestas a WHERE cedula_t = $1)", [id]);
-
-        if (propuestas.rows[0]) {
-            res.json(propuestas.rows[0]);
-        } else {
-            res.json(`La propuesta del tesista C.I V-${id} no existe`);
+            res.json(`400`);
         }
 
     } catch (err) {

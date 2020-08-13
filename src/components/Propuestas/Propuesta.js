@@ -64,12 +64,26 @@ const Propuesta = ({ location }) => {
             .catch(err => console.log(err.message))
     }
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        const { id_comite, cedula_p, observaciones_comite, estatus_aprobacion, veredicto_prof, fec_veredicto } = values;
+        console.log(...propuesta, values);
+        // fetch('http://localhost:3000/propuestas', {
+        //     method: 'PUT',
+        //     headers: { 'Content-type': 'application/json' },
+        //     body: JSON.stringify({ id_comite, cedula_p, observaciones_comite, estatus_aprobacion, veredicto_prof, fec_veredicto })
+        // })
+        //     .then(res => res.json())
+        //     .then(result => console.log(result))
+        //     .catch(err => console.log(err.message))
+    }
+
     return (
         <div className="content-container">
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
             <h4 className="content-subtitle">{titulo_propuesta} por: {nombre_t}</h4>
             <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
-            <form onSubmit={handleUpdate}>
+            <form onSubmit={e => handleSubmit(e)}>
                 <div className="propuesta-container">
                     <div className="propuesta-form-1">
                         {hasComite == true
