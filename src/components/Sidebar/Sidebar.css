@@ -1,3 +1,4 @@
+
 .sidebar-header{
     text-align: center;
     padding: .8rem;
@@ -7,12 +8,13 @@
     z-index: 1;
     height: 100vh;
     width: 16rem;
-    background-color: #ffffff;
+    color:white;
+    background-color: #0d0d25;
 }
 
 .sidebar-content{
     place-items: left stretch;
-    margin-left: 2rem;
+    margin: 0 2rem;
     display: flex;
     flex-direction: column;
 }
@@ -20,15 +22,19 @@
 .sidebar-wrapper a{
     text-decoration: none;
     margin:1.2rem 0 1.2rem 0;
-    color: #0C1713;
-    font-weight: 500;
+    color: #ffffff;
+    font-size: .8rem;
 }
 
 .sidebar-wrapper a:hover{
-    color: #523ece;
+    color: #ffc171;
     transition: 0.5s;
 }
 
 .active-link{
     color: #523ece;
+}
+
+.recursive{
+    font-family: 'Recursive',sans-serif;
 }

@@ -3,14 +3,12 @@ import MaterialTable from 'material-table'
 
 // id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo
 const TrabajosGradoTable = () => {
-    const [trabajosgrado, setTrbajosgrados] = useState([{}])
+    const [trabajosgrado, setTrabajosgrados] = useState([{}])
     const [state, setState] = useState({
         columns: [
             { title: 'Id trabajo grado', field: 'id_tg', editable: 'never' },
-            { title: 'Numero de consejo', field: 'num_consejo' },
-            { title: 'Cedula tesista', field: 'cedula_t' },
+            { title: 'ID propuesta', field: 'id_propuesta', editable: 'never' },
             { title: 'Modalidad', field: 'modalidad' },
-            { title: 'Fecha aprobacion', field: 'fec_aprobacion' },
             { title: 'Ttulo', field: 'titulo' },
         ],
         data: []
@@ -25,7 +23,7 @@ const TrabajosGradoTable = () => {
     const fetchTrabajosgrado = () => {
         fetch('http://localhost:3000/trabajos_grado')
             .then(res => res.json())
-            .then(result => setTrabajosGrado(result))
+            .then(result => setTrabajosgrados(result))
             .catch(err => console.log(err.message))
     }
 
@@ -44,11 +42,11 @@ const TrabajosGradoTable = () => {
     //actualizar un tutor
     const updateTrabajogrado = (trabajosgrado) => {
         console.log(trabajosgrado)
-        const { id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo} = trabajosgrado;
+        const { id_tg, id_propuesta, modalidad, fec_aprobacion, titulo } = trabajosgrado;
         const updateTg = fetch(`http://localhost:3000/trabajos_grado/${id_tg}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo })
+            body: JSON.stringify({ id_tg, id_propuesta, modalidad, fec_aprobacion, titulo })
         })
             .then(res => res.json())
             .then(result => console.log(result))
