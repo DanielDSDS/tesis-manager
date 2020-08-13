@@ -94,16 +94,36 @@ router.get('/propuestas/:id', async (req, res) => {
 router.put('/propuestas/:id', async (req, res) => {
     try {
         const { id } = req.params;
-        const { id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion } = req.body;
+        const { id_comite, estatus_aprobacion, veredicto_profesor, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion } = req.body;
         const updatePropuesta = await pool.query
-            ("UPDATE Propuestas SET id_comite = $1, id_tg = $2, estatus_aprovacion = $3, veredicto_profesor = $4, titulo = $5, titulo_propuesta = $6, observaciones_comite = $7, fec_comite = $7, fec_veredicto = $8, fec_aprovacion = $9 WHERE id_propuesta = $10",
-                [id_comite, id_tg, estatus_aprobacion, veredicto_profesor, titulo, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion])
-            .then(() => {
-                res.json(`La propuesta ${id} ha sido actualizada exitosamente`);
-            })
-            .catch((err) => {
-                res.json(err.message)
-            })
+            ("UPDATE Propuestas SET id_comite = $1, estatus_aprovacion = $2, veredicto_profesor = $3, titulo_propuesta = $4, observaciones_comite = $5, fec_comite = $6, fec_veredicto = $7, fec_aprovacion = $8 WHERE id_propuesta = $9",
+                [id_comite, estatus_aprobacion, veredicto_profesor, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion, id])
+        if (updatePropuesta.rows[0]) {
+            res.json(`200`);
+        } else {
+            res.json(`400`);
+        }
+
+
+    } catch (err) {
+        res.body = err.message;
+        res.json(err.message);
+        console.log(res.body);
+    }
+});
+
+router.put('/propuesta/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion } = req.body
+        const updatePropuesta = await pool.query
+            ("UPDATE Propuestas SET cedula_p=$1, veredicto_profesor=$2, id_comite=$3, observaciones_comite=$4, estatus_aprobacion=$5, fec_veredicto=$6, fec_aprobacion=$7 WHERE id_propuesta = $8",
+                [cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion, id])
+        if (updatePropuesta.rows[0]) {
+            res.json(`200`);
+        } else {
+            res.json(`400`);
+        }
 
 
     } catch (err) {

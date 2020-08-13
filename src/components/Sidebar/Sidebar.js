@@ -5,9 +5,9 @@ import './Sidebar.css'
 const Sidebar = () => {
 
     return (
-        <div className="sidebar-wrapper recursive">
+        <div className="sidebar-wrapper">
             <h1 className="sidebar-header">t-manager</h1>
-            <div className="sidebar-content">
+            <div className="sidebar-content recursive">
                 <NavLink to="/propuestas" activeClassName="active-link">Propuestas<span className="material-icons">rule</span></NavLink>
                 <NavLink to="/trabajos_grado" activeClassName="active-link">Trabajos de Grado<span className="material-icons">history_edu</span></NavLink>
                 <NavLink to="/tesistas" activeClassName="active-link">Tesistas<span className="material-icons">account_box</span></NavLink>
