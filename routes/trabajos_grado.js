@@ -86,6 +86,49 @@ router.put('/trabajos_grado/:id', async (req, res) => {
     }
 });
 
+router.put('/tg/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const { num_consejo, titulo, cod_tutor, cedula_p1, cedula_p2, cedula_p3, fec_aprobacion, modalidad } = req.body
+        const updateTG = await pool.query(
+            "UPDATE trabajo_grado SET num_consejo=$1, titulo=$2,fec_aprobacion=$3 WHERE id_tg=$4",
+            [num_consejo, titulo, fec_aprobacion, id]
+        )
+            .then(res => res.json('200 tg'))
+
+        if (modalidad = "Experimental") {
+            const j1 = await pool.query(
+                "INSERT INTO Experimentales (id_tg,cedula_p) VALUES($1,$2);",
+                [id_tg, cedula_p]
+            )
+                .then(res => res.json('200 e'))
+        }
+
+        const j1 = await pool.query(
+            "INSERT INTO Jueces (id_tg,cedula_p,nombre_p) VALUES($1,$2,(SELECT nombre_p FROM Profesores WHERE cedula_p = $2));",
+            [id_tg, cedula_p1]
+        )
+            .then(res => res.json('200 j1'))
+
+        const j2 = await pool.query(
+            "INSERT INTO Jueces (id_tg,cedula_p,nombre_p) VALUES($1,$2,(SELECT nombre_p FROM Profesores WHERE cedula_p = $2));",
+            [id_tg, cedula_p2]
+        )
+            .then(res => res.json('200 j2'))
+
+        const j3 = await pool.query(
+            "INSERT INTO Jueces (id_tg,cedula_p,nombre_p) VALUES($1,$2,(SELECT nombre_p FROM Profesores WHERE cedula_p = $2));",
+            [id_tg, cedula_p3]
+        )
+            .then(res => res.json('200 j3'))
+
+
+    } catch (err) {
+        res.json(err.message)
+        console.log(err.message)
+    }
+})
+
 router.put('/trabajogrado/:id', async (req, res) => {
     const { id } = req.params
     try {
@@ -95,7 +138,7 @@ router.put('/trabajogrado/:id', async (req, res) => {
                 [num_consejo, modalidad, fec_aprobacion, id])
         if (updateTrabajoGrado.rows[0]) {
             res.json(`200`);
-        } else { 
+        } else {
             res.json(`400`);
         }
 

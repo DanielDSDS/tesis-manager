@@ -99,7 +99,6 @@ const Propuesta = ({ location }) => {
                 setRevisor(true)
             }
         }
-        console.log('%ctoggled')
     }
 
     return (

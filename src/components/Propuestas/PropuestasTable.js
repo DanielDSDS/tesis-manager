@@ -52,14 +52,14 @@ const PropuestasTable = () => {
     //actualizar una especialidad
     const updatePropuesta = (propuesta) => {
         console.log(propuesta)
-        const { id_comite, id_tg, estatus_aprobacion, titulo_propuesta,
-            observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion } = propuesta;
+        const { id_propuesta, id_comite, estatus_aprobacion, titulo_propuesta,
+            observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion } = propuesta;
         const updateP = fetch(`http://localhost:3000/propuestas/${id_propuesta}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({
-                id_comite, id_tg, estatus_aprobacion, titulo_propuesta,
-                observaciones_comite, fec_comite, fec_veredicto, fec_aprovacion
+                id_comite, estatus_aprobacion, titulo_propuesta,
+                observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion, id_propuesta
             })
         })
             .then(res => res.json())

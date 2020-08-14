@@ -54,6 +54,22 @@ router.get('/tutores_emp/:id', async (req, res) => {
     }
 });
 
+router.get('/tutoresxemp/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const TE = await pool.query("SELECT nombre_tutor,cod_tutor FROM tutores_empresariales te WHERE te.cod_emp IN (SELECT cod_emp FROM Instrumentales i WHERE i.id_tg = $1);", [id]);
+        if (TE.rows[0]) {
+            res.json(TE.rows[0]);
+        } else {
+            res.json(`El Tutor empresarial ${id} no esta registrado`)
+        }
+
+    } catch (err) {
+        res.body = err.message;
+        res.json(err.message);
+    }
+});
+
 
 //Actualizar un Tutor Empresarial  
 

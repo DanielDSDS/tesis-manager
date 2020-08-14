@@ -16,6 +16,19 @@ router.get('/propuestas', async (req, res) => {
     }
 })
 
+router.get('/propuestasViables', async (req, res) => {
+    try {
+        const propuestas = await pool.query("SELECT * FROM propuestas WHERE estatus_aprobacion = 'PAR';")
+        res.body = propuestas;
+        res.json(propuestas.rows);
+    } catch (err) {
+        res.body = err.message;
+        console.log(res.body);
+        res.json(err.message);
+    }
+})
+
+
 router.get('/propuestasT', async (req, res) => {
     try {
         const propuestas = await pool
@@ -121,7 +134,7 @@ router.put('/propuesta/:id', async (req, res) => {
             res.json(`200`);
         } else {
             res.json(`400`);
-        }
+        }<<<<<<<<<<
 
 
     } catch (err) {

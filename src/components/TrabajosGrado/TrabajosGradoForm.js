@@ -38,7 +38,7 @@ const TrabajosGradoForm = () => {
     const toggleModalidad = ({ target }) => setToggle(target.value == "Experimental" ? true : false)
 
     const fetchPropuestas = () => {
-        fetch(`http://localhost:3000/propuestas`)
+        fetch(`http://localhost:3000/propuestasViables`)
             .then(res => res.json())
             .then(result => setPropuestas(result))
             .catch(err => console.log(err.message))
@@ -120,7 +120,7 @@ const TrabajosGradoForm = () => {
                             : <FormControl>
                                 <InputLabel id="empresas-label">Empresas</InputLabel>
                                 <Select
-                                    className="select"
+                                    className="w-15"
                                     labelId="empresas-label"
                                     id="empresas"
                                     value={values.cod_emp}
