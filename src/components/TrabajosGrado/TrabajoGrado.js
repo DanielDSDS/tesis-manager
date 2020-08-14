@@ -8,20 +8,15 @@ import MenuItem from '@material-ui/core/MenuItem'
 import useForm from '../useForm/useForm'
 
 const TrabajoGrado = ({ location }) => {
-    //Se debe obtener desde el front: cedula_p,veredicto_profesor,id_comite,estatus_aprobacion,observaciones_comite
-    const [triggers, setTrigger] = useState({ hasRevisor: false, hasComite: false })
-    const [comites, setComites] = useState([{}])
-    const [profesores, setProfesores] = useState([{}])
-    const [propuesta, setPropuesta] = useState([{}])
-    const { fec_entrega, id_propuesta, nombre_t, titulo_propuesta } = location.state.rowData
+    //Se debe obtener desde el front: num_consejo, modalidad, fec_aprobacion 
+    const [consejos, setConsejos] = useState([{}])
+    const [trabajos_grado, setTrabajos_Grado] = useState([{}])
+    const { num_consejo, modalidad, fec_aprobacion } = location.state.rowData
     const { handleChange, values } = useForm({
-        cedula_p: '',
-        veredicto_profesor: '',
-        id_comite: '',
-        observaciones_comite: '',
-        estatus_aprobacion: '',
-        fec_veredicto: '',
+        num_consejo: '',
+        modalidad: '',
         fec_aprobacion: '',
+        titulo_propuesta: '',
     }, 'null')
 
     useEffect(() => {

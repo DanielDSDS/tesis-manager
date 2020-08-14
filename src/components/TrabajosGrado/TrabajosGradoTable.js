@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
+import { useHistory } from 'react-router-dom'
 
 // id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo
 const TrabajosGradoTable = () => {
+    const history = useHistory()
     const [trabajosgrado, setTrabajosgrados] = useState([{}])
     const [state, setState] = useState({
         columns: [

@@ -86,6 +86,27 @@ router.put('/trabajos_grado/:id', async (req, res) => {
     }
 });
 
+router.put('/trabajogrado/:id', async (req, res) => {
+    const { id } = req.params
+    try {
+        const { num_consejo, modalidad, fec_aprobacion } = req.body
+        const updateTrabajoGrado = await pool.query
+            ("UPDATE trabajo_grado SET num_consejo=$1, modalidad=$2, fec_aprobacion=$3 WHERE id_tg=$4",
+                [num_consejo, modalidad, fec_aprobacion, id])
+        if (updateTrabajoGrado.rows[0]) {
+            res.json(`200`);
+        } else { 
+            res.json(`400`);
+        }
+
+
+    } catch (err) {
+        res.body = err.message;
+        res.json(err.message);
+        console.log(res.body);
+    }
+});
+
 //Borar un TG
 //recibira el id del trabajo de grado pero se puede cambiar por la cedula
 router.delete('/trabajos_grado/:id', async (req, res) => {
