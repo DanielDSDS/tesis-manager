@@ -8,7 +8,7 @@ const TrabajosGradoTable = () => {
     const [trabajosgrado, setTrabajosgrados] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Id trabajo grado', field: 'id_tg', editable: 'never' },
+            { title: 'ID trabajo grado', field: 'id_tg', editable: 'never' },
             { title: 'ID propuesta', field: 'id_propuesta', editable: 'never' },
             { title: 'Modalidad', field: 'modalidad' },
             { title: 'Ttulo', field: 'titulo' },
@@ -37,13 +37,6 @@ const TrabajosGradoTable = () => {
             .then(result => setTrabajosgrados(result))
             .catch(err => console.log(err.message))
     }
-
-    //Traerse nombre del tesista
-
-    //Traerse lista de profesores
-
-    //Traerse
-
     //eliminar un tutor
     const deleteTrabajosgrado = (id_tg) => {
         console.log(id_tg)

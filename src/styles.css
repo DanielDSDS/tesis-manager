@@ -60,8 +60,18 @@ html{
 .tg-form-2{
     margin: 1rem;;
 }
-.display-message{
+.display-data{
+    margin-top: 2rem;
+}
+
+.select-jurado-container{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin: auto;
+}
+
+.select-jurado-title{
+    text-align: center;
+    margin: auto;
 }
