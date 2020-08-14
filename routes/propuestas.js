@@ -109,7 +109,7 @@ router.put('/propuestas/:id', async (req, res) => {
         const { id } = req.params;
         const { id_comite, estatus_aprobacion, veredicto_profesor, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion } = req.body;
         const updatePropuesta = await pool.query
-            ("UPDATE Propuestas SET id_comite = $1, estatus_aprovacion = $2, veredicto_profesor = $3, titulo_propuesta = $4, observaciones_comite = $5, fec_comite = $6, fec_veredicto = $7, fec_aprovacion = $8 WHERE id_propuesta = $9",
+            ("UPDATE Propuestas SET id_comite = $1, estatus_aprobacion = $2, veredicto_profesor = $3, titulo_propuesta = $4, observaciones_comite = $5, fec_comite = $6, fec_veredicto = $7, fec_aprobacion = $8 WHERE id_propuesta = $9",
                 [id_comite, estatus_aprobacion, veredicto_profesor, titulo_propuesta, observaciones_comite, fec_comite, fec_veredicto, fec_aprobacion, id])
         if (updatePropuesta.rows[0]) {
             res.json(`200`);
@@ -134,7 +134,7 @@ router.put('/propuesta/:id', async (req, res) => {
             res.json(`200`);
         } else {
             res.json(`400`);
-        }<<<<<<<<<<
+        }
 
 
     } catch (err) {
