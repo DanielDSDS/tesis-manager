@@ -17,6 +17,9 @@ const trabajos_grado = require('./routes/trabajos_grado.js')
 const tutores_emp = require('./routes/tutores_emp')
 const defensas = require('./routes/defensas.js')
 const empresas = require('./routes/empresas.js') //Lo puso Roberto
+const anexo_experimental = require('./routes/anexo_experimental.js') //Lo puso Roberto
+const anexo_instrumental_jurado = require('./routes/anexo_instrumental_jurado.js') //Lo puso Roberto
+const anexo_instrumental_academico = require('./routes/anexo_instrumental_academico.js') //Lo puso Roberto
 
 //guardar credenciales de la bd
 const pool = require('./db')
@@ -51,6 +54,9 @@ app.use(tesistas)
 app.use(tutores_emp)
 app.use(defensas)
 app.use(empresas) //Lo puso Roberto
+app.use(anexo_experimental) //Lo puso Roberto
+app.use(anexo_instrumental_jurado) //Lo puso Roberto
+app.use(anexo_instrumental_academico) //Lo puso Roberto
 
 const server = createServer(app)
 
