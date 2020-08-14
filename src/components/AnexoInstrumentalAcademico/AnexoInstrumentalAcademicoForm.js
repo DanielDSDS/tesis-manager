@@ -231,37 +231,26 @@ return (
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">encuadernado</InputLabel>
+                    <InputLabel id="jurado-label">responsabilidad</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="encuadernado"
-                            value={values.encuadernado}
-                            name="encuadernado"
+                            id="responsabilidad"
+                            value={values.responsabilidad}
+                            name="responsabilidad"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
                                 <MenuItem value = "0" key={i}> 0 </MenuItem>
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "3" key={i}> 3 </MenuItem>
+                                <MenuItem value = "4" key={i}> 4 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">precision</InputLabel>
+                    <InputLabel id="jurado-label">adaptacion</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="precision"
-                            value={values.precision}
-                            name="precision"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">claridad</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="claridad"
-                            value={values.claridad}
-                            name="claridad"
+                            id="adaptacion"
+                            value={values.adaptacion}
+                            name="adaptacion"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -269,12 +258,12 @@ return (
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">brevedad</InputLabel>
+                    <InputLabel id="jurado-label">hpcinstrucciones</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="brevedad"
-                            value={values.brevedad}
-                            name="brevedad"
+                            id="hpcinstrucciones"
+                            value={values.hpcinstrucciones}
+                            name="hpcinstrucciones"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -282,12 +271,12 @@ return (
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">id_problema</InputLabel>
+                    <InputLabel id="jurado-label">hpcinstrucciones</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="id_problema"
-                            value={values.id_problema}
-                            name="brevedad"
+                            id="hpcinstrucciones"
+                            value={values.hpcinstrucciones}
+                            name="hpcinstrucciones"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -295,12 +284,65 @@ return (
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">objetivos</InputLabel>
+                    <InputLabel id="jurado-label">hpphechos</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="objetivos"
-                            value={values.objetivos}
-                            name="objetivos"
+                            id="hpphechos"
+                            value={values.hpphechos}
+                            name="hpphechos"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                                <MenuItem value = "3" key={i}> 3 </MenuItem>
+                                <MenuItem value = "4" key={i}> 4 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">aporteideas</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="aporteideas"
+                            value={values.aporteideas}
+                            name="aporteideas"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                                <MenuItem value = "3" key={i}> 3 </MenuItem>
+                                <MenuItem value = "4" key={i}> 4 </MenuItem>
+                                <MenuItem value = "5" key={i}> 5 </MenuItem>
+                        </Select>
+                        <TextField
+                            className="text-field"
+                            size="small"
+                            label="observacionesemp"
+                            name="observacionesemp"
+                            variant="outlined"
+                            value={values.observacionesemp}/>
+                    <InputLabel id="jurado-label">tetotal</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="tetotal"
+                            value={values.tetotal}
+                            name="tetotal"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                                <MenuItem value = "4" key={i}> 4 </MenuItem>
+                                <MenuItem value = "5" key={i}> 5 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">taresresponsabilidad</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="taresresponsabilidad"
+                            value={values.taresresponsabilidad}
+                            name="taresresponsabilidad"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -308,25 +350,26 @@ return (
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">importancia</InputLabel>
+                    <InputLabel id="jurado-label">tadocumento</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="importancia"
-                            value={values.importancia}
-                            name="importancia"
+                            id="tadocumento"
+                            value={values.tadocumento}
+                            name="tadocumento"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
                                 <MenuItem value = "0" key={i}> 0 </MenuItem>
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
+                                <MenuItem value = "3" key={i}> 3 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">limitaciones</InputLabel>
+                    <InputLabel id="jurado-label">presentacion</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="limitaciones"
-                            value={values.limitaciones}
-                            name="limitaciones"
+                            id="presentacion"
+                            value={values.presentacion}
+                            name="presentacion"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -346,15 +389,52 @@ return (
                                 <MenuItem value = "0" key={i}> 0 </MenuItem>
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">uso</InputLabel>
+                    <InputLabel id="jurado-label">justificacion</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="uso"
-                            value={values.uso}
-                            name="uso"
+                            id="justificacion"
+                            value={values.justificacion}
+                            name="justificacion"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">metodologia</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="metodologia"
+                            value={values.metodologia}
+                            name="metodologia"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">documentacion</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="documentacion"
+                            value={values.documentacion}
+                            name="documentacion"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">precisionproducto</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="precisionproducto"
+                            value={values.precisionproducto}
+                            name="precisionproducto"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -363,22 +443,6 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">precision</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="precision"
-                            value={values.precision}
-                            name="precision"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">cumplimientoobj</InputLabel>
                         <Select
@@ -394,14 +458,34 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
+                        </Select>
+                    <InputLabel id="jurado-label">recomendacionpt</InputLabel>
+                        <Select
+                            labelId="jurado-label"
+                            id="recomendacionpt"
+                            value={values.recomendacionpt}
+                            name="recomendacionpt"
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        >
+                                <MenuItem value = "0" key={i}> 0 </MenuItem>
+                                <MenuItem value = "1" key={i}> 1 </MenuItem>
+                                <MenuItem value = "2" key={i}> 2 </MenuItem>
+                                <MenuItem value = "3" key={i}> 3 </MenuItem>
+                                <MenuItem value = "4" key={i}> 4 </MenuItem>
                                 <MenuItem value = "5" key={i}> 5 </MenuItem>
+                                <MenuItem value = "6" key={i}> 6 </MenuItem>
+                                <MenuItem value = "7" key={i}> 7 </MenuItem>
+                                <MenuItem value = "8" key={i}> 8 </MenuItem>
+                                <MenuItem value = "9" key={i}> 9 </MenuItem>
+                                <MenuItem value = "10" key={i}> 10 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">aplicacion</InputLabel>
+                    <InputLabel id="jurado-label">definicion</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="aplicacion"
-                            value={values.aplicacion}
-                            name="aplicacion"
+                            id="definicion"
+                            value={values.definicion}
+                            name="definicion"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -410,21 +494,12 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">alcance</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="alcance"
-                            value={values.alcance}
-                            name="alcance"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
+                                <MenuItem value = "5" key={i}> 5 </MenuItem>
+                                <MenuItem value = "6" key={i}> 6 </MenuItem>
+                                <MenuItem value = "7" key={i}> 7 </MenuItem>
+                                <MenuItem value = "8" key={i}> 8 </MenuItem>
+                                <MenuItem value = "9" key={i}> 9 </MenuItem>
+                                <MenuItem value = "10" key={i}> 10 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">profundidad</InputLabel>
                         <Select
@@ -440,7 +515,6 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">validez</InputLabel>
                         <Select
@@ -456,7 +530,6 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">recomendaciones</InputLabel>
                         <Select
@@ -470,8 +543,6 @@ return (
                                 <MenuItem value = "0" key={i}> 0 </MenuItem>
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">bibliografia</InputLabel>
                         <Select
@@ -485,8 +556,6 @@ return (
                                 <MenuItem value = "0" key={i}> 0 </MenuItem>
                                 <MenuItem value = "1" key={i}> 1 </MenuItem>
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">tiempo</InputLabel>
                         <Select
@@ -517,29 +586,6 @@ return (
                                 <MenuItem value = "2" key={i}> 2 </MenuItem>
                                 <MenuItem value = "3" key={i}> 3 </MenuItem>
                                 <MenuItem value = "4" key={i}> 4 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">demostracion</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="demostracion"
-                            value={values.demostracion}
-                            name="demostracion"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
-                                <MenuItem value = "6" key={i}> 6 </MenuItem>
-                                <MenuItem value = "7" key={i}> 7 </MenuItem>
-                                <MenuItem value = "8" key={i}> 8 </MenuItem>
-                                <MenuItem value = "9" key={i}> 9 </MenuItem>
-                                <MenuItem value = "10" key={i}> 10 </MenuItem>
-                                <MenuItem value = "11" key={i}> 11 </MenuItem>
-                                <MenuItem value = "12" key={i}> 12 </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">calidad</InputLabel>
                         <Select
@@ -575,12 +621,12 @@ return (
                                 <MenuItem value = "5" key={i}> 5 </MenuItem>
                                 <MenuItem value = "6" key={i}> 6 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">respuestas</InputLabel>
+                    <InputLabel id="jurado-label">demostracion</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="respuestas"
-                            value={values.respuestas}
-                            name="respuestas"
+                            id="demostracion"
+                            value={values.demostracion}
+                            name="demostracion"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -593,47 +639,17 @@ return (
                                 <MenuItem value = "6" key={i}> 6 </MenuItem>
                                 <MenuItem value = "7" key={i}> 7 </MenuItem>
                                 <MenuItem value = "8" key={i}> 8 </MenuItem>
+                                <MenuItem value = "9" key={i}> 9 </MenuItem>
+                                <MenuItem value = "10" key={i}> 10 </MenuItem>
+                                <MenuItem value = "11" key={i}> 11 </MenuItem>
+                                <MenuItem value = "12" key={i}> 12 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">calidad2</InputLabel>
+                    <InputLabel id="jurado-label">respuestasse</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="calidad2"
-                            value={values.calidad2}
-                            name="calidad2"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
-                                <MenuItem value = "6" key={i}> 6 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">desenvolvimiento2</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="desenvolvimiento2"
-                            value={values.desenvolvimiento2}
-                            name="desenvolvimiento2"
-                            onChange={handleChange}
-                            onBlur={handleChange}
-                        >
-                                <MenuItem value = "0" key={i}> 0 </MenuItem>
-                                <MenuItem value = "1" key={i}> 1 </MenuItem>
-                                <MenuItem value = "2" key={i}> 2 </MenuItem>
-                                <MenuItem value = "3" key={i}> 3 </MenuItem>
-                                <MenuItem value = "4" key={i}> 4 </MenuItem>
-                                <MenuItem value = "5" key={i}> 5 </MenuItem>
-                                <MenuItem value = "6" key={i}> 6 </MenuItem>
-                        </Select>
-                    <InputLabel id="jurado-label">respuestas2</InputLabel>
-                        <Select
-                            labelId="jurado-label"
-                            id="respuestas2"
-                            value={values.respuestas2}
-                            name="respuestas2"
+                            id="respuestasse"
+                            value={values.respuestasse}
+                            name="respuestasse"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
@@ -650,52 +666,24 @@ return (
                         <TextField
                             className="text-field"
                             size="small"
-                            label="Pjurado"
-                            name="pjurado"
-                            variant="outlined"
-                            value={values.pjurado}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Jurado2"
+                            label="jurado"
                             name="jurado"
                             variant="outlined"
                             value={values.jurado}/>
                         <TextField
                             className="text-field"
                             size="small"
-                            label="Tutor"
-                            name="tutor"
+                            label="Total  300"
+                            name="total300"
                             variant="outlined"
-                            value={values.tutor}/>
+                            value={values.total300}/>
                         <TextField
                             className="text-field"
                             size="small"
-                            label="Total 1 300"
-                            name="total1300"
+                            label="Total  20"
+                            name="total20"
                             variant="outlined"
-                            value={values.total1300}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Total 1 20"
-                            name="total120"
-                            variant="outlined"
-                            value={values.total120}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Total 2 300"
-                            name="total2300"
-                            variant="outlined"
-                            value={values.total2300}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Total 2 300"
-                            name="total2300"
-                            variant="outlined"
-                            value={values.total1200}/>
+                            value={values.total20}/>
                         <TextField
                             className="text-field"
                             size="small"
@@ -710,20 +698,6 @@ return (
                             name="justificacionmencionh"
                             variant="outlined"
                             value={values.justificacionmencionh}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Mencion Publicacion"
-                            name="mencionp"
-                            variant="outlined"
-                            value={values.mencion}/>
-                        <TextField
-                            className="text-field"
-                            size="small"
-                            label="Justificacion Mencion Publicacion"
-                            name="justificacionmencionp"
-                            variant="outlined"
-                            value={values.justificacionmencionp}/>
                     
                     <Button type="submit" variant="contained" size="small" disableElevation>Completar</Button>
             </FormControl>
