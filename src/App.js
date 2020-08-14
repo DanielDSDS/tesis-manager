@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Link, Route } from 'react-router-dom';
 import Especialidades from './components/Especialidades/Especialidades';
 import Tesistas from './components/Tesistas/Tesistas';
 import TrabajosGrado from './components/TrabajosGrado/TrabajosGrado';
+import TrabajoGrado from './components/TrabajosGrado/TrabajoGrado';
 import TutoresEmp from './components/TutoresEmp/TutoresEmp';
 import Consejos from './components/Consejos/Consejos';
 import Comites from './components/Comites/Comites';
@@ -31,6 +32,7 @@ const App = () => {
                     <Route path="/defensas" component={Defensas} />
                     <Route path="/instituciones" component={Instituciones} />
                     <Route path="/propuesta" component={Propuesta} />
+                    <Route path="/trabajogrado" component={TrabajoGrado} />
                 </Switch>
             </div>
         </Router>

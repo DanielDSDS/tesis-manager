@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import MaterialTable from 'material-table'
+import { useHistory } from 'react-router-dom'
 
 // id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo
 const TrabajosGradoTable = () => {
+    const history = useHistory()
     const [trabajosgrado, setTrabajosgrados] = useState([{}])
     const [state, setState] = useState({
         columns: [
@@ -18,6 +20,15 @@ const TrabajosGradoTable = () => {
     useEffect(() => {
         fetchTrabajosgrado()
     }, [])
+
+    const handleRowClick = (e, rowData) => {
+        const { id_tg } = rowData;
+        history.push({
+            pathname: '/trabajogrado',
+            search: `?query=${id_tg}`,
+            state: { rowData }
+        })
+    }
 
     //obtener todos los tutores emp
     const fetchTrabajosgrado = () => {
@@ -60,6 +71,7 @@ const TrabajosGradoTable = () => {
             title="Trabajos de Grado"
             columns={state.columns}
             data={trabajosgrado}
+            onRowClick={handleRowClick}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
