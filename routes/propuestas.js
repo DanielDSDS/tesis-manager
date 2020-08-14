@@ -77,7 +77,7 @@ router.get('/propuestas/:id', async (req, res) => {
         const propuestas = await pool.query(
             "SELECT * FROM Propuestas WHERE id_propuesta = $1", [id]);
         if (propuestas.rows[0]) {
-            res.json(`200`);
+            res.json(propuestas.rows[0]);
         } else {
             res.json(`400`);
         }

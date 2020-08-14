@@ -60,3 +60,8 @@ html{
 .tg-form-2{
     margin: 1rem;;
 }
+.display-message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

@@ -20,10 +20,10 @@ const Propuesta = ({ location }) => {
         cedula_p: '',
         veredicto_profesor: '',
         id_comite: '',
-        observaciones_comite: '',
-        estatus_aprobacion: '',
-        fec_veredicto: '',
-        fec_aprobacion: '',
+        observaciones_comite: propuesta.observaciones_comite,
+        estatus_aprobacion: propuesta.estatus_aprobacion,
+        // fec_veredicto: '',
+        // fec_aprobacion: '',
     }, 'null')
 
     useEffect(() => {
@@ -35,17 +35,24 @@ const Propuesta = ({ location }) => {
     const handleUpdate = (e) => {
         e.preventDefault()
         console.log("%cValores", "color:red", values)
-        const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion } = values;
-        if (veredicto_profesor != 'PE' && veredicto_profesor != '') {
+        const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, } = values;
+        let fec_veredicto = ''
+        let fec_aprobacion = ''
+        let fec_comite = ''
+        if (veredicto_profesor != 'PE' || veredicto_profesor !== false) {
             fec_veredicto = getLocalDate()
         }
-        if (estatus_aprobacion != 'NR' && estatus_aprobacion != '') {
+        if (estatus_aprobacion != 'NR' || estatus_aprobacion !== false) {
             fec_aprobacion = getLocalDate()
         }
+        if (id_comite != '') {
+            fec_comite = getLocalDate()
+        }
+
         fetch(`http://localhost:3000/propuesta/${id_propuesta}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion })
+            body: JSON.stringify({ cedula_p, veredicto_profesor, fec_comite, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion })
         })
     }
 
@@ -110,6 +117,33 @@ const Propuesta = ({ location }) => {
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
             <h4 className="content-subtitle">{titulo_propuesta} por: {nombre_t}</h4>
             <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
+            <div className="display-message">
+                <div className="display-message-1">
+                    {propuesta.id_comite
+                        ? <h5>Fecha del comite:{propuesta.fec_comite}</h5>
+                        : <h5>No ha sido asignada a un comite</h5>
+                    }
+                    {propuesta.estatus_aprobacion == 'NR'
+                        ? < h5 > Esta propuesta no ha sido revisada por el comite</h5>
+                        : < h5 > Estado de aprobacion del comite:{propuesta.estatus_aprobacion}</h5>
+                    }
+                    {propuesta.observaciones_comite
+                        ? <h5>Observaciones del comite:{propuesta.observaciones_comite}</h5>
+                        : <span></span>
+                    }
+                </div>
+                <div className="display-message-1">
+                    {propuesta.cedula_p !== false
+                        ? <h5>Profesor revisor asignado: C.I V-{propuesta.cedula_p}</h5>
+                        : <h5>No tiene ningun profesor revisor asignado</h5>
+                    }
+                    {propuesta.cedula_p
+                        ? <h5>Estado de aprobacion del revisor:{propuesta.veredicto_profesor}</h5>
+                        : <h5>No tiene ningun profesor revisor asignado</h5>
+                    }
+
+                </div>
+            </div>
             <form onSubmit={handleUpdate}>
                 <div className="propuesta-container">
                     <div className="propuesta-form-1">
@@ -143,9 +177,9 @@ const Propuesta = ({ location }) => {
                                 onBlur={handleChange}
                                 disabled={!hasComite}
                             >
-                                <MenuItem value="A" key={1}>A</MenuItem>
-                                <MenuItem value="R" key={2}>R</MenuItem>
-                                <MenuItem value="PE" key={3}>PE</MenuItem>
+                                <MenuItem value="PAR" key={1}>PAR</MenuItem>
+                                <MenuItem value="PRR" key={2}>PRR</MenuItem>
+                                <MenuItem value="NR" key={3}>NR</MenuItem>
                             </Select>
                         </FormControl>
                         <TextField
@@ -203,7 +237,7 @@ const Propuesta = ({ location }) => {
                 <Button type="submit" variant="contained" size="small" disableElevation>Actualizar Propuesta</Button>
             </form>
 
-        </div>
+        </div >
     )
 }
 
