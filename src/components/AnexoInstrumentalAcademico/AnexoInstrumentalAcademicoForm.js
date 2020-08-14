@@ -13,7 +13,7 @@ import useForm from '../useForm/useForm'
 //id_tg, cedula_p, tema_propuesta, organizacion, criterio1, criterio2, criterio3, criterio4, criterio5, criterio6,decision_revisor, observaciones, fec_revision, iniciativa, 
 //responsabilidad, adaptacion, hpcinstrucciones, hpphechos, aporteideas, observacionesemp, tetotal, taresresponsabilidad, tadocumento, presentacion, seleccion, justificacion, 
 //metodologia, documentacion, precisionproducto, cumplimientoobj, recomendacionpt, definicion, profundidad, validez, recomendaciones, bibliografia, tiempo, contenido, calidad, 
-//desenvolvimiento, demostracion, respuestasse, jurado, total300, total20, mencionh, justificacionh
+//desenvolvimiento, demostracion, respuestase, jurado, total300, total20, mencionh, justificacionh
 
 
 //Dios mio que horrible es esta tabla
@@ -62,7 +62,7 @@ const AnexoInstrumentalAcademicoForm = () => {
         calidad: '',
         desenvolvimiento: '',
         demostracion: '',
-        respuestasse: '',
+        respuestase: '',
         jurado: '',
         total300: '',
         total20: '',
@@ -644,12 +644,12 @@ return (
                                 <MenuItem value = "11" key={i}> 11 </MenuItem>
                                 <MenuItem value = "12" key={i}> 12 </MenuItem>
                         </Select>
-                    <InputLabel id="jurado-label">respuestasse</InputLabel>
+                    <InputLabel id="jurado-label">respuestase</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="respuestasse"
-                            value={values.respuestasse}
-                            name="respuestasse"
+                            id="respuestase"
+                            value={values.respuestase}
+                            name="respuestase"
                             onChange={handleChange}
                             onBlur={handleChange}
                         >
