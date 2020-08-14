@@ -31,22 +31,22 @@ const TrabajoGrado = ({ location }) => {
         fetchConsejos()
     }, [])
 
-    const fetchTG = async () => {
-        const _prop = await fetch(`http://localhost:3000/trabajos_grado/${id_propuesta}`)
+    const fetchTG = () => {
+        const _prop = fetch(`http://localhost:3000/trabajos_grado/${id_propuesta}`)
             .then(res => res.json())
             .then(result => setTG(result))
             .catch(err => console.log(err.message))
     }
 
-    const fetchProfesores = async () => {
-        const _prof = await fetch('http://localhost:3000/profesores')
+    const fetchProfesores = () => {
+        const _prof = fetch('http://localhost:3000/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
-    const fetchConsejos = async () => {
-        const _cons = await fetch('http://localhost:3000/consejos')
+    const fetchConsejos = () => {
+        const _cons = fetch('http://localhost:3000/consejos')
             .then(res => res.json())
             .then(result => setConsejos(result))
             .catch(err => console.log(err.message))
