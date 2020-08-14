@@ -107,7 +107,7 @@ return (
                 <InputLabel id="jurado-label">profesor</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="profesor"
                             value={values.cedula_p}
                             name="cedula_p"
                             onChange={handleChange}
@@ -138,7 +138,7 @@ return (
                     <InputLabel id="jurado-label">criterio1</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio1"
                             value={values.criterio1}
                             name="criterio1"
                             onChange={handleChange}
@@ -150,7 +150,7 @@ return (
                     <InputLabel id="jurado-label">criterio2</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio2"
                             value={values.criterio2}
                             name="criterio2"
                             onChange={handleChange}
@@ -162,7 +162,7 @@ return (
                     <InputLabel id="jurado-label">criterio3</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio3"
                             value={values.criterio3}
                             name="criterio3"
                             onChange={handleChange}
@@ -174,7 +174,7 @@ return (
                     <InputLabel id="jurado-label">criterio4</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio4"
                             value={values.criterio4}
                             name="criterio4"
                             onChange={handleChange}
@@ -186,7 +186,7 @@ return (
                     <InputLabel id="jurado-label">criterio5</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio5"
                             value={values.criterio5}
                             name="criterio5"
                             onChange={handleChange}
@@ -198,7 +198,7 @@ return (
                     <InputLabel id="jurado-label">criterio6</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="criterio6"
                             value={values.criterio6}
                             name="criterio6"
                             onChange={handleChange}
@@ -212,7 +212,7 @@ return (
                     <InputLabel id="jurado-label">decision</InputLabel>
                         <Select
                             labelId="jurado-label"
-                            id="jurado"
+                            id="decision_revisor"
                             value={values.decision_revisor}
                             name="decision_revisor"
                             onChange={handleChange}
