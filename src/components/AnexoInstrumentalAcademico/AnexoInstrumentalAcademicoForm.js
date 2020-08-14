@@ -99,6 +99,7 @@ return (
             <FormControl className="form-profesor">
                 <InputLabel id="jurado-label">profesor</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="profesor"
                             value={values.cedula_p}
@@ -121,7 +122,7 @@ return (
                             value={values.tema_propuesta}/>
                     //Criterios    
                     <InputLabel id="jurado-label">criterio1</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio1"
                             value={values.criterio1}
@@ -133,7 +134,7 @@ return (
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">criterio2</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio2"
                             value={values.criterio2}
@@ -145,7 +146,7 @@ return (
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">criterio3</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio3"
                             value={values.criterio3}
@@ -157,7 +158,7 @@ return (
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">criterio4</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio4"
                             value={values.criterio4}
@@ -169,7 +170,7 @@ return (
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">criterio5</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio5"
                             value={values.criterio5}
@@ -181,7 +182,7 @@ return (
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">criterio6</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio6"
                             value={values.criterio6}
@@ -195,7 +196,7 @@ return (
                     //Mostrar Datos Tesista y Tutor
                     
                     <InputLabel id="jurado-label">decision</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="decision_revisor"
                             value={values.decision_revisor}
@@ -217,7 +218,7 @@ return (
                     //Get fecha y asignarlo a fec revision
                     
                     <InputLabel id="jurado-label">iniciativa</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="iniciativa"
                             value={values.iniciativa}
@@ -230,7 +231,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">responsabilidad</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="responsabilidad"
                             value={values.responsabilidad}
@@ -244,7 +245,7 @@ return (
                                 <MenuItem value = "3" key={3}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">adaptacion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="adaptacion"
                             value={values.adaptacion}
@@ -257,7 +258,7 @@ return (
                                 <MenuItem value = "2" key={2}>  </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">hpcinstrucciones</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="hpcinstrucciones"
                             value={values.hpcinstrucciones}
@@ -270,7 +271,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">hpcinstrucciones</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="hpcinstrucciones"
                             value={values.hpcinstrucciones}
@@ -283,7 +284,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">hpphechos</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="hpphechos"
                             value={values.hpphechos}
@@ -298,7 +299,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">aporteideas</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="aporteideas"
                             value={values.aporteideas}
@@ -321,7 +322,7 @@ return (
                             variant="outlined"
                             value={values.observacionesemp}/>
                     <InputLabel id="jurado-label">tetotal</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="tetotal"
                             value={values.tetotal}
@@ -336,7 +337,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">taresresponsabilidad</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="taresresponsabilidad"
                             value={values.taresresponsabilidad}
@@ -349,7 +350,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">tadocumento</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="tadocumento"
                             value={values.tadocumento}
@@ -363,7 +364,7 @@ return (
                                 <MenuItem value = "3" key={3}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">presentacion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="presentacion"
                             value={values.presentacion}
@@ -376,7 +377,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">seleccion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="seleccion"
                             value={values.seleccion}
@@ -389,7 +390,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">justificacion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="justificacion"
                             value={values.justificacion}
@@ -402,7 +403,7 @@ return (
                                 <MenuItem value = "2" key={2}>  </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">metodologia</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="metodologia"
                             value={values.metodologia}
@@ -415,7 +416,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">documentacion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="documentacion"
                             value={values.documentacion}
@@ -428,7 +429,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">precisionproducto</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="precisionproducto"
                             value={values.precisionproducto}
@@ -443,7 +444,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">cumplimientoobj</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="cumplimientoobj"
                             value={values.cumplimientoobj}
@@ -458,7 +459,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">recomendacionpt</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="recomendacionpt"
                             value={values.recomendacionpt}
@@ -479,7 +480,7 @@ return (
                                 <MenuItem value = "10" key={10}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">definicion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="definicion"
                             value={values.definicion}
@@ -500,7 +501,7 @@ return (
                                 <MenuItem value = "10" key={10}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">profundidad</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="profundidad"
                             value={values.profundidad}
@@ -515,7 +516,7 @@ return (
                                 <MenuItem value = "4" key={4}>  </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">validez</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="validez"
                             value={values.validez}
@@ -530,7 +531,7 @@ return (
                                 <MenuItem value = "4" key={4}>  </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">recomendaciones</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="recomendaciones"
                             value={values.recomendaciones}
@@ -543,7 +544,7 @@ return (
                                 <MenuItem value = "2" key={2}>  </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">bibliografia</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="bibliografia"
                             value={values.bibliografia}
@@ -556,7 +557,7 @@ return (
                                 <MenuItem value = "2" key={2}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">tiempo</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="tiempo"
                             value={values.tiempo}
@@ -571,7 +572,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">contenido</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="contenido"
                             value={values.contenido}
@@ -586,7 +587,7 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">calidad</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="calidad"
                             value={values.calidad}
@@ -603,7 +604,7 @@ return (
                                 <MenuItem value = "6" key={6}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">desenvolvimiento</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="desenvolvimiento"
                             value={values.desenvolvimiento}
@@ -620,7 +621,7 @@ return (
                                 <MenuItem value = "6" key={6}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">demostracion</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="demostracion"
                             value={values.demostracion}
@@ -643,7 +644,7 @@ return (
                                 <MenuItem value = "12" key={12}> </MenuItem>
                         </Select>
                     <InputLabel id="jurado-label">respuestasse</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="respuestasse"
                             value={values.respuestasse}
