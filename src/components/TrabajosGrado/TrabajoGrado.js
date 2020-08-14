@@ -6,6 +6,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import useForm from '../useForm/useForm';
+import AnexoExperimental from '../AnexoExperimental/AnexoExperimental';
 
 const TrabajoGrado = ({ location }) => {
 
@@ -220,7 +221,10 @@ const TrabajoGrado = ({ location }) => {
                     } */}
 
                 </FormControl>
+                
             </div>
+            
+            <AnexoExperimental/>
         </div>
     )
 }
