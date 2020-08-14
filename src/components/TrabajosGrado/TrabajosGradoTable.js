@@ -38,6 +38,12 @@ const TrabajosGradoTable = () => {
             .catch(err => console.log(err.message))
     }
 
+    //Traerse nombre del tesista
+
+    //Traerse lista de profesores
+
+    //Traerse
+
     //eliminar un tutor
     const deleteTrabajosgrado = (id_tg) => {
         console.log(id_tg)
