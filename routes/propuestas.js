@@ -103,8 +103,6 @@ router.put('/propuestas/:id', async (req, res) => {
         } else {
             res.json(`400`);
         }
-
-
     } catch (err) {
         res.body = err.message;
         res.json(err.message);

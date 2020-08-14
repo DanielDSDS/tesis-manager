@@ -30,18 +30,18 @@ const Propuesta = ({ location }) => {
         fetchPropuesta()
         fetchProfesores()
         fetchComites()
-        if (propuesta.cedula_p != '') {
-            setRevisor(true)
-        }
-        if (propuesta.id_comite != '') {
-            setComite(true)
-        }
     }, [])
 
     const handleUpdate = (e) => {
         e.preventDefault()
         console.log("%cValores", "color:red", values)
         const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion } = values;
+        if (veredicto_profesor != 'PE' && veredicto_profesor != '') {
+            fec_veredicto = getLocalDate()
+        }
+        if (estatus_aprobacion != 'NR' && estatus_aprobacion != '') {
+            fec_aprobacion = getLocalDate()
+        }
         fetch(`http://localhost:3000/propuesta/${id_propuesta}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
@@ -78,15 +78,26 @@ const Propuesta = ({ location }) => {
         setRevisor(true)
     }
 
+    function getLocalDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '-' + dd + '-' + yyyy;
+        return today;
+    }
+
     const stateHandler = (e) => {
         handleChange(e)
         const { target } = e;
-        console.log('%cname:', 'color:red', target.name)
+        console.log('%c hasComite:', 'color:red', hasComite)
+        console.log('%c hasRevisor:', 'color:red', hasRevisor)
         if (target.name = 'id_comite') {
             if (values.id_comite !== '') {
                 enableComiteStuff()
             }
-        } else if (target.name = 'cedula_p') {
+        }
+        if (target.name = 'cedula_p') {
             if (values.cedula_p !== '') {
                 enableProfesorStuff()
             }
@@ -102,25 +113,25 @@ const Propuesta = ({ location }) => {
             <form onSubmit={handleUpdate}>
                 <div className="propuesta-container">
                     <div className="propuesta-form-1">
+                        <FormControl className="comites-select-container">
+                            <InputLabel id="comites-label">Asignar Comite</InputLabel>
+                            <Select
+                                className="w-15"
+                                labelId="comites-label"
+                                id="comites"
+                                value={values.id_comite}
+                                name="id_comite"
+                                onChange={stateHandler}
+                                onBlur={stateHandler}
+                            >
+                                {comites.map((comite, i) => (
+                                    <MenuItem value={comite.id_comite} key={i}>
+                                        {comite.fec_realizacion}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                         <FormControl className="aprobacion-select-container">
-                            <FormControl className="comites-select-container">
-                                <InputLabel id="comites-label">Asignar Comite</InputLabel>
-                                <Select
-                                    className="w-15"
-                                    labelId="comites-label"
-                                    id="comites"
-                                    value={values.id_comite}
-                                    name="id_comite"
-                                    onChange={stateHandler}
-                                    onBlur={handleChange}
-                                >
-                                    {comites.map((comite, i) => (
-                                        <MenuItem value={comite.id_comite} key={i}>
-                                            {comite.fec_realizacion}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
                             <InputLabel id="aprobacion-label">Aprobacion Comite</InputLabel>
                             <Select
                                 className="w-15"
@@ -130,7 +141,7 @@ const Propuesta = ({ location }) => {
                                 name="estatus_aprobacion"
                                 onChange={handleChange}
                                 onBlur={handleChange}
-                                disabled={hasComite}
+                                disabled={!hasComite}
                             >
                                 <MenuItem value="A" key={1}>A</MenuItem>
                                 <MenuItem value="R" key={2}>R</MenuItem>
@@ -147,9 +158,8 @@ const Propuesta = ({ location }) => {
                             variant="outlined"
                             value={values.observaciones_comite}
                             onChange={stateHandler}
-                            disabled={hasComite}
+                            disabled={!hasComite}
                             multiline />
-
 
                     </div>
                     <div className="propuesta-form-2">
@@ -162,7 +172,7 @@ const Propuesta = ({ location }) => {
                                 value={values.cedula_p}
                                 name="cedula_p"
                                 onChange={stateHandler}
-                                onBlur={handleChange}
+                                onBlur={stateHandler}
                             >
                                 {profesores.map((profesor, i) => (
                                     <MenuItem value={profesor.cedula_p} key={i}>
@@ -181,7 +191,7 @@ const Propuesta = ({ location }) => {
                                 name="veredicto_profesor"
                                 onChange={handleChange}
                                 onBlur={handleChange}
-                                disabled={hasRevisor}
+                                disabled={!hasRevisor}
                             >
                                 <MenuItem value="A" key={1}>A</MenuItem>
                                 <MenuItem value="R" key={2}>R</MenuItem>
