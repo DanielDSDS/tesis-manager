@@ -107,13 +107,15 @@ return (
                                 </MenuItem>
                             ))}
                         </Select>
-                        <TextField
+                        <div>
+                            <TextField
                             className="text-field"
                             size="small"
                             label="Tema Propuesto"
                             name="titulo"
                             variant="outlined"
                             value={values.tema_propuesta}/>
+                                </div>
                     //Criterios    
                     <InputLabel id="jurado-label">criterio1</InputLabel>
                         <Select className = "w-15"
@@ -207,7 +209,7 @@ return (
                                 <MenuItem value = "Aprovado" key={'A'}> </MenuItem>
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
-                        
+                        <div>
                         <TextField
                             className="text-field"
                             size="small"
@@ -215,7 +217,8 @@ return (
                             name="titulo"
                             variant="outlined"
                             value={values.observaciones}/>
-                    //Get fecha y asignarlo a fec revision
+                        </div>    
+                                //Get fecha y asignarlo a fec revision
                     <InputLabel id="jurado-label">presentacion</InputLabel>
                         <Select
                             className = "w-15"
@@ -580,6 +583,7 @@ return (
                                 <MenuItem value = "7" key={7}> </MenuItem>
                                 <MenuItem value = "8" key={8}> </MenuItem>
                         </Select>
+                        <div>
                         <TextField
                             className="text-field"
                             size="small"
@@ -615,7 +619,7 @@ return (
                             name="justificacionmencionh"
                             variant="outlined"
                             value={values.justificacionmencionh}/>
-                    
+                    </div>
                     <Button type="submit" variant="contained" size="small" disableElevation>Completar</Button>
             </FormControl>
         </form>
