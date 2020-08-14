@@ -17,7 +17,7 @@ import useForm from '../useForm/useForm'
 
 
 //Dios mio que horrible es esta tabla
-const AnexoExperimentalForm = () => {
+const AnexoInstrumentalAcademicoForm = () => {
     const [profesor, setprofesor] = useState([{}])
     //const [instituciones, setInstituciones] = useState([{}])
     const [toggle, setToggle] = useState(false)
@@ -706,4 +706,4 @@ return (
     )
 }
 
-export default AnexoExperimentalForm
+export default AnexoInstrumentalAcademicoForm
