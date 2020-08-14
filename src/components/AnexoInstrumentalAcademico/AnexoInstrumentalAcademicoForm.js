@@ -113,6 +113,7 @@ return (
                                 </MenuItem>
                             ))}
                         </Select>
+                     <div>
                         <TextField
                             className="text-field"
                             size="small"
@@ -120,7 +121,8 @@ return (
                             name="titulo"
                             variant="outlined"
                             value={values.tema_propuesta}/>
-                    //Criterios    
+                    </div>
+                                //Criterios    
                     <InputLabel id="jurado-label">criterio1</InputLabel>
                         <Select className = "w-15"
                             labelId="jurado-label"
@@ -207,7 +209,7 @@ return (
                                 <MenuItem value = "Aprovado" key={'A'}> </MenuItem>
                                 <MenuItem value = "Reprovado" key={'R'}> </MenuItem>
                         </Select>
-                        
+                       <div> 
                         <TextField
                             className="text-field"
                             size="small"
@@ -215,7 +217,8 @@ return (
                             name="titulo"
                             variant="outlined"
                             value={values.observaciones}/>
-                    //Get fecha y asignarlo a fec revision
+                    </div>
+                                //Get fecha y asignarlo a fec revision
                     
                     <InputLabel id="jurado-label">iniciativa</InputLabel>
                         <Select className = "w-15"
@@ -314,14 +317,16 @@ return (
                                 <MenuItem value = "4" key={4}> </MenuItem>
                                 <MenuItem value = "5" key={5}> </MenuItem>
                         </Select>
-                        <TextField
+                            <div>
+                            <TextField
                             className="text-field"
                             size="small"
                             label="observacionesemp"
                             name="observacionesemp"
                             variant="outlined"
                             value={values.observacionesemp}/>
-                    <InputLabel id="jurado-label">tetotal</InputLabel>
+                            </div>
+                        <InputLabel id="jurado-label">tetotal</InputLabel>
                         <Select className = "w-15"
                             labelId="jurado-label"
                             id="tetotal"
@@ -662,6 +667,7 @@ return (
                                 <MenuItem value = "7" key={7}> </MenuItem>
                                 <MenuItem value = "8" key={8}> </MenuItem>
                         </Select>
+                    <div>
                         <TextField
                             className="text-field"
                             size="small"
@@ -697,7 +703,7 @@ return (
                             name="justificacionmencionh"
                             variant="outlined"
                             value={values.justificacionmencionh}/>
-                    
+                    </div>
                     <Button type="submit" variant="contained" size="small" disableElevation>Completar</Button>
             </FormControl>
         </form>
