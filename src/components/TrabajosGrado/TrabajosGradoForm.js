@@ -66,6 +66,7 @@ const TrabajosGradoForm = () => {
                         <FormControl className="select">
                             <InputLabel id="propuestas-label">Propuesta Original</InputLabel>
                             <Select
+                                className="w-15"
                                 labelId="propuestas-label"
                                 id="propuestas"
                                 value={values.id_propuesta}
@@ -101,7 +102,7 @@ const TrabajosGradoForm = () => {
                             ? <FormControl>
                                 <InputLabel id="profesores-label">Profesores</InputLabel>
                                 <Select
-                                    className="select"
+                                    className="w-15"
                                     labelId="profesores-label"
                                     id="profesores"
                                     value={values.cedula_p}

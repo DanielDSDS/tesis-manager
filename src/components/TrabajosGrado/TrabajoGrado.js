@@ -11,7 +11,7 @@ const TrabajoGrado = ({ location }) => {
     //Se debe obtener desde el front: num_consejo, modalidad, fec_aprobacion 
     const [consejos, setConsejos] = useState([{}])
     const [trabajogrado, setTrabajoGrado] = useState([{}])
-    const { num_consejo, modalidad, fec_aprobacion, titulo, } = location.state.rowData
+    const { modalidad, titulo, id_tg /*num_consejo,fec_aprobacion,id_tg,*/ } = location.state.rowData
     const { handleChange, values } = useForm({
         num_consejo: '',
         modalidad: '',
@@ -25,11 +25,11 @@ const TrabajoGrado = ({ location }) => {
 
     const handleUpdate = () => {
         console.log("%cValores", "color:red", values)
-        const { num_consejo, modalidad, fec_aprobacion  } = values;
+        const { num_consejo, modalidad, fec_aprobacion } = values;
         fetch(`http://localhost:3000/trabajogrado/${id_tg}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({num_consejo, modalidad, fec_aprobacion  })
+            body: JSON.stringify({ num_consejo, modalidad, fec_aprobacion })
         })
     }
 
@@ -49,15 +49,15 @@ const TrabajoGrado = ({ location }) => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        const { num_consejo, modalidad, fec_aprobacion  } = values;
+        const { num_consejo, modalidad, fec_aprobacion } = values;
         console.log(...trabajogrado, values);
     }
 
     return (
         <div className="content-container">
             <h2 className="content-title">Trabajo de Grado #{id_tg}</h2>
-            <h4 className="content-subtitle">{titulo} por: {nombre_t}</h4>
-            <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
+            <h4 className="content-subtitle">{titulo} por: {/*nombre_t*/}</h4>
+            <h5 className="content-subtitle">Fecha de entrega: {/*fec_entrega*/}</h5>
             <form onSubmit={handleSubmit}>
                 <div className="propuesta-container">
                     <div className="propuesta-form-1">

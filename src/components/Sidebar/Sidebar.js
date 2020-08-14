@@ -18,6 +18,7 @@ const Sidebar = () => {
                 <NavLink to="/tutores_emp" className="sidebar-text" activeClassName="active-link"><span className="material-icons">engineering</span>Tutores Empresariales</NavLink>
                 <NavLink to="/especialidades" className="sidebar-text" activeClassName="active-link"><span className="material-icons">school</span>Especialidades</NavLink>
                 <NavLink to="/instituciones" className="sidebar-text" activeClassName="active-link"><span className="material-icons">domain</span>Instituciones</NavLink>
+                <NavLink to="/empresas" className="sidebar-text" activeClassName="active-link"><span className="material-icons">work</span>Empresas</NavLink>
             </div>
         </div>
     )
