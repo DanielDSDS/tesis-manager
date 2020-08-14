@@ -37,28 +37,28 @@ const TrabajoGrado = ({ location }) => {
     }, [])
 
     const fetchTG = () => {
-        const _prop = fetch(`http://localhost:3000/trabajos_grado/${id_tg}`)
+        const _prop = fetch(`http://tesis-manager.herokuapp.com/trabajos_grado/${id_tg}`)
             .then(res => res.json())
             .then(result => setTG(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchTutoresEmp = () => {
-        const _prof = fetch(`http://localhost:3000/tutoresxemp/${id_tg}`)
+        const _prof = fetch(`http://tesis-manager.herokuapp.com/tutoresxemp/${id_tg}`)
             .then(res => res.json())
             .then(result => setTutoresEmp(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchProfesores = () => {
-        const _prof = fetch('http://localhost:3000/profesores')
+        const _prof = fetch('http://tesis-manager.herokuapp.com/profesores')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchConsejos = () => {
-        const _cons = fetch('http://localhost:3000/consejos')
+        const _cons = fetch('http://tesis-manager.herokuapp.com/consejos')
             .then(res => res.json())
             .then(result => setConsejos(result))
             .catch(err => console.log(err.message))
@@ -92,7 +92,7 @@ const TrabajoGrado = ({ location }) => {
         e.preventDefault()
         console.log(values)
         const { num_consejo, titulo, cedula_p, cedula_p1, cedula_p2, cedula_p3, fec_aprobacion } = values
-        fetch(`http://localhost:3000/tg/${id_tg}`, {
+        fetch(`http://tesis-manager.herokuapp.com/tg/${id_tg}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ num_consejo, titulo, cedula_p1, cedula_p2, cedula_p3, modalidad, fec_aprobacion })

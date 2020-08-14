@@ -24,7 +24,7 @@ const TutoresEmpForm = () => {
     }, [])
 
     const fetchEmpresas = () => {
-        fetch('http://localhost:3000/especialidades')
+        fetch('http://tesis-manager.herokuapp.com/especialidades')
             .then(res => res.json())
             .then(result => setEmpresas(result))
             .catch(err => console.log(err.message))

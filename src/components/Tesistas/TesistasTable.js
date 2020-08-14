@@ -6,7 +6,7 @@ const TesistasTable = () => {
     const [tesistas, setTesista] = useState([{}])
     const [state, setState] = useState({
         columns: [
-            { title: 'Cedula', field: 'cedula_t', editable:'never' },
+            { title: 'Cedula', field: 'cedula_t', editable: 'never' },
             { title: 'Nombre', field: 'nombre_t' },
             { title: 'email UCAB', field: 'correo_ucab_t' },
             { title: 'email', field: 'correo_particular_t' },
@@ -22,7 +22,7 @@ const TesistasTable = () => {
 
     //obtener todas las especialidades
     const fetchTesistas = () => {
-        fetch('http://localhost:3000/tesistas')
+        fetch('http://tesis-manager.herokuapp.com/tesistas')
             .then(res => res.json())
             .then(result => setTesista(result))
             .catch(err => console.log(err.message))
@@ -31,7 +31,7 @@ const TesistasTable = () => {
     //eliminar una especialidad
     const deleteTesistas = (cedula_t) => {
         console.log(cedula_t)
-        fetch(`http://localhost:3000/tesistas/${cedula_t}`, {
+        fetch(`http://tesis-manager.herokuapp.com/tesistas/${cedula_t}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -44,7 +44,7 @@ const TesistasTable = () => {
     const updateTesistas = (tesista) => {
         console.log(tesista)
         const { cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t } = tesista;
-        const updateT = fetch(`http://localhost:3000/tesistas/${cedula_t}`, {
+        const updateT = fetch(`http://tesis-manager.herokuapp.com/tesistas/${cedula_t}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cedula_t, nombre_t, correo_ucab_t, correo_particular_t, telefono_contacto_t })

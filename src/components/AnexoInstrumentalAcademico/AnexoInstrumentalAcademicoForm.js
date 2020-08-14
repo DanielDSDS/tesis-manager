@@ -73,7 +73,7 @@ const AnexoInstrumentalAcademicoForm = () => {
     const toggleSelect = ({ target }) => setToggle(target.value == "F" ? true : false)
 
     const fetchprofesor = () => {
-        fetch('http://localhost:3000/profesores')
+        fetch('http://tesis-manager.herokuapp.com/profesores')
             .then(res => res.json())
             .then(result => setprofesor(result))
             .catch(err => console.log(err.message))

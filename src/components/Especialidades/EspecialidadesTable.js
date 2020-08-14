@@ -30,7 +30,7 @@ const EspecialidadesTable = () => {
     //TODAS LAS VARIABLES DE LAS TABLAS DEBEN TENER EL MISMO NOMBRE QUE EN LA BD
     const [state, setState] = useState({
         columns: [
-            { title: 'id', field: 'cod_esp', editable:'never' },
+            { title: 'id', field: 'cod_esp', editable: 'never' },
             { title: 'Nombre de Especialidad', field: 'nombre_esp' },
         ],
         data: []
@@ -43,7 +43,7 @@ const EspecialidadesTable = () => {
 
     //obtener todas las especialidades
     const fetchEspecialidades = () => {
-        fetch('http://localhost:3000/especialidades')
+        fetch('http://tesis-manager.herokuapp.com/especialidades')
             .then(res => res.json())
             .then(result => setEspecialidades(result))
             .catch(err => console.log(err.message))
@@ -52,7 +52,7 @@ const EspecialidadesTable = () => {
     //eliminar una especialidad
     const deleteEspecialidad = (cod_esp) => {
         console.log(cod_esp)
-        fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+        fetch(`http://tesis-manager.herokuapp.com/especialidades/${cod_esp}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -65,7 +65,7 @@ const EspecialidadesTable = () => {
     const updateEspecialidad = (especialidad) => {
         console.log(especialidad)
         const { cod_esp, nombre_esp } = especialidad;
-        const updateE = fetch(`http://localhost:3000/especialidades/${cod_esp}`, {
+        const updateE = fetch(`http://tesis-manager.herokuapp.com/especialidades/${cod_esp}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ cod_esp, nombre_esp })

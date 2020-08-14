@@ -19,7 +19,7 @@ const EmpresasTable = () => {
 
     //obtener todas las empresas
     const fetchEmpresas = () => {
-        fetch('http://localhost:3000/empresas')
+        fetch('http://tesis-manager.herokuapp.com/empresas')
             .then(res => res.json())
             .then(result => setEmpresas(result))
             .catch(err => console.log(err.message))
@@ -28,7 +28,7 @@ const EmpresasTable = () => {
     //eliminar un tutor
     const deleteEmpresas = (nombre_emp) => {
         console.log(cod_tutor)
-        fetch(`http://localhost:3000/empresas/${nombre_emp}`, {
+        fetch(`http://tesis-manager.herokuapp.com/empresas/${nombre_emp}`, {
             method: 'DELETE',
             headers: { 'Content-type': 'application/json' }
         })
@@ -41,7 +41,7 @@ const EmpresasTable = () => {
     const updateEmpresas = (empresa) => {
         console.log(empresa)
         const { nombre_emp } = empresa;
-        const updateEmp = fetch(`http://localhost:3000/empresa/${nombre_emp}`, {
+        const updateEmp = fetch(`http://tesis-manager.herokuapp.com/empresa/${nombre_emp}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
             body: JSON.stringify({ nombre_emp })

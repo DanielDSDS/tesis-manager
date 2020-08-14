@@ -38,21 +38,21 @@ const TrabajosGradoForm = () => {
     const toggleModalidad = ({ target }) => setToggle(target.value == "Experimental" ? true : false)
 
     const fetchPropuestas = () => {
-        fetch(`http://localhost:3000/propuestasViables`)
+        fetch(`http://tesis-manager.herokuapp.com/propuestasViables`)
             .then(res => res.json())
             .then(result => setPropuestas(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchProfesores = () => {
-        fetch(`http://localhost:3000/profesores`)
+        fetch(`http://tesis-manager.herokuapp.com/profesores`)
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchEmpresas = () => {
-        fetch(`http://localhost:3000/empresas`)
+        fetch(`http://tesis-manager.herokuapp.com/empresas`)
             .then(res => res.json())
             .then(result => setEmpresas(result))
             .catch(err => console.log(err.message))

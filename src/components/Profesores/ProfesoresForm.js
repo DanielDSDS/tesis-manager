@@ -30,14 +30,14 @@ const ProfesoresForm = () => {
     const toggleSelect = ({ target }) => setToggle(target.value == "F" ? true : false)
 
     const fetchEspecialidades = () => {
-        fetch('http://localhost:3000/especialidades')
+        fetch('http://tesis-manager.herokuapp.com/especialidades')
             .then(res => res.json())
             .then(result => setEspecialidades(result))
             .catch(err => console.log(err.message))
     }
 
     const fetchInstituciones = () => {
-        fetch('http://localhost:3000/instituciones')
+        fetch('http://tesis-manager.herokuapp.com/instituciones')
             .then(res => res.json())
             .then(result => setInstituciones(result))
             .catch(err => console.log(err.message))
