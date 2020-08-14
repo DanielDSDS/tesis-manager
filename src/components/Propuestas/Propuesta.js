@@ -9,7 +9,9 @@ import useForm from '../useForm/useForm'
 
 const Propuesta = ({ location }) => {
     //Se debe obtener desde el front: cedula_p,veredicto_profesor,id_comite,estatus_aprobacion,observaciones_comite
-    const [triggers, setTrigger] = useState({ hasRevisor: false, hasComite: false })
+    const [hasComite, setComite] = useState(false)
+    const [hasRevisor, setRevisor] = useState(false)
+
     const [comites, setComites] = useState([{}])
     const [profesores, setProfesores] = useState([{}])
     const [propuesta, setPropuesta] = useState([{}])
@@ -18,10 +20,10 @@ const Propuesta = ({ location }) => {
         cedula_p: '',
         veredicto_profesor: '',
         id_comite: '',
-        observaciones_comite: '',
-        estatus_aprobacion: '',
-        fec_veredicto: '',
-        fec_aprobacion: '',
+        observaciones_comite: propuesta.observaciones_comite,
+        estatus_aprobacion: propuesta.estatus_aprobacion,
+        // fec_veredicto: '',
+        // fec_aprobacion: '',
     }, 'null')
 
     useEffect(() => {
@@ -30,17 +32,27 @@ const Propuesta = ({ location }) => {
         fetchComites()
     }, [])
 
-    useEffect(() => {
-        checkTriggers()
-    }, [setTrigger])
-
-    const handleUpdate = () => {
+    const handleUpdate = (e) => {
+        e.preventDefault()
         console.log("%cValores", "color:red", values)
-        const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion } = values;
+        const { cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, } = values;
+        let fec_veredicto = ''
+        let fec_aprobacion = ''
+        let fec_comite = ''
+        if (veredicto_profesor != 'PE' || veredicto_profesor !== false) {
+            fec_veredicto = getLocalDate()
+        }
+        if (estatus_aprobacion != 'NR' || estatus_aprobacion !== false) {
+            fec_aprobacion = getLocalDate()
+        }
+        if (id_comite != '') {
+            fec_comite = getLocalDate()
+        }
+
         fetch(`http://localhost:3000/propuesta/${id_propuesta}`, {
             method: 'PUT',
             headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify({ cedula_p, veredicto_profesor, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion })
+            body: JSON.stringify({ cedula_p, veredicto_profesor, fec_comite, id_comite, observaciones_comite, estatus_aprobacion, fec_veredicto, fec_aprobacion })
         })
     }
 
@@ -65,25 +77,39 @@ const Propuesta = ({ location }) => {
             .catch(err => console.log(err.message))
     }
 
-    const checkTriggers = () => {
-        if (values.cedula_p !== 'NULL') {
-            setTrigger({
-                ...triggers,
-                [triggers.hasRevisor]: true
-            })
-        }
-        if (values.id_comite !== 'NULL') {
-            setTrigger({
-                ...triggers,
-                [triggers.hasComite]: true
-            })
-        }
+    const enableComiteStuff = () => {
+        setComite(true)
     }
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        const { id_comite, cedula_p, observaciones_comite, estatus_aprobacion, veredicto_prof, fec_veredicto } = values;
-        console.log(...propuesta, values);
+    const enableProfesorStuff = () => {
+        setRevisor(true)
+    }
+
+    function getLocalDate() {
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '-' + dd + '-' + yyyy;
+        return today;
+    }
+
+    const stateHandler = (e) => {
+        handleChange(e)
+        const { target } = e;
+        console.log('%c hasComite:', 'color:red', hasComite)
+        console.log('%c hasRevisor:', 'color:red', hasRevisor)
+        if (target.name = 'id_comite') {
+            if (values.id_comite !== '') {
+                enableComiteStuff()
+            }
+        }
+        if (target.name = 'cedula_p') {
+            if (values.cedula_p !== '') {
+                enableProfesorStuff()
+            }
+        }
+        console.log('%ctoggled')
     }
 
     return (
@@ -91,109 +117,127 @@ const Propuesta = ({ location }) => {
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
             <h4 className="content-subtitle">{titulo_propuesta} por: {nombre_t}</h4>
             <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
-            <form onSubmit={handleSubmit}>
+            <div className="display-message">
+                <div className="display-message-1">
+                    {propuesta.id_comite
+                        ? <h5>Fecha del comite:{propuesta.fec_comite}</h5>
+                        : <h5>No ha sido asignada a un comite</h5>
+                    }
+                    {propuesta.estatus_aprobacion == 'NR'
+                        ? < h5 > Esta propuesta no ha sido revisada por el comite</h5>
+                        : < h5 > Estado de aprobacion del comite:{propuesta.estatus_aprobacion}</h5>
+                    }
+                    {propuesta.observaciones_comite
+                        ? <h5>Observaciones del comite:{propuesta.observaciones_comite}</h5>
+                        : <span></span>
+                    }
+                </div>
+                <div className="display-message-1">
+                    {propuesta.cedula_p !== false
+                        ? <h5>Profesor revisor asignado: C.I V-{propuesta.cedula_p}</h5>
+                        : <h5>No tiene ningun profesor revisor asignado</h5>
+                    }
+                    {propuesta.cedula_p
+                        ? <h5>Estado de aprobacion del revisor:{propuesta.veredicto_profesor}</h5>
+                        : <h5>No tiene ningun profesor revisor asignado</h5>
+                    }
+
+                </div>
+            </div>
+            <form onSubmit={handleUpdate}>
                 <div className="propuesta-container">
                     <div className="propuesta-form-1">
-                        {triggers.hasComite == true
-                            ?
-                            <div>
-                                <TextField
-                                    className="textarea-field"
-                                    rowsMax={6}
-                                    rows={6}
-                                    size="small"
-                                    label="Observaciones del Comite"
-                                    name="observaciones_comite"
-                                    variant="outlined"
-                                    value={values.observaciones_comite}
-                                    onChange={handleChange}
-                                    multiline />
-                                <FormControl className="aprobacion-select-container">
-                                    <InputLabel id="aprobacion-label">Aprobacion Comite</InputLabel>
-                                    <Select
-                                        labelId="aprobacion-label"
-                                        id="aprobacion"
-                                        value={values.estatus_aprobacion}
-                                        name="estatus_aprobacion"
-                                        onChange={handleChange}
-                                        onBlur={handleChange}
-                                    >
-                                        <MenuItem value="A" key={1}>A</MenuItem>
-                                        <MenuItem value="R" key={2}>R</MenuItem>
-                                        <MenuItem value="PE" key={3}>PE</MenuItem>
-                                    </Select>
-                                </FormControl>
-                            </div>
-                            :
-                            <FormControl className="comites-select-container">
-                                <InputLabel id="comites-label">Asignar Comite</InputLabel>
-                                <Select
-                                    labelId="comites-label"
-                                    id="comites"
-                                    value={values.id_comite}
-                                    name="id_comite"
-                                    onChange={handleChange}
-                                    onBlur={handleChange}
-                                >
-                                    {comites.map((comite, i) => (
-                                        <MenuItem value={comite.id_comite} key={i}>
-                                            {comite.fec_realizacion}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                        }
+                        <FormControl className="comites-select-container">
+                            <InputLabel id="comites-label">Asignar Comite</InputLabel>
+                            <Select
+                                className="w-15"
+                                labelId="comites-label"
+                                id="comites"
+                                value={values.id_comite}
+                                name="id_comite"
+                                onChange={stateHandler}
+                                onBlur={stateHandler}
+                            >
+                                {comites.map((comite, i) => (
+                                    <MenuItem value={comite.id_comite} key={i}>
+                                        {comite.fec_realizacion}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl className="aprobacion-select-container">
+                            <InputLabel id="aprobacion-label">Aprobacion Comite</InputLabel>
+                            <Select
+                                className="w-15"
+                                labelId="aprobacion-label"
+                                id="aprobacion"
+                                value={values.estatus_aprobacion}
+                                name="estatus_aprobacion"
+                                onChange={handleChange}
+                                onBlur={handleChange}
+                                disabled={!hasComite}
+                            >
+                                <MenuItem value="PAR" key={1}>PAR</MenuItem>
+                                <MenuItem value="PRR" key={2}>PRR</MenuItem>
+                                <MenuItem value="NR" key={3}>NR</MenuItem>
+                            </Select>
+                        </FormControl>
+                        <TextField
+                            className="textarea-field"
+                            rowsMax={6}
+                            rows={6}
+                            size="small"
+                            label="Observaciones del Comite"
+                            name="observaciones_comite"
+                            variant="outlined"
+                            value={values.observaciones_comite}
+                            onChange={stateHandler}
+                            disabled={!hasComite}
+                            multiline />
+
                     </div>
                     <div className="propuesta-form-2">
-                        {triggers.hasComite == false
-                            ? <div></div>
-                            : <div>
-                                <FormControl className="revisor-select-container w-15">
-                                    <InputLabel id="revisor-label">Asignar Revisor</InputLabel>
-                                    <Select
-                                        className="w-15"
-                                        labelId="revisor-label"
-                                        id="revisores"
-                                        value={values.cedula_p}
-                                        name="cedula_p"
-                                        onChange={handleChange}
-                                        onBlur={handleChange}
-                                    >
-                                        {profesores.map((profesor, i) => (
-                                            <MenuItem value={profesor.cedula_p} key={i}>
-                                                {profesor.nombre_p}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            </div>
-                        }
-                        {
-                            triggers.hasRevisor == true
-                                ? <h3>El veredicto del profesor es {veredicto_prof}</h3>
-                                : <FormControl className="veredicto-container w-15">
-                                    <InputLabel id="veredicto-label">Veredicto del Revisor</InputLabel>
-                                    <Select
-                                        className="w-15"
-                                        labelId="veredicto-label"
-                                        id="veredictos"
-                                        value={values.veredicto_profesor}
-                                        name="veredicto_prof"
-                                        onChange={handleChange}
-                                        onBlur={handleChange}
-                                    >
-                                        <MenuItem value="A" key={1}>A</MenuItem>
-                                        <MenuItem value="R" key={2}>R</MenuItem>
-                                        <MenuItem value="PE" key={3}>PE</MenuItem>
-                                    </Select>
-                                </FormControl>
-                        }
+                        <FormControl className="revisor-select-container w-15">
+                            <InputLabel id="revisor-label">Asignar Revisor</InputLabel>
+                            <Select
+                                className="w-15"
+                                labelId="revisor-label"
+                                id="revisores"
+                                value={values.cedula_p}
+                                name="cedula_p"
+                                onChange={stateHandler}
+                                onBlur={stateHandler}
+                            >
+                                {profesores.map((profesor, i) => (
+                                    <MenuItem value={profesor.cedula_p} key={i}>
+                                        {profesor.nombre_p}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <FormControl className="veredicto-container w-15">
+                            <InputLabel id="veredicto-label">Veredicto del Revisor</InputLabel>
+                            <Select
+                                className="w-15"
+                                labelId="veredicto-label"
+                                id="veredictos"
+                                value={values.veredicto_profesor}
+                                name="veredicto_profesor"
+                                onChange={handleChange}
+                                onBlur={handleChange}
+                                disabled={!hasRevisor}
+                            >
+                                <MenuItem value="A" key={1}>A</MenuItem>
+                                <MenuItem value="R" key={2}>R</MenuItem>
+                                <MenuItem value="PE" key={3}>PE</MenuItem>
+                            </Select>
+                        </FormControl>
                     </div>
                 </div>
                 <Button type="submit" variant="contained" size="small" disableElevation>Actualizar Propuesta</Button>
             </form>
 
-        </div>
+        </div >
     )
 }
 

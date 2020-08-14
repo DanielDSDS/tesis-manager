@@ -53,9 +53,15 @@ html{
 
 .w-15{
     width: 15rem;
+    margin-bottom: 1rem;
 }
 
 .tg-form-1,
 .tg-form-2{
     margin: 1rem;;
+}
+.display-message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

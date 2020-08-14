@@ -1,8 +1,8 @@
 import React from 'react';
 import TrabajosGradoTable from './TrabajosGradoTable'
 import TrabajosGradoForm from './TrabajosGradoForm'
+
 const TrabajosGrado = () => {
-   
     return (   
 
         <div className="content-container">
