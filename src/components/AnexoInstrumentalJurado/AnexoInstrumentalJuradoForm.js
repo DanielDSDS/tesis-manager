@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react'
 import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
@@ -92,7 +93,7 @@ return (
 
             <FormControl className="form-profesor">
                 <InputLabel id="jurado-label">profesor</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="profesor"
                             value={values.cedula_p}
@@ -115,7 +116,7 @@ return (
                             value={values.tema_propuesta}/>
                     //Criterios    
                     <InputLabel id="jurado-label">criterio1</InputLabel>
-                        <Select
+                        <Select className = "w-15"
                             labelId="jurado-label"
                             id="criterio1"
                             value={values.criterio1}
@@ -128,6 +129,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">criterio2</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="criterio2"
                             value={values.criterio2}
@@ -140,6 +142,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">criterio3</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="criterio3"
                             value={values.criterio3}
@@ -152,6 +155,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">criterio4</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="criterio4"
                             value={values.criterio4}
@@ -164,6 +168,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">criterio5</InputLabel>
                         <Select
+                        className = "w-15"
                             labelId="jurado-label"
                             id="criterio5"
                             value={values.criterio5}
@@ -176,6 +181,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">criterio6</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="criterio6"
                             value={values.criterio6}
@@ -190,6 +196,7 @@ return (
                     
                     <InputLabel id="jurado-label">decision</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="decision_revisor"
                             value={values.decision_revisor}
@@ -211,6 +218,7 @@ return (
                     //Get fecha y asignarlo a fec revision
                     <InputLabel id="jurado-label">presentacion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="presentacion"
                             value={values.presentacion}
@@ -226,6 +234,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">identificacionproblema</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="identificacionproblema"
                             value={values.identificacionproblema}
@@ -239,6 +248,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">objetivos</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="objetivos"
                             value={values.objetivos}
@@ -252,6 +262,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">limitaciones</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="limitaciones"
                             value={values.limitaciones}
@@ -265,6 +276,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">seleccion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="seleccion"
                             value={values.seleccion}
@@ -278,6 +290,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">justificacion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="justificacion"
                             value={values.justificacion}
@@ -291,6 +304,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">metodologia</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="metodologia"
                             value={values.metodologia}
@@ -304,6 +318,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">documentacion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="documentacion"
                             value={values.documentacion}
@@ -317,6 +332,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">precisionproducto</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="precisionproducto"
                             value={values.precisionproducto}
@@ -332,6 +348,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">cumplimientoobj</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="cumplimientoobj"
                             value={values.cumplimientoobj}
@@ -347,6 +364,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">recomendacionpt</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="recomendacionpt"
                             value={values.recomendacionpt}
@@ -368,6 +386,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">definicion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="definicion"
                             value={values.definicion}
@@ -389,6 +408,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">profundidad</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="profundidad"
                             value={values.profundidad}
@@ -404,6 +424,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">validez</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="validez"
                             value={values.validez}
@@ -419,6 +440,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">recomendaciones</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="recomendaciones"
                             value={values.recomendaciones}
@@ -434,6 +456,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">bibliografia</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="bibliografia"
                             value={values.bibliografia}
@@ -447,6 +470,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">tiempo</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="tiempo"
                             value={values.tiempo}
@@ -462,6 +486,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">contenido</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="contenido"
                             value={values.contenido}
@@ -477,6 +502,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">calidad</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="calidad"
                             value={values.calidad}
@@ -494,6 +520,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">desenvolvimiento</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="desenvolvimiento"
                             value={values.desenvolvimiento}
@@ -511,6 +538,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">demostracion</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="demostracion"
                             value={values.demostracion}
@@ -534,6 +562,7 @@ return (
                         </Select>
                     <InputLabel id="jurado-label">respuestasse</InputLabel>
                         <Select
+                            className = "w-15"
                             labelId="jurado-label"
                             id="respuestasse"
                             value={values.respuestasse}
