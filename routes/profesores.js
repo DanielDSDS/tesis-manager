@@ -18,8 +18,8 @@ router.get('/profesores', async (req, res) => {
 
 router.get('/profesores/internos', async (req, res) => {
     try {
-        const internos = await pool.query("SELECT * FROM internos;");
-        res.json(internos);
+        const internos = await pool.query("SELECT i.cedula_p,p.nombre_p FROM internos i,profesores p WHERE p.cedula_p = i.cedula_p;");
+        res.json(internos.rows);
         res.body = internos;
     } catch (err) {
         res.body = err.message

@@ -64,7 +64,7 @@ const Propuesta = ({ location }) => {
     }
 
     const fetchProfesores = () => {
-        const _prof = fetch('http://localhost:3000/profesores')
+        const _prof = fetch('http://localhost:3000/profesores/internos')
             .then(res => res.json())
             .then(result => setProfesores(result))
             .catch(err => console.log(err.message))
@@ -75,14 +75,6 @@ const Propuesta = ({ location }) => {
             .then(res => res.json())
             .then(result => setComites(result))
             .catch(err => console.log(err.message))
-    }
-
-    const enableComiteStuff = () => {
-        setComite(true)
-    }
-
-    const enableProfesorStuff = () => {
-        setRevisor(true)
     }
 
     function getLocalDate() {
@@ -97,16 +89,14 @@ const Propuesta = ({ location }) => {
     const stateHandler = (e) => {
         handleChange(e)
         const { target } = e;
-        console.log('%c hasComite:', 'color:red', hasComite)
-        console.log('%c hasRevisor:', 'color:red', hasRevisor)
         if (target.name = 'id_comite') {
             if (values.id_comite !== '') {
-                enableComiteStuff()
+                setComite(true)
             }
         }
         if (target.name = 'cedula_p') {
             if (values.cedula_p !== '') {
-                enableProfesorStuff()
+                setRevisor(true)
             }
         }
         console.log('%ctoggled')
@@ -117,7 +107,7 @@ const Propuesta = ({ location }) => {
             <h2 className="content-title">Propuesta #{id_propuesta}</h2>
             <h4 className="content-subtitle">{titulo_propuesta} por: {nombre_t}</h4>
             <h5 className="content-subtitle">Fecha de entrega: {fec_entrega}</h5>
-            <div className="display-message">
+            <div className="display-data">
                 <div className="display-message-1">
                     {propuesta.id_comite
                         ? <h5>Fecha del comite:{propuesta.fec_comite}</h5>
@@ -133,12 +123,9 @@ const Propuesta = ({ location }) => {
                     }
                 </div>
                 <div className="display-message-1">
-                    {propuesta.cedula_p !== false
-                        ? <h5>Profesor revisor asignado: C.I V-{propuesta.cedula_p}</h5>
-                        : <h5>No tiene ningun profesor revisor asignado</h5>
-                    }
                     {propuesta.cedula_p
-                        ? <h5>Estado de aprobacion del revisor:{propuesta.veredicto_profesor}</h5>
+                        ? <div>< h5 > Profesor revisor asignado: C.I V-{propuesta.cedula_p}</h5>
+                            <h5>Estado de aprobacion del revisor:{propuesta.veredicto_profesor}</h5></div>
                         : <h5>No tiene ningun profesor revisor asignado</h5>
                     }
 
@@ -191,7 +178,7 @@ const Propuesta = ({ location }) => {
                             name="observaciones_comite"
                             variant="outlined"
                             value={values.observaciones_comite}
-                            onChange={stateHandler}
+                            onChange={handleChange}
                             disabled={!hasComite}
                             multiline />
 
@@ -208,11 +195,11 @@ const Propuesta = ({ location }) => {
                                 onChange={stateHandler}
                                 onBlur={stateHandler}
                             >
-                                {profesores.map((profesor, i) => (
-                                    <MenuItem value={profesor.cedula_p} key={i}>
+                                {profesores.map((profesor, i) =>
+                                    (<MenuItem value={profesor.cedula_p} key={i}>
                                         {profesor.nombre_p}
-                                    </MenuItem>
-                                ))}
+                                    </MenuItem>)
+                                )}
                             </Select>
                         </FormControl>
                         <FormControl className="veredicto-container w-15">
