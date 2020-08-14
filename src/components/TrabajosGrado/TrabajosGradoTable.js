@@ -19,6 +19,15 @@ const TrabajosGradoTable = () => {
         fetchTrabajosgrado()
     }, [])
 
+    const handleRowClick = (e, rowData) => {
+        const { id_tg } = rowData;
+        history.push({
+            pathname: '/trabajogrado',
+            search: `?query=${id_tg}`,
+            state: { rowData }
+        })
+    }
+
     //obtener todos los tutores emp
     const fetchTrabajosgrado = () => {
         fetch('http://localhost:3000/trabajos_grado')
@@ -60,6 +69,7 @@ const TrabajosGradoTable = () => {
             title="Trabajos de Grado"
             columns={state.columns}
             data={trabajosgrado}
+            onRowClick={handleRowClick}
             editable={{
                 onRowUpdate: (newData, oldData) =>
                     new Promise((resolve) => {
