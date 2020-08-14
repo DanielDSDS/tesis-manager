@@ -13,7 +13,7 @@ import Profesores from './components/Profesores/Profesores';
 import Defensas from './components/Defensas/Defensas';
 import Instituciones from './components/Instituciones/Instituciones';
 import Sidebar from './components/Sidebar/Sidebar';
-
+import Empresas from './components/Empresas/Empresas'
 const App = () => {
 
     return (
@@ -32,6 +32,7 @@ const App = () => {
                     <Route path="/defensas" component={Defensas} />
                     <Route path="/instituciones" component={Instituciones} />
                     <Route path="/propuesta" component={Propuesta} />
+                    <Route path="/empresas" component={Empresas} />
                     <Route path="/trabajogrado" component={TrabajoGrado} />
                 </Switch>
             </div>

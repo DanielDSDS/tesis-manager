@@ -7,11 +7,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import useForm from '../useForm/useForm';
 
-const TG = ({ location }) => {
+const TrabajoGrado = ({ location }) => {
     const [consejos, setConsejos] = useState([{}])
     const [profesores, setProfesores] = useState([{}])
     const [TG, setTG] = useState([{}])
-    const { id_tg, num_consejo, cedula_t, modalidad, fec_aprobacion, titulo } = location.state
+    const { id_tg, cedula_t, modalidad, /*fec_aprobacion,num_consejo,*/ titulo } = location.state
 
     const { handleChange, values } = useForm({
         num_consejo: '',
@@ -130,4 +130,4 @@ const TG = ({ location }) => {
     )
 }
 
-export default TG
+export default TrabajoGrado
